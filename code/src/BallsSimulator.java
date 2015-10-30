@@ -6,11 +6,12 @@ import gui.GUISimulator;
 import gui.Oval;
 import gui.Simulable;
 
-public class BallsSimulator implements Simulable{
+public class BallsSimulator implements Simulable {
 
 	private Balls balls;
 	private GUISimulator gui;
-	private static final int ballSize = 10;
+	private static final int ballSize = 7; // Ball radius
+	public static final int GUI_BORDERS = 3; // GUI panel borders
 	
 	public BallsSimulator(Balls b, GUISimulator g){
 		this.balls = b;
@@ -25,14 +26,20 @@ public class BallsSimulator implements Simulable{
 		Iterator<Point> it = this.balls.iterator();
 		while(it.hasNext()){
 			Point p = it.next();
-			gui.addGraphicalElement(new Oval((int)p.getX(), (int)p.getY(), Color.decode("#1f77b4"), Color.decode("#1f77b4"), ballSize));
+
+			// Subtract 1 from ballSize because Oval adds 1 pixel to radius
+			gui.addGraphicalElement(new Oval((int)p.getX(), (int)p.getY(),
+					Color.decode("#1f77b4"), Color.decode("#1f77b4"), 2*(ballSize-1)));
 		}
 	}
 	
 	@Override 
 	public void next(){
 		//balls.translate(this.dx, this.dy);
-		balls.translateBoundarie(this.gui.getPanelWidth() - ballSize, this.gui.getPanelHeight() - ballSize, ballSize);
+		
+		// Add 1 to ballSize because Oval adds 1 pixel in the middle
+		balls.translateBoundarie(this.gui.getPanelWidth() - GUI_BORDERS - ballSize-1,
+				this.gui.getPanelHeight() - GUI_BORDERS - ballSize-1, ballSize);
 		System.out.println(balls.toString());
 		this.gui.reset();
 		updateFrame();

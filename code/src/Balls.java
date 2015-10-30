@@ -85,7 +85,7 @@ public class Balls {
 		for(Point dir : direction)
 			dir.setLocation(d);
 			
-		// balls, initialPosition et direction ont le même nombre d'élément
+		// balls, initialPosition et direction ont le mÃªme nombre d'Ã©lÃ©ments
 	}
 	
 	public Iterator<Point> iterator(){

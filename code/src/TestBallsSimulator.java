@@ -11,7 +11,8 @@ public class TestBallsSimulator {
 		b.addBall(new Point(100, 250));
 		b.addBall(new Point(200, 100));
 		
-		GUISimulator gui = new GUISimulator(500, 500, Color.WHITE);
+		GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
+
 		gui.setSimulable(new BallsSimulator(b, gui));
 	}
 }
