@@ -104,7 +104,7 @@ public class Balls {
 			else
 				res += p.toString();
 		}
-			
+
 		res += " ]";
 		return res;
 	}

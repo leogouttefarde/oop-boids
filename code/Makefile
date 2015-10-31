@@ -26,6 +26,9 @@ all: testGUI
 testGUI:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestGUI.java
 
+testBSim:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestBallsSimulator.java
+
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -34,6 +37,9 @@ testGUI:
 #   > make exeIHM
 exeGUI:
 	java -classpath bin:bin/gui.jar TestGUI
+
+exeBSim:
+	java -classpath bin:bin/gui.jar TestBallsSimulator
 
 clean:
 	rm -rf bin/*.class

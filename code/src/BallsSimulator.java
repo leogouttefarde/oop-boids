@@ -11,7 +11,7 @@ public class BallsSimulator implements Simulable {
 	private Balls balls;
 	private GUISimulator gui;
 	private static final int ballSize = 7; // Ball radius
-	public static final int GUI_BORDERS = 3; // GUI panel borders
+	private static final int GUI_BORDERS = 3; // GUI panel borders
 	
 	public BallsSimulator(Balls b, GUISimulator g){
 		this.balls = b;
