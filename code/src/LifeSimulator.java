@@ -6,18 +6,14 @@ import gui.GUISimulator;
 import gui.Rectangle;
 import gui.Simulable;
 
-public class LifeSimulator implements Simulable {
-
-	private GUISimulator gui;
-	private Life life;
+public class LifeSimulator extends ConwaySimulator {
 
 	public LifeSimulator(GUISimulator g, Life life) {
-		this.gui = g;
-		this.life = life;
+		super(g, life);
 	}
 
-	private void updateFrame() {
-		Life.State cells[][] = life.getCells();
+	protected void updateFrame() {
+		Life.State cells[][] = ((Life)conway).getCells();
 
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {
@@ -35,26 +31,8 @@ public class LifeSimulator implements Simulable {
 								Color.GRAY,
 								Color.GRAY, 10));
 						break;
-
-					default:
-						System.out.println("wtf");
 				}
 			}
 		}
-	}
-
-	@Override 
-	public void next() {
-		life.generate();
-		System.out.println(life);
-		gui.reset();
-		updateFrame();
-	}
-
-	@Override
-	public void restart() {
-		life.reset();
-		gui.reset();
-		updateFrame();
 	}
 }

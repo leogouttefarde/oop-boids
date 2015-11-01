@@ -4,14 +4,14 @@ import java.util.Vector;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Life extends Conway {
+public class Immigration extends Conway {
 
 	public enum State { ALIVE, DEAD, DYING, BIRTH };
 	private State cells[][];
 	private Vector<Point> initialCells;
 
 
-	public Life(int n, int m) {
+	public Immigration(int n, int m) {
 		super(n, m);
 
 		cells = new State[n][m];
@@ -106,7 +106,7 @@ public class Life extends Conway {
 	}
 
 	public String toString() {
-		String str = new String("Life("+n+", "+m+")\n");
+		String str = new String("Immigration("+n+", "+m+")\n");
 
 		for (Point c : initialCells) {
 			str += c + "\n";
