@@ -29,17 +29,23 @@ testGUI:
 testBSim:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestBallsSimulator.java
 
+testLifeSim:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestLifeSimulator.java
+
 
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin TestGUI
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeIHM
-exeGUI:
+exeGUI: testGUI
 	java -classpath bin:bin/gui.jar TestGUI
 
-exeBSim:
+exeBSim: testBSim
 	java -classpath bin:bin/gui.jar TestBallsSimulator
+
+exeLifeSim: testLifeSim
+	java -classpath bin:bin/gui.jar TestLifeSimulator
 
 clean:
 	rm -rf bin/*.class

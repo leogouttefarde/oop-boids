@@ -12,7 +12,7 @@ public class BallsSimulator implements Simulable {
 	private GUISimulator gui;
 	private static final int ballSize = 7; // Ball radius
 	private static final int GUI_BORDERS = 3; // GUI panel borders
-	
+
 	public BallsSimulator(Balls b, GUISimulator g){
 		this.balls = b;
 		this.gui = g;
@@ -21,7 +21,7 @@ public class BallsSimulator implements Simulable {
 		this.dy = ThreadLocalRandom.current().nextInt(rndMin, rndMax + 1) % vitesseMax;
 		System.out.println(this.dx + " " + this.dy);*/
 	}
-	
+
 	private void updateFrame(){
 		Iterator<Point> it = this.balls.iterator();
 		while(it.hasNext()){
@@ -32,7 +32,7 @@ public class BallsSimulator implements Simulable {
 					Color.decode("#1f77b4"), Color.decode("#1f77b4"), 2*(ballSize-1)));
 		}
 	}
-	
+
 	@Override 
 	public void next(){
 		//balls.translate(this.dx, this.dy);
@@ -44,7 +44,7 @@ public class BallsSimulator implements Simulable {
 		this.gui.reset();
 		updateFrame();
 	}
-	
+
 	@Override
 	public void restart(){
 		balls.reInit();
