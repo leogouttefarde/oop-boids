@@ -70,8 +70,8 @@ public class Life {
 				if (cells[x][y] == State.DEAD && nbNeighbors == 3)
 					cells[x][y] = State.BIRTH;
 
-				else if (cells[x][y] == State.ALIVE &&
-					(nbNeighbors < 2 || 3 < nbNeighbors))
+				else if (cells[x][y] == State.ALIVE && nbNeighbors != 2
+							&& nbNeighbors != 3)
 						cells[x][y] = State.DYING;
 			}
 		}
