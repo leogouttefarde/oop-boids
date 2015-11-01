@@ -13,7 +13,7 @@ public class LifeSimulator extends ConwaySimulator {
 	}
 
 	protected void updateFrame() {
-		Life.State cells[][] = ((Life)conway).getCells();
+		Life.State cells[][] = ((Life)game).getCells();
 
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {
