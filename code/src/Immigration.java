@@ -2,43 +2,39 @@ import java.awt.Point;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.Arrays;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Immigration extends Conway {
 
-	public enum State { ALIVE, DEAD, DYING, BIRTH };
-	private State cells[][];
-	private Vector<Point> initialCells;
+	private int defaultState;
+	private int states;
+	private int cells[][];
+	private int nextCells[][];
+	private Vector<Cell> initialCells;
 
 
-	public Immigration(int n, int m) {
+	public Immigration(int n, int m, int states) {
+		this(n, m, states, 0);
+	}
+
+	public Immigration(int n, int m, int states, int defaultState) {
 		super(n, m);
 
-		cells = new State[n][m];
-		initialCells = new Vector<Point>();
+		this.states = states;
+		this.defaultState = defaultState;
+		cells = new int[n][m];
+		nextCells = new int[n][m];
+		initialCells = new Vector<Cell>();
 		reset();
 	}
 
-	public State[][] getCells() {
+
+	public int[][] getCells() {
 		return cells;
 	}
 
-	public void addCell(int x, int y) {
-		initialCells.add(new Point(x, y));
-		cells[x][y] = State.ALIVE;
-	}
-
-	public int getNeighbor(int cell, int n, int max) {
-
-		int pos = cell + n;
-
-		if (pos == 0)
-			pos = max-1;
-
-		else
-			pos = (pos - 1) % max;
-
-		return pos;
+	public void addCell(int x, int y, int state) {
+		initialCells.add(new Cell(x, y, state));
+		cells[x][y] = state;
 	}
 
 	public void nextGeneration() {
@@ -46,6 +42,9 @@ public class Immigration extends Conway {
 			for (int y = 0; y < m; y++) {
 
 				int nbNeighbors = 0;
+				final int k = cells[x][y];
+				final int kp = (k + 1) % states;
+				// System.out.println(k+", "+kp);
 
 				for (int i = 0; i < 3; i++) {
 					for (int j = 0; j < 3; j++) {
@@ -54,40 +53,27 @@ public class Immigration extends Conway {
 							int nx = getNeighbor(x, i, n);
 							int ny = getNeighbor(y, j, m);
 
-							// System.out.println(x+", "+y + ", "+i + ", "+j + " :  "+ nx+", "+ny);
-							switch (cells[nx][ny]) {
-								case ALIVE:
-								case DYING:
-									nbNeighbors++;
-							}
+							//System.out.println(x+", "+y + ", "+k + ", "+i + ", "+j + " :  "+ nx+", "+ny+", "+cells[nx][ny]);
+							if (cells[nx][ny] == kp)
+								nbNeighbors++;
 						}
 					}
 				}
 
-				if (cells[x][y] == State.DEAD && nbNeighbors == 3)
-					cells[x][y] = State.BIRTH;
+				if (nbNeighbors >= 3)
+					nextCells[x][y] = kp;
 
-				else if (cells[x][y] == State.ALIVE && nbNeighbors != 2
-							&& nbNeighbors != 3)
-						cells[x][y] = State.DYING;
+				else
+					nextCells[x][y] = k;
 			}
 		}
+
 	}
 
 	public void finishGeneration() {
-		for (int x = 0; x < n; x++) {
-			for (int y = 0; y < m; y++) {
-
-				switch (cells[x][y]) {
-					case BIRTH:
-						cells[x][y] = State.ALIVE;
-						break;
-
-					case DYING:
-						cells[x][y] = State.DEAD;
-				}
-			}
-		}
+		int tmp[][] = cells;
+		cells = nextCells;
+		nextCells = tmp;
 	}
 
 	public void reset() {
@@ -95,24 +81,37 @@ public class Immigration extends Conway {
 		for (int i = 0; i < n; i++) {
 			// cells[i] = new State[m];
 			for (int j = 0; j < m; j++) {
-				cells[i][j] = State.DEAD;
+				cells[i][j] = defaultState;
 			}
 		}
 
-		for (Point c : initialCells) {
+		for (Cell c : initialCells) {
 			// System.out.println(c.x+", "+c.y);
-			cells[c.x][c.y] = State.ALIVE;
+			cells[c.x][c.y] = c.state;
 		}
 	}
 
 	public String toString() {
 		String str = new String("Immigration("+n+", "+m+")\n");
 
-		for (Point c : initialCells) {
-			str += c + "\n";
+		for (Cell c : initialCells) {
+			str += c.x+ ", " + c.y+ ", " + c.state + "\n";
 		}
 
 		return str;
 	}
 
+
+	public class Cell {
+		public int x;
+		public int y;
+		public int state;
+
+		public Cell(int x, int y, int state) {
+			this.x = x;
+			this.y = y;
+			this.state = state;
+		}
+
+	}
 }

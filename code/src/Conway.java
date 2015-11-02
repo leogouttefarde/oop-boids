@@ -18,6 +18,19 @@ public abstract class Conway {
 	protected abstract void nextGeneration();
 	protected abstract void finishGeneration();
 
+	protected int getNeighbor(int cell, int n, int max) {
+
+		int pos = cell + n;
+
+		if (pos == 0)
+			pos = max-1;
+
+		else
+			pos = (pos - 1) % max;
+
+		return pos;
+	}
+
 	public void generate() {
 		nextGeneration();
 		finishGeneration();

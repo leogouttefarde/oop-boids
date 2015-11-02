@@ -28,19 +28,6 @@ public class Life extends Conway {
 		cells[x][y] = State.ALIVE;
 	}
 
-	public int getNeighbor(int cell, int n, int max) {
-
-		int pos = cell + n;
-
-		if (pos == 0)
-			pos = max-1;
-
-		else
-			pos = (pos - 1) % max;
-
-		return pos;
-	}
-
 	public void nextGeneration() {
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < m; y++) {
