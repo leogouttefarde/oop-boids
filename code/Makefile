@@ -35,6 +35,9 @@ testLifeSim:
 testImmSim:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestImmigrationSimulator.java
 
+testSSim:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSchellingSimulator.java
+
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -52,6 +55,9 @@ exeLifeSim: testLifeSim
 
 exeImmSim: testImmSim
 	java -classpath bin:bin/gui.jar TestImmigrationSimulator
+
+exeSSim: testImmSim
+	java -classpath bin:bin/gui.jar TestSchellingSimulator
 
 clean:
 	rm -rf bin/*.class
