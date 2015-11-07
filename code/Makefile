@@ -56,7 +56,7 @@ exeLifeSim: testLifeSim
 exeImmSim: testImmSim
 	java -classpath bin:bin/gui.jar TestImmigrationSimulator
 
-exeSSim: testImmSim
+exeSSim: testSSim
 	java -classpath bin:bin/gui.jar TestSchellingSimulator
 
 clean:
