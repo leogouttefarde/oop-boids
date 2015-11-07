@@ -1,6 +1,5 @@
 import gui.GUISimulator;
 import java.awt.Color;
-import java.awt.Point;
 
 public class TestImmigrationSimulator {
 

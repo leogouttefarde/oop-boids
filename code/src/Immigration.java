@@ -1,7 +1,4 @@
-import java.awt.Point;
-import java.util.Iterator;
 import java.util.Vector;
-import java.util.Arrays;
 
 public class Immigration extends Conway {
 

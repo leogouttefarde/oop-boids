@@ -1,10 +1,7 @@
 import java.awt.Color;
-import java.awt.Point;
-import java.util.Iterator;
 
 import gui.GUISimulator;
 import gui.Rectangle;
-import gui.Simulable;
 
 public class LifeSimulator extends ConwaySimulator {
 
@@ -30,6 +27,8 @@ public class LifeSimulator extends ConwaySimulator {
 							new Rectangle(10+x * 12,10+ y*12,
 								Color.GRAY,
 								Color.GRAY, 10));
+						break;
+					default:
 						break;
 				}
 			}

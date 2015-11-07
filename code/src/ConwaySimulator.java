@@ -1,9 +1,4 @@
-import java.awt.Color;
-import java.awt.Point;
-import java.util.Iterator;
-
 import gui.GUISimulator;
-import gui.Rectangle;
 import gui.Simulable;
 
 public abstract class ConwaySimulator implements Simulable {

@@ -1,8 +1,5 @@
 import java.awt.Point;
-import java.util.Iterator;
 import java.util.Vector;
-import java.util.Arrays;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Life extends Conway {
 
@@ -46,6 +43,9 @@ public class Life extends Conway {
 								case ALIVE:
 								case DYING:
 									nbNeighbors++;
+									break;
+								default:
+									break;
 							}
 						}
 					}
@@ -72,6 +72,9 @@ public class Life extends Conway {
 
 					case DYING:
 						cells[x][y] = State.DEAD;
+						break;
+					default:
+						break;
 				}
 			}
 		}
