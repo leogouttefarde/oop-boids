@@ -6,7 +6,7 @@ public class TestImmigrationSimulator {
 	public static void main(String[] args) {
 
 		Immigration imm = new Immigration(70, 40, 4);
-
+		
 		imm.addCell(1, 1, 0);
 		imm.addCell(1, 2, 0);
 		imm.addCell(1, 3, 0);
@@ -26,6 +26,7 @@ public class TestImmigrationSimulator {
 		imm.addCell(20, 30, 3);
 		imm.addCell(31, 22, 3);
 		imm.addCell(21, 31, 3);
+		
 		System.out.println(imm);
 
 

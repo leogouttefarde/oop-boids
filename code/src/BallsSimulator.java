@@ -16,10 +16,6 @@ public class BallsSimulator implements Simulable {
 	public BallsSimulator(Balls b, GUISimulator g){
 		this.balls = b;
 		this.gui = g;
-		/*rndMax = Math.min(this.gui.getWidth(), this.gui.getHeight());
-		this.dx = ThreadLocalRandom.current().nextInt(rndMin, rndMax + 1) % vitesseMax;
-		this.dy = ThreadLocalRandom.current().nextInt(rndMin, rndMax + 1) % vitesseMax;
-		System.out.println(this.dx + " " + this.dy);*/
 	}
 
 	private void updateFrame(){
@@ -35,8 +31,6 @@ public class BallsSimulator implements Simulable {
 
 	@Override 
 	public void next(){
-		//balls.translate(this.dx, this.dy);
-		
 		// Add 1 to ballSize because Oval adds 1 pixel in the middle
 		balls.translateBoundarie(this.gui.getPanelWidth() - GUI_BORDERS - ballSize-1,
 				this.gui.getPanelHeight() - GUI_BORDERS - ballSize-1, ballSize);
