@@ -1,18 +1,18 @@
 import java.awt.Point;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class Life extends Conway {
 
 	public enum State { ALIVE, DEAD, DYING, BIRTH };
 	private State cells[][];
-	private Vector<Point> initialCells;
+	private ArrayList<Point> initialCells;
 
 
 	public Life(int n, int m) {
 		super(n, m);
 
 		cells = new State[n][m];
-		initialCells = new Vector<Point>();
+		initialCells = new ArrayList<Point>();
 		reset();
 	}
 

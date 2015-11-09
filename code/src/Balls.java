@@ -1,21 +1,21 @@
 import java.awt.Point;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Balls {
-	private Vector<Point> balls;
-	private Vector<Point> direction;
-	private Vector<Point> initialPosition;
+	private ArrayList<Point> balls;
+	private ArrayList<Point> direction;
+	private ArrayList<Point> initialPosition;
 	private static final int rndMin = 5;
 	private static int rndMax;
 	private static final int vitesseMax = 25;
 	private static final Point d = new Point(10, 10);
 	
 	public Balls() {
-		this.balls = new Vector<Point>();
-		this.direction = new Vector<Point>();
-		this.initialPosition = new Vector<Point>();
+		this.balls = new ArrayList<Point>();
+		this.direction = new ArrayList<Point>();
+		this.initialPosition = new ArrayList<Point>();
 	}
 	
 	public void addBall(Point p) {

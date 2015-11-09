@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class Schelling extends Conway {
 
@@ -9,7 +8,7 @@ public class Schelling extends Conway {
 	private int threshold;
 	private int cells[][];
 	private int nextCells[][];
-	private Vector<Cell> initialCells;
+	private ArrayList<Cell> initialCells;
 	private ArrayList<Cell> vacantHousing;
 
 
@@ -25,7 +24,7 @@ public class Schelling extends Conway {
 		this.threshold = threshold;
 		cells = new int[n][m];
 		nextCells = new int[n][m];
-		initialCells = new Vector<Cell>();
+		initialCells = new ArrayList<Cell>();
 		vacantHousing = new ArrayList<Cell>();
 		
 		initCellsAndNextCells();

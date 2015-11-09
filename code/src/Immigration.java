@@ -1,4 +1,4 @@
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class Immigration extends Conway {
 
@@ -6,7 +6,7 @@ public class Immigration extends Conway {
 	private int states;
 	private int cells[][];
 	private int nextCells[][];
-	private Vector<Cell> initialCells;
+	private ArrayList<Cell> initialCells;
 
 
 	public Immigration(int n, int m, int states) {
@@ -20,7 +20,7 @@ public class Immigration extends Conway {
 		this.defaultState = defaultState;
 		cells = new int[n][m];
 		nextCells = new int[n][m];
-		initialCells = new Vector<Cell>();
+		initialCells = new ArrayList<Cell>();
 		reset();
 	}
 
