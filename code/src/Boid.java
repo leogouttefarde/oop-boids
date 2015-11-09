@@ -32,7 +32,7 @@ public class Boid {
 	}
 
 	public void applyForce(PVector force) {
-		float m = 1; // C'est quoi m ?
+		float m = 1; // m = masse du Boid
 		acceleration.add(force.div(m));
 	}
 
