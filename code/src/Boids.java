@@ -9,7 +9,7 @@ public class Boids {
 	private ArrayList<Boid> boids;
 	private ArrayList<Boid> initialState;
 	private static final int deplacementFactor = 100;
-	private static final int smallDistance = 5;
+	private static final int smallDistance = 10;
 	private static final int velocityFactor = 8;
 
 	public Boids() {
@@ -65,8 +65,8 @@ public class Boids {
 					tmp.sub(currentBoid.position);
 					tmp.mult(-1);
 
-					// Multiply by speed so it doesn't absorb this rule
-					tmp.mult(currentBoid.velocity);
+					// Multiply by speed norm so that speed doesn't absorb this rule
+					tmp.mult(currentBoid.velocity.norm());
 
 					d.add(tmp);
 				}

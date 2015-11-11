@@ -12,21 +12,27 @@ public class PVector extends Point2D.Float implements Cloneable {
 		return p;
 	}
 
-	PVector add(PVector p) {
+	public PVector add(PVector p) {
 		x += p.x;
 		y += p.y;
 
 		return this;
 	}
 
-	PVector sub(PVector p) {
+	public PVector sub(PVector p) {
 		x -= p.x;
 		y -= p.y;
 
 		return this;
 	}
 
-	float getLimit(float value, float lim) {
+	public float norm() {
+		float n = (float)Math.sqrt(x*x + y*y);
+
+		return n;
+	}
+
+	public float getLimit(float value, float lim) {
 
 		if (value > lim)
 			value = lim;
@@ -37,28 +43,28 @@ public class PVector extends Point2D.Float implements Cloneable {
 		return value;
 	}
 
-	PVector limit(float lim) {
+	public PVector limit(float lim) {
 		x = getLimit(x, lim);
 		y = getLimit(y, lim);
 
 		return this;
 	}
 
-	PVector mult(float v) {
+	public PVector mult(float v) {
 		x *= v;
 		y *= v;
 
 		return this;
 	}
 
-	PVector mult(PVector p) {
+	public PVector mult(PVector p) {
 		x *= p.x;
 		y *= p.y;
 
 		return this;
 	}
 
-	PVector div(float v) {
+	public PVector div(float v) {
 		x /= v;
 		y /= v;
 
