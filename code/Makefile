@@ -41,6 +41,9 @@ testSSim:
 testBoids:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestBoidsSimulator.java
 
+testEvents:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestEventManager.java
+
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -64,6 +67,9 @@ exeSSim: testSSim
 
 exeBoids: testBoids
 	java -classpath bin:bin/gui.jar TestBoidsSimulator
+
+exeEvents: testEvents
+	java -classpath bin:bin/gui.jar TestEventManager
 
 clean:
 	rm -rf bin/*.class
