@@ -120,8 +120,8 @@ public class Boid implements Cloneable {
 	}
 
 	public void setPos(PVector pos){
-		pos.x = mod(pos.x, Boids.MAX_WIDTH);
-		pos.y = mod(pos.y, Boids.MAX_HEIGHT);
+		pos.x = mod(pos.x, Boids.getWidth());
+		pos.y = mod(pos.y, Boids.getHeight());
 
 		this.position.setLocation(pos);
 	}

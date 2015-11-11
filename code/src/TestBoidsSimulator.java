@@ -27,7 +27,7 @@ public class TestBoidsSimulator {
 		System.out.println(boids);
 
 
-		GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
+		GUISimulator gui = new GUISimulator(850, 500, Color.BLACK);
 
 		gui.setSimulable(new BoidsSimulator(gui, boids));
 	}

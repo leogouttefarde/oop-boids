@@ -3,8 +3,8 @@ import java.util.Iterator;
 
 public class Boids {
 
-	static int MAX_HEIGHT = 500;
-	static int MAX_WIDTH = 500;
+	private static int maxWidth;
+	private static int maxHeight;
 
 	private ArrayList<Boid> boids;
 	private ArrayList<Boid> initialState;
@@ -17,6 +17,7 @@ public class Boids {
 		initialState = new ArrayList<Boid>();
 	}
 
+
 	public void add(float x, float y, float vx, float vy, float ax, float ay) {
 		add(new Boid(x, y, vx, vy, ax, ay));
 	}
@@ -24,6 +25,22 @@ public class Boids {
 	public void add(Boid b) {
 		boids.add(b);
 		initialState.add(b.clone());
+	}
+
+	public static void setWidth(int width) {
+		maxWidth = width;
+	}
+
+	public static void setHeight(int height) {
+		maxHeight = height;
+	}
+
+	public static int getWidth() {
+		return maxWidth;
+	}
+
+	public static int getHeight() {
+		return maxHeight;
 	}
 
 	// First rule : Boids try to fly towards the center of mass of neighboring boids

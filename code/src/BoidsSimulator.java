@@ -13,6 +13,9 @@ public class BoidsSimulator implements Simulable {
 	public BoidsSimulator(GUISimulator gui, Boids boids) {
 		this.gui = gui;
 		this.boids = boids;
+
+		Boids.setWidth(gui.getPanelWidth());
+		Boids.setHeight(gui.getPanelHeight());
 	}
 
 	private void updateFrame() {
