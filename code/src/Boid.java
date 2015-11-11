@@ -1,4 +1,4 @@
-public class Boid {
+public class Boid implements Cloneable {
 	
 	public static int NEIGHBORHOOD = 55;
 	public static int DEFAULT_MAX_SPEED = 10;
