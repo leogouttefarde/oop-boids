@@ -9,33 +9,19 @@ public class Triangle extends CenteredGraphicalElement {
 
 	  private Color drawColor;
 	  private Color fillColor;
-	  private int size;
 	  private int xPoints[];
 	  private int yPoints[];
 	  private static int nPoints = 3;
 
-	  public Triangle(int x, int y, Color drawColor, Color fillColor, int size)
+	  public Triangle(int x, int y, int xPoints[], int yPoints[], Color drawColor, Color fillColor)
 	  {
 	    super(x, y);
 	    this.drawColor = drawColor;
 	    this.fillColor = fillColor;
-	    this.size = size;
-	    xPoints = new int[nPoints];
-	    yPoints = new int[nPoints];
-	    
-	    initPoints(x, y);
+	    this.xPoints = xPoints;
+	    this.yPoints = yPoints;
 	  }
 	  
-	  private void initPoints(int x, int y){
-		    xPoints[0] = x + this.size;
-		    xPoints[1] = x;
-		    xPoints[2] = x - this.size;
-		    
-		    yPoints[0] = y + this.size;
-		    yPoints[1] = y - this.size;
-		    yPoints[2] = y;
-	  }
-
 	  public void paint(Graphics2D g2d)
 	  {
 	    Stroke currentStroke = g2d.getStroke();
@@ -53,7 +39,7 @@ public class Triangle extends CenteredGraphicalElement {
 
 	  public String toString()
 	  {
-	    return this.drawColor.toString() + " rectangle";
+	    return this.drawColor.toString() + " triangle";
 	  }
 	
 }

@@ -9,6 +9,7 @@ public class BoidsSimulator implements Simulable {
 
 	private GUISimulator gui;
 	private Boids boids;
+	private static int size = 7;
 
 	public BoidsSimulator(GUISimulator gui, Boids boids) {
 		this.gui = gui;
@@ -21,14 +22,14 @@ public class BoidsSimulator implements Simulable {
 			Boid b = it.next();
 
 			gui.addGraphicalElement(new Triangle((int)b.position.getX(), (int)b.position.getY(),
-					Color.decode("#1f77b4"), Color.decode("#1f77b4"), 7));
+					b.computeTriangleXPoints(size), b.computeTriangleYPoints(size), Color.decode("#1f77b4"), Color.decode("#1f77b4")));
 		}
 	}
 
 	@Override 
 	public void next() {
 		boids.update();
-		// System.out.println(boids.toString());
+		//System.out.println(boids.toString());
 		this.gui.reset();
 		updateFrame();
 	}

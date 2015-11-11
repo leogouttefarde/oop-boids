@@ -13,7 +13,7 @@ public class TestBoidsSimulator {
 		boids.add(200, 200, 2, 2, -1, -1);
 		boids.add(400, 400, 7, 9, 3, -2);
 		boids.add(450, 470, 7, 9, -3, -2);
-		boids.add(350, 470, 7, 9, 3, 2);
+		boids.add(350, 470, 1, 9, 3, 2);
 		boids.add(350, 320, 7, 9, -3, 2);
 		boids.add(450, 50, 7, 9, -3, 2);
 		boids.add(450, 50, 7, 9, -3, 2);
