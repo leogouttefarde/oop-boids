@@ -1,4 +1,3 @@
-
 public class Boid {
 
 	public PVector position;
