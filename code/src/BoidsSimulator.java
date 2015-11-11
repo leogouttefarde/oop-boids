@@ -20,16 +20,15 @@ public class BoidsSimulator implements Simulable {
 		while(it.hasNext()){
 			Boid b = it.next();
 
-			// Subtract 1 from ballSize because Oval adds 1 pixel to radius
 			gui.addGraphicalElement(new Oval((int)b.position.getX(), (int)b.position.getY(),
-					Color.decode("#1f77b4"), Color.decode("#1f77b4"), 10));
+					Color.decode("#1f77b4"), Color.decode("#1f77b4"), 7));
 		}
 	}
 
 	@Override 
 	public void next() {
 		boids.update();
-		System.out.println(boids.toString());
+		// System.out.println(boids.toString());
 		this.gui.reset();
 		updateFrame();
 	}
@@ -37,7 +36,7 @@ public class BoidsSimulator implements Simulable {
 	@Override
 	public void restart() {
 		boids.reset();
-		System.out.println(boids.toString());
+		// System.out.println(boids.toString());
 		this.gui.reset();
 		updateFrame();
 	}
