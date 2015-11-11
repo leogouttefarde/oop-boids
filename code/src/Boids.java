@@ -49,25 +49,7 @@ public class Boids {
 		return centerMassPosition.div(deplacementFactor);
 	}
 
-	// // Second rule : Boids try to keep a small distance away from other objects (including other boids)
-	// private PVector ruleKeepDistance(Boid currentBoid){
-	// 	PVector d = new PVector(0, 0);
-	// 	PVector tmp = new PVector(0, 0);
-		
-	// 	for(Boid b : boids){
-	// 		if(b != currentBoid){
-	// 			if(b.position.distance(currentBoid.position) < smallDistance){
-	// 				tmp.add(b.position);
-	// 				tmp.add(currentBoid.position.mult(-1));
-	// 				d.add(tmp.mult(-1));
-	// 			}	
-	// 		}
-	// 	}
-		
-	// 	return d;
-	// }
-
-	// Second rule : Boids try to keep a small distance away from other objects (including other boids)
+	// Second rule : Boids try to keep a small distance away from other objects (including other Boids)
 	private PVector ruleKeepDistance(Boid currentBoid){
 		// System.out.println("ruleKeepDistance");
 		PVector d = new PVector(0, 0);
@@ -119,22 +101,6 @@ public class Boids {
 		// System.out.println(v);
 		return v.div(velocityFactor);
 	}
-
-	// public void moveAllBoids(){
-	// 	PVector v1, v2, v3;
-		
-	// 	for(Boid b : boids){
-	// 		v1 = ruleFlyTowardCentreMass(b);
-	// 		v2 = ruleKeepDistance(b);
-	// 		v3 = ruleMatchVelocity(b);
-			
-	// 		b.velocity.add(v1);
-	// 		b.velocity.add(v2);
-	// 		b.velocity.add(v3);
-			
-	// 		b.position.add(b.velocity);
-	// 	}
-	// }
 
 	public void moveAllBoids(){
 		PVector v1, v2, v3;
