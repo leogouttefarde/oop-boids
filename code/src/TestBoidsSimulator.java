@@ -22,6 +22,7 @@ public class TestBoidsSimulator {
 		boids.add(100, 480, 7, 9, -3, -2);
 		boids.add(100, 450, 7, 9, 3, -2);
 		boids.add(110, 430, 7, 9, -3, 2);
+		boids.add(250, 250, 0, -3, 0, 0);
 
 		System.out.println(boids);
 

@@ -17,6 +17,9 @@ public class Boid implements Cloneable {
 	public float maxforce;
 	public float maxspeed;
 
+	public int triXPoints[];
+	public int triYPoints[];
+
 
 	public Boid(float x, float y, float vx, float vy, float ax, float ay) {
 		position = new PVector(x, y);
@@ -28,6 +31,8 @@ public class Boid implements Cloneable {
 		maxspeed = DEFAULT_MAX_SPEED;
 		maxforce = DEFAULT_MAX_FORCE;
 
+		triXPoints = new int[nbTrianglePoint];
+		triYPoints = new int[nbTrianglePoint];
 	}
 	
 	public Boid(PVector p, PVector v, PVector a, float ms, float mf) {
@@ -37,6 +42,9 @@ public class Boid implements Cloneable {
 
 		maxspeed = ms;
 		maxforce = mf;
+
+		triXPoints = new int[nbTrianglePoint];
+		triYPoints = new int[nbTrianglePoint];
 	}
 
 	public Boid clone() {
@@ -54,43 +62,51 @@ public class Boid implements Cloneable {
 	public double getOrientation(){
 		return orientation;
 	}
-	
+
+	// public double[] rotateAroundCenter(double cx, double cy, double[] x, double[] y){
+	// 	double[] res = new int[x.length + y.length];
+	// 	for (int i = 0; i < res.length; i++) {
+	// 		if (i % 2)
+	// 			value = y[(i - 1) / 2];
+	// 		else
+	// 			value = x[i/2];
+	// 		res[i] = value;
+	// 	}
+	// 	AffineTransform.getRotateInstance(orientation, cx, cy).transform(res, 0, res, 0, res.length);
+	// 	return res;
+	// }
+
 	public double[] rotateAroundCenter(double cx, double cy, double x, double y){
 		double[] res = {x , y};
 		AffineTransform.getRotateInstance(orientation, cx, cy).transform(res, 0, res, 0, 1);
 		return res;
 	}
-	
-	public int[] computeTriangleXPoints(int size){
-		int xPoints[] = new int[nbTrianglePoint];
+
+	public void computeTrianglePoints(int size) {
 		double cx = position.getX();
 		double cy = position.getY();
-		
-		double[] res = rotateAroundCenter(cx, cy, cx + (double)size, cy + (double)size);
-		xPoints[0] = (int)res[0];
-		res = rotateAroundCenter(cx, cy, cx, cy - (double)size);
-	    xPoints[1] = (int)res[0];
-	    res = rotateAroundCenter(cx, cy, cx - (double)size, cy);
-	    xPoints[2] = (int)res[0];
-		
-		return xPoints;
+
+		double[] res = rotateAroundCenter(cx, cy, cx + (double)size, cy);
+		triXPoints[0] = (int)res[0];
+		triYPoints[0] = (int)res[1];
+
+		res = rotateAroundCenter(cx, cy, cx - (double)size, cy + ((double)size)/2);
+		triXPoints[1] = (int)res[0];
+		triYPoints[1] = (int)res[1];
+
+		res = rotateAroundCenter(cx, cy, cx - (double)size, cy - ((double)size)/2);
+		triXPoints[2] = (int)res[0];
+		triYPoints[2] = (int)res[1];
 	}
-	
-	public int[] computeTriangleYPoints(int size){
-		int yPoints[] = new int[nbTrianglePoint];
-		double cx = position.getX();
-		double cy = position.getY();
-		
-		double[] res = rotateAroundCenter(cx, cy, cx + (double)size, cy + (double)size);
-		yPoints[0] = (int)res[1];
-		res = rotateAroundCenter(cx, cy, cx, cy - (double)size);
-	    yPoints[1] = (int)res[1];
-	    res = rotateAroundCenter(cx, cy, cx - (double)size, cy);
-	    yPoints[2] = (int)res[1];
-		
-		return yPoints;
+
+	public int[] getTriangleXPoints() {
+		return triXPoints;
 	}
-	
+
+	public int[] getTriangleYPoints() {
+		return triYPoints;
+	}
+
 	public float mod(float a, float b) {
 		float r = a % b;
 
@@ -111,9 +127,9 @@ public class Boid implements Cloneable {
 	}
 
 	public boolean isNeighbor(Boid b) {
-		double angleDirection = Math.atan2((double)b.velocity.getY(), (double)b.velocity.getX());
-		double currentAngleDirection = Math.atan2((double)velocity.getY(), (double)velocity.getX());
-		
+		double angleDirection = mod(Math.atan2((double)b.velocity.getY(), (double)b.velocity.getX()), 2*Math.PI);
+		double currentAngleDirection = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
+
 		double firstVisionLimit = mod(currentAngleDirection + visionAngle, 2*Math.PI);
 		double secondVisionLimit = mod(currentAngleDirection - visionAngle, 2*Math.PI);
 		
