@@ -7,6 +7,8 @@ public class Boid implements Cloneable {
 	public PVector position;
 	public PVector velocity;
 	public PVector acceleration;
+	
+	public static double visionAngle = 3*Math.PI/4;
 
 	public float maxforce;
 	public float maxspeed;
@@ -57,9 +59,20 @@ public class Boid implements Cloneable {
 	}
 
 	public boolean isNeighbor(Boid b) {
-		if (this != b && position.distance(b.position) < NEIGHBORHOOD)
+		double angleDirection = Math.atan2((double)b.velocity.getY(), (double)b.velocity.getX());
+		double currentAngleDirection = Math.atan2((double)velocity.getY(), (double)velocity.getX());
+		
+		double firstVisionLimit = mod((float)(currentAngleDirection + visionAngle), (float)(2*Math.PI));
+		double secondVisionLimit = mod((float)(currentAngleDirection - visionAngle), (float)(2*Math.PI));
+		
+		double minAngleVisionLimit = Math.min(firstVisionLimit, secondVisionLimit);
+		double maxAngleVisionLimit = Math.max(firstVisionLimit, secondVisionLimit);
+		
+		
+		if (this != b && position.distance(b.position) < NEIGHBORHOOD
+				&& !(angleDirection >= minAngleVisionLimit && angleDirection <= maxAngleVisionLimit))
 			return true;
-
+		
 		return false;
 	}
 

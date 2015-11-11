@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.util.Iterator;
 
 import gui.GUISimulator;
-import gui.Oval;
+import gui.Triangle;
 import gui.Simulable;
 
 public class BoidsSimulator implements Simulable {
@@ -20,7 +20,7 @@ public class BoidsSimulator implements Simulable {
 		while(it.hasNext()){
 			Boid b = it.next();
 
-			gui.addGraphicalElement(new Oval((int)b.position.getX(), (int)b.position.getY(),
+			gui.addGraphicalElement(new Triangle((int)b.position.getX(), (int)b.position.getY(),
 					Color.decode("#1f77b4"), Color.decode("#1f77b4"), 7));
 		}
 	}
