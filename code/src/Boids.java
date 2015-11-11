@@ -9,7 +9,7 @@ public class Boids {
 	private ArrayList<Boid> boids;
 	private ArrayList<Boid> initialState;
 	private static final int deplacementFactor = 100;
-	private static final int smallDistance = 10;
+	private static final int smallDistance = 14;
 	private static final int velocityFactor = 8;
 
 	public Boids() {
