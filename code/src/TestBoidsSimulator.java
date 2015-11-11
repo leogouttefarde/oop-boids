@@ -8,9 +8,20 @@ public class TestBoidsSimulator {
 		Boids boids = new Boids();
 
 		boids.add(7, 8, 2, 2, 1, 1);
-		boids.add(8, 9, 2, 2, 1, 1);
-		boids.add(20, 20, 2, 2, 1, 1);
-		boids.add(200, 200, 2, 2, 1, 1);
+		boids.add(8, 9, 2, 2, -7, 1);
+		boids.add(20, 20, 2, 2, -8, -9);
+		boids.add(200, 200, 2, 2, -1, -1);
+		boids.add(400, 400, 7, 9, 3, -2);
+		boids.add(450, 470, 7, 9, -3, -2);
+		boids.add(350, 470, 7, 9, 3, 2);
+		boids.add(350, 320, 7, 9, -3, 2);
+		boids.add(450, 50, 7, 9, -3, 2);
+		boids.add(450, 50, 7, 9, -3, 2);
+		boids.add(470, 150, 7, 9, -3, 2);
+		boids.add(480, 100, 7, 9, 3, -2);
+		boids.add(100, 480, 7, 9, -3, -2);
+		boids.add(100, 450, 7, 9, 3, -2);
+		boids.add(110, 430, 7, 9, -3, 2);
 
 		System.out.println(boids);
 
