@@ -31,7 +31,7 @@ public class BoidsSimulator implements Simulable {
 	public void next() {
 		boids.update();
 		//System.out.println(boids.toString());
-		this.gui.reset();
+		gui.reset();
 		updateFrame();
 	}
 
@@ -39,7 +39,7 @@ public class BoidsSimulator implements Simulable {
 	public void restart() {
 		boids.reset();
 		// System.out.println(boids.toString());
-		this.gui.reset();
+		gui.reset();
 		updateFrame();
 	}
 }

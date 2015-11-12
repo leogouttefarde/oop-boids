@@ -13,12 +13,12 @@ public class BallsSimulator implements Simulable {
 	private static final int ballSize = 7; // Ball radius
 	private static final int GUI_BORDERS = 3; // GUI panel borders
 
-	public BallsSimulator(Balls b, GUISimulator g){
+	public BallsSimulator(Balls b, GUISimulator g) {
 		this.balls = b;
 		this.gui = g;
 	}
 
-	private void updateFrame(){
+	private void updateFrame() {
 		Iterator<Point> it = this.balls.iterator();
 		while(it.hasNext()){
 			Point p = it.next();
@@ -30,10 +30,12 @@ public class BallsSimulator implements Simulable {
 	}
 
 	@Override 
-	public void next(){
+	public void next() {
+		manager.next();
 		// Add 1 to ballSize because Oval adds 1 pixel in the middle
 		balls.translateBoundarie(this.gui.getPanelWidth() - GUI_BORDERS - ballSize-1,
 				this.gui.getPanelHeight() - GUI_BORDERS - ballSize-1, ballSize);
+		manager.addEvent(new );
 		System.out.println(balls.toString());
 		this.gui.reset();
 		updateFrame();
