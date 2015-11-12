@@ -3,7 +3,7 @@ import java.awt.Color;
 import gui.GUISimulator;
 import gui.Rectangle;
 
-public class ImmigrationSimulator extends ConwaySimulator {
+public class ImmigrationSimulator extends CellularAutomatonSimulator {
 
 	public ImmigrationSimulator(GUISimulator g, Immigration imm) {
 		super(g, imm);

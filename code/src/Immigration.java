@@ -1,4 +1,4 @@
-public class Immigration extends CellularAutomaton {
+public class Immigration extends ExtendedCellularAutomaton {
 
 	public Immigration(int n, int m, int states) {
 		this(n, m, states, 0);

@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
-public class Schelling extends CellularAutomaton {
+public class Schelling extends ExtendedCellularAutomaton {
 	
 	private int threshold;
 	private ArrayList<Cell> vacantHousing;
 
 
 	public Schelling(int n, int m, int states, int threshold) {
-		this(n, m, states,threshold, 0);
+		this(n, m, states, threshold, 0);
 	}
 
 	public Schelling(int n, int m, int states, int threshold, int defaultState) {
@@ -15,8 +15,6 @@ public class Schelling extends CellularAutomaton {
 
 		this.threshold = threshold;
 		vacantHousing = new ArrayList<Cell>();
-		
-		//initCellsAndNextCells();
 	}
 	
 	public void initVacantHousing(){
@@ -26,13 +24,6 @@ public class Schelling extends CellularAutomaton {
 				if(cells[x][y] == defaultState)
 					vacantHousing.add(new Cell(x, y, defaultState));
 			}
-		}
-	}
-	
-	public class VacantHousingException extends Exception{
-
-		public VacantHousingException(){
-			System.out.println("Not enough vacant housing");
 		}
 	}
 
@@ -82,11 +73,6 @@ public class Schelling extends CellularAutomaton {
 						//System.out.println(c.x + " " + c.y);
 						nextCells[c.x][c.y] = cellState;
 					} 
-					else {
-						try {
-							throw new VacantHousingException();
-						} catch (VacantHousingException e) {}		
-					}
 				}
 			}
 		}

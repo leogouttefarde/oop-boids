@@ -1,30 +1,37 @@
+import java.awt.Color;
+
 import gui.GUISimulator;
-import gui.Simulable;
+import gui.Rectangle;
 
-public abstract class ConwaySimulator implements Simulable {
+public class ConwaySimulator extends CellularAutomatonSimulator {
 
-	protected GUISimulator gui;
-	protected Conway game;
-
-	public ConwaySimulator(GUISimulator gui, Conway game) {
-		this.gui = gui;
-		this.game = game;
+	public ConwaySimulator(GUISimulator g, Conway life) {
+		super(g, life);
 	}
 
-	protected abstract void updateFrame();
+	protected void updateFrame() {
+		int cells[][] = ((Conway)game).getCells();
 
-	@Override 
-	public void next() {
-		game.generate();
-		System.out.println(game);
-		gui.reset();
-		updateFrame();
-	}
+		for (int x = 0; x < cells.length; x++) {
+			for (int y = 0; y < cells[x].length; y++) {
+				switch (cells[x][y]) {
+					case Conway.alive:
+						gui.addGraphicalElement(
+							new Rectangle(10+x * 12,10+ y*12,
+								Color.BLUE,
+								Color.BLUE, 10));
+						break;
 
-	@Override
-	public void restart() {
-		game.reset();
-		gui.reset();
-		updateFrame();
+					case Conway.dead:
+						gui.addGraphicalElement(
+							new Rectangle(10+x * 12,10+ y*12,
+								Color.GRAY,
+								Color.GRAY, 10));
+						break;
+					default:
+						break;
+				}
+			}
+		}
 	}
 }

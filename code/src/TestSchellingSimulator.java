@@ -24,7 +24,7 @@ public class TestSchellingSimulator {
 		int rndMax = numberOfColor + 1;
 		Schelling sch = new Schelling(n, m, numberOfColor + 1, threshold);
 		
-		int nbMaxHabitant = (3 * n * m)/4;
+		int nbMaxHabitant = (4 * n * m)/5;
 		int nbHabitant = 0;
 		while(nbHabitant < nbMaxHabitant){
 			int x = ThreadLocalRandom.current().nextInt(0, n);
