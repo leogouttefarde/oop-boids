@@ -1,37 +1,11 @@
-import java.util.ArrayList;
-
-public class Immigration extends Conway {
-
-	private int defaultState;
-	private int states;
-	private int cells[][];
-	private int nextCells[][];
-	private ArrayList<Cell> initialCells;
-
+public class Immigration extends CellularAutomaton {
 
 	public Immigration(int n, int m, int states) {
 		this(n, m, states, 0);
 	}
 
 	public Immigration(int n, int m, int states, int defaultState) {
-		super(n, m);
-
-		this.states = states;
-		this.defaultState = defaultState;
-		cells = new int[n][m];
-		nextCells = new int[n][m];
-		initialCells = new ArrayList<Cell>();
-		reset();
-	}
-
-
-	public int[][] getCells() {
-		return cells;
-	}
-
-	public void addCell(int x, int y, int state) {
-		initialCells.add(new Cell(x, y, state));
-		cells[x][y] = state;
+		super(n, m, states, defaultState);	
 	}
 
 	public void nextGeneration() {
@@ -67,30 +41,9 @@ public class Immigration extends Conway {
 
 	}
 
-	public void finishGeneration() {
-		int tmp[][] = cells;
-		cells = nextCells;
-		nextCells = tmp;
-	}
-
-	public void reset() {
-		// Arrays.fill(cells, new State[m]);
-		for (int i = 0; i < n; i++) {
-			// cells[i] = new State[m];
-			for (int j = 0; j < m; j++) {
-				cells[i][j] = defaultState;
-			}
-		}
-
-		for (Cell c : initialCells) {
-			// System.out.println(c.x+", "+c.y);
-			cells[c.x][c.y] = c.state;
-		}
-	}
-
 	public String toString() {
 		String str = new String("Immigration("+n+", "+m+")\n");
-
+		
 		for (Cell c : initialCells) {
 			str += c.x+ ", " + c.y+ ", " + c.state + "\n";
 		}
@@ -98,17 +51,4 @@ public class Immigration extends Conway {
 		return str;
 	}
 
-
-	public class Cell {
-		public int x;
-		public int y;
-		public int state;
-
-		public Cell(int x, int y, int state) {
-			this.x = x;
-			this.y = y;
-			this.state = state;
-		}
-
-	}
 }

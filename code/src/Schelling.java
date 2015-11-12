@@ -1,14 +1,8 @@
 import java.util.ArrayList;
 
-public class Schelling extends Conway {
-
+public class Schelling extends CellularAutomaton {
 	
-	private int defaultState;
-	private int states;
 	private int threshold;
-	private int cells[][];
-	private int nextCells[][];
-	private ArrayList<Cell> initialCells;
 	private ArrayList<Cell> vacantHousing;
 
 
@@ -17,34 +11,12 @@ public class Schelling extends Conway {
 	}
 
 	public Schelling(int n, int m, int states, int threshold, int defaultState) {
-		super(n, m);
+		super(n, m, states, defaultState);
 
-		this.states = states;
-		this.defaultState = defaultState;
 		this.threshold = threshold;
-		cells = new int[n][m];
-		nextCells = new int[n][m];
-		initialCells = new ArrayList<Cell>();
 		vacantHousing = new ArrayList<Cell>();
 		
-		initCellsAndNextCells();
-	}
-
-	private void initCellsAndNextCells(){
-		for (int x = 0; x < n; x++) {
-			for (int y = 0; y < m; y++) {
-				cells[x][y] = defaultState;
-				nextCells[x][y] = defaultState;
-			}
-		}
-	}
-	public int[][] getCells() {
-		return cells;
-	}
-
-	public void addCell(int x, int y, int state) {
-		initialCells.add(new Cell(x, y, state));
-		cells[x][y] = state;
+		//initCellsAndNextCells();
 	}
 	
 	public void initVacantHousing(){
@@ -54,6 +26,13 @@ public class Schelling extends Conway {
 				if(cells[x][y] == defaultState)
 					vacantHousing.add(new Cell(x, y, defaultState));
 			}
+		}
+	}
+	
+	public class VacantHousingException extends Exception{
+
+		public VacantHousingException(){
+			System.out.println("Not enough vacant housing");
 		}
 	}
 
@@ -112,20 +91,10 @@ public class Schelling extends Conway {
 			}
 		}
 	}
-
-	public void finishGeneration() {
-		int tmp[][] = cells;
-		cells = nextCells;
-		nextCells = tmp;
-	}
-
+	
+	@Override
 	public void reset() {
-		initCellsAndNextCells();
-		
-		for (Cell c : initialCells) {
-			// System.out.println(c.x+", "+c.y);
-			cells[c.x][c.y] = c.state;
-		}
+		super.reset();
 		initVacantHousing();
 	}
 
@@ -137,26 +106,5 @@ public class Schelling extends Conway {
 		}
 
 		return str;
-	}
-
-
-	public class Cell {
-		public int x;
-		public int y;
-		public int state;
-
-		public Cell(int x, int y, int state) {
-			this.x = x;
-			this.y = y;
-			this.state = state;
-		}
-
-	}
-	
-	public class VacantHousingException extends Exception{
-
-		public VacantHousingException(){
-			System.out.println("Not enough vacant housing");
-		}
 	}
 }
