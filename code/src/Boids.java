@@ -67,14 +67,14 @@ public class Boids {
 	}
 
 	// Second rule : Boids try to keep a small distance away from other objects (including other Boids)
-	private PVector ruleKeepDistance(Boid currentBoid){
+	private PVector ruleKeepDistance(Boid currentBoid) {
 		// System.out.println("ruleKeepDistance");
 		PVector d = new PVector(0, 0);
 		// System.out.println("d");
 		// System.out.println(d);
 
 		for(Boid b : boids){
-			if(currentBoid.isNeighbor(b)){
+			if(currentBoid.isNeighbor(b)) {
 				if(currentBoid.position.distance(b.position) < smallDistance){
 					PVector tmp = new PVector(0, 0);
 
@@ -97,7 +97,7 @@ public class Boids {
 	}
 
 	// Third rule : Boids try to match velocity with near boids
-	private PVector ruleMatchVelocity(Boid currentBoid){
+	private PVector ruleMatchVelocity(Boid currentBoid) {
 		PVector v = new PVector(0, 0);
 		int nb = 0;
 

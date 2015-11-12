@@ -1,4 +1,5 @@
-public class Immigration extends ExtendedCellularAutomaton {
+
+public class Immigration extends ExtendedAutomaton {
 
 	public Immigration(int n, int m, int states) {
 		this(n, m, states, 0);
@@ -21,10 +22,9 @@ public class Immigration extends ExtendedCellularAutomaton {
 					for (int j = 0; j < 3; j++) {
 
 						if (i != 1 || j != 1) {
-							int nx = getNeighbor(x, i, n);
-							int ny = getNeighbor(y, j, m);
+							final int nx = getNeighbor(x, i, n);
+							final int ny = getNeighbor(y, j, m);
 
-							//System.out.println(x+", "+y + ", "+k + ", "+i + ", "+j + " :  "+ nx+", "+ny+", "+cells[nx][ny]);
 							if (cells[nx][ny] == kp)
 								nbNeighbors++;
 						}
@@ -45,10 +45,11 @@ public class Immigration extends ExtendedCellularAutomaton {
 		String str = new String("Immigration("+n+", "+m+")\n");
 		
 		for (Cell c : initialCells) {
-			str += c.x+ ", " + c.y+ ", " + c.state + "\n";
+			str += c + "\n";
 		}
 
 		return str;
 	}
 
 }
+

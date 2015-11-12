@@ -7,25 +7,25 @@ public class TestImmigrationSimulator {
 
 		Immigration imm = new Immigration(70, 40, 4);
 		
-		imm.addCell(1, 1, 0);
-		imm.addCell(1, 2, 0);
-		imm.addCell(1, 3, 0);
-		imm.addCell(7, 7, 1);
-		imm.addCell(8, 7, 1);
-		imm.addCell(9, 7, 1);
-		imm.addCell(7, 10, 2);
-		imm.addCell(7, 11, 2);
-		imm.addCell(8, 11, 2);
-		imm.addCell(7, 12, 2);
-		imm.addCell(7, 8, 3);
-		imm.addCell(7, 9, 3);
+		imm.add(1, 1, 0);
+		imm.add(1, 2, 0);
+		imm.add(1, 3, 0);
+		imm.add(7, 7, 1);
+		imm.add(8, 7, 1);
+		imm.add(9, 7, 1);
+		imm.add(7, 10, 2);
+		imm.add(7, 11, 2);
+		imm.add(8, 11, 2);
+		imm.add(7, 12, 2);
+		imm.add(7, 8, 3);
+		imm.add(7, 9, 3);
 
-		imm.addCell(19, 30, 3);
-		imm.addCell(20, 30, 3);
-		imm.addCell(20, 31, 3);
-		imm.addCell(20, 30, 3);
-		imm.addCell(31, 22, 3);
-		imm.addCell(21, 31, 3);
+		imm.add(19, 30, 3);
+		imm.add(20, 30, 3);
+		imm.add(20, 31, 3);
+		imm.add(20, 30, 3);
+		imm.add(31, 22, 3);
+		imm.add(21, 31, 3);
 		
 		System.out.println(imm);
 

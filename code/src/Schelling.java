@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Schelling extends ExtendedCellularAutomaton {
+public class Schelling extends ExtendedAutomaton {
 	
 	private int threshold;
 	private ArrayList<Cell> vacantHousing;
@@ -28,51 +28,44 @@ public class Schelling extends ExtendedCellularAutomaton {
 	}
 
 	public void nextGeneration() {
-		int nbNeighbors[] = new int[this.states];
 
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < m; y++) {
 				nextCells[x][y] = cells[x][y];
 			}
 		}
-		
+
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < m; y++) {
 				final int cellState = cells[x][y];
-				
-				// k = 0 => vacant housing
-				for(int k = 1; k < this.states; k++){
-					nbNeighbors[k] = 0;
-					for (int i = 0; i < 3; i++) {
-						for (int j = 0; j < 3; j++) {
 
-							if (i != 1 || j != 1) {
-								int nx = getNeighbor(x, i, n);
-								int ny = getNeighbor(y, j, m);
+				if (cellState == defaultState)
+					continue;
 
-								//System.out.println(x+", "+y + ", "+k + ", "+i + ", "+j + " :  "+ nx+", "+ny+", "+cells[nx][ny]);
-								if (cells[nx][ny] == k)
-									nbNeighbors[k]++;
+				int nbNeighbors = 0;
+				for (int i = 0; i < 3; i++) {
+					for (int j = 0; j < 3; j++) {
+
+						if (i != 1 || j != 1) {
+							final int nx = getNeighbor(x, i, n);
+							final int ny = getNeighbor(y, j, m);
+
+							final int state = cells[nx][ny];
+
+							if (state != cellState && state != defaultState) {
+									nbNeighbors++;
 							}
 						}
 					}
 				}
-				// k = 0 => vacant housing
-				int k = 1;
-				while(k != this.states && nbNeighbors[k] < this.threshold)
-					k++;
-				
-				if(k < this.states && k != cellState && cellState != defaultState && nbNeighbors[k] >= this.threshold){
+
+				if(nbNeighbors > threshold) {
 					System.out.println(x + " " + y);
 					nextCells[x][y] = defaultState;
 					vacantHousing.add(new Cell(x, y, defaultState));
-					if(!vacantHousing.isEmpty()){
-						System.out.println(vacantHousing.get(0));
-						Cell c = vacantHousing.remove(0);
-						System.out.println(vacantHousing.get(0));
-						//System.out.println(c.x + " " + c.y);
-						nextCells[c.x][c.y] = cellState;
-					} 
+
+					Cell c = vacantHousing.remove(0);
+					nextCells[c.x][c.y] = cellState;
 				}
 			}
 		}
@@ -88,7 +81,7 @@ public class Schelling extends ExtendedCellularAutomaton {
 		String str = new String("Schelling("+n+", "+m+")\n");
 
 		for (Cell c : initialCells) {
-			str += c.x+ ", " + c.y+ ", " + c.state + "\n";
+			str += c + "\n";
 		}
 
 		return str;

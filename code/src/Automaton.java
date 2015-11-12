@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public abstract class CellularAutomaton {
+public abstract class Automaton {
 
 	protected int n;
 	protected int m;
@@ -9,7 +9,7 @@ public abstract class CellularAutomaton {
 	protected int cells[][];
 	protected ArrayList<Cell> initialCells;
 
-	public CellularAutomaton(int n, int m, int states, int defaultState) {
+	public Automaton(int n, int m, int states, int defaultState) {
 		this.n = n;
 		this.m = m;
 		this.states = states;
@@ -19,15 +19,15 @@ public abstract class CellularAutomaton {
 		initialCells = new ArrayList<Cell>();
 	}
 
-	public CellularAutomaton(int size, int states, int defaultState) {
+	public Automaton(int size, int states, int defaultState) {
 		this(size, size, states, defaultState);
 	}
-	
+
 	public int[][] getCells() {
 		return cells;
 	}
-	
-	public void addCell(int x, int y, int state) {
+
+	public void add(int x, int y, int state) {
 		initialCells.add(new Cell(x, y, state));
 		cells[x][y] = state;
 	}
@@ -55,9 +55,9 @@ public abstract class CellularAutomaton {
 	}
 
 	public String toString() {
-		return "Conway("+n+", "+m+")";
+		return "Automaton("+n+", "+m+")";
 	}
-	
+
 	public class Cell {
 		public int x;
 		public int y;
@@ -69,5 +69,8 @@ public abstract class CellularAutomaton {
 			this.state = state;
 		}
 
+		public String toString() {
+			return "Cell(" + x + ", " + y + ") : " + state;
+		}
 	}
 }

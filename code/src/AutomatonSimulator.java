@@ -1,12 +1,12 @@
 import gui.GUISimulator;
 import gui.Simulable;
 
-public abstract class CellularAutomatonSimulator implements Simulable {
+public abstract class AutomatonSimulator implements Simulable {
 
 	protected GUISimulator gui;
-	protected CellularAutomaton game;
+	protected Automaton game;
 
-	public CellularAutomatonSimulator(GUISimulator gui, CellularAutomaton game) {
+	public AutomatonSimulator(GUISimulator gui, Automaton game) {
 		this.gui = gui;
 		this.game = game;
 	}

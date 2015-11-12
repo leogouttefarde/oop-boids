@@ -3,7 +3,7 @@ import java.awt.Color;
 import gui.GUISimulator;
 import gui.Rectangle;
 
-public class SchellingSimulator extends CellularAutomatonSimulator{
+public class SchellingSimulator extends AutomatonSimulator {
 	
 	private Color color[];
 	
