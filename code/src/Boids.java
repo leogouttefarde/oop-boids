@@ -82,9 +82,6 @@ public class Boids {
 					tmp.sub(currentBoid.position);
 					tmp.mult(-1);
 
-					// Multiply by speed norm so that speed doesn't absorb this rule
-					tmp.mult(currentBoid.velocity.norm());
-
 					d.add(tmp);
 				}
 			}

@@ -136,9 +136,8 @@ public class Boid implements Cloneable {
 		double minAngleVisionLimit = Math.min(firstVisionLimit, secondVisionLimit);
 		double maxAngleVisionLimit = Math.max(firstVisionLimit, secondVisionLimit);
 		
-		
 		if (this != b && position.distance(b.position) < NEIGHBORHOOD
-			&& !(angleDirection >= minAngleVisionLimit && angleDirection <= maxAngleVisionLimit))
+			&& !(angleDirection <= minAngleVisionLimit && angleDirection >= maxAngleVisionLimit))
 			return true;
 		
 		return false;
