@@ -15,11 +15,12 @@ public abstract class Event implements Comparable<Event> {
 	
 	public int compareTo(Event e) {
 		long diff = this.date - e.getDate();
-		if (diff < 0 ) {
+
+		if (diff < 0) {
 			return -1;
 		}
 		else {
-			return (diff > 0?1:0);
+			return (diff > 0 ? 1 : 0);
 		}
 	}
 }

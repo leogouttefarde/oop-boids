@@ -16,6 +16,8 @@ public class BoidsSimulator implements Simulable {
 
 		Boids.setWidth(gui.getPanelWidth());
 		Boids.setHeight(gui.getPanelHeight());
+
+		EventManager.Get().addEvent(new BoidsEvent(1, boids));
 	}
 
 	private void updateFrame() {
@@ -29,7 +31,7 @@ public class BoidsSimulator implements Simulable {
 
 	@Override 
 	public void next() {
-		boids.update();
+		EventManager.Get().next();
 		//System.out.println(boids.toString());
 		gui.reset();
 		updateFrame();
