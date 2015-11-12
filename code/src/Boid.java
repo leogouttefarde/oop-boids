@@ -11,7 +11,7 @@ public class Boid implements Cloneable {
 	public PVector velocity;
 	public PVector acceleration;
 	
-	private static double visionAngle = 3*Math.PI/4;
+	private static double visionAngle = Math.PI/3;
 	private double orientation;
 
 	public float maxforce;
@@ -135,10 +135,18 @@ public class Boid implements Cloneable {
 		
 		double minAngleVisionLimit = Math.min(firstVisionLimit, secondVisionLimit);
 		double maxAngleVisionLimit = Math.max(firstVisionLimit, secondVisionLimit);
-		
+
+		// Ancienne condition toujours vraie, preuve live
+		if (!(angleDirection <= minAngleVisionLimit && angleDirection >= maxAngleVisionLimit) == false) {
+			System.out.println("Ce texte ne s'affichera jamais."); 
+			System.exit(0);
+		}
+
+
 		if (this != b && position.distance(b.position) < NEIGHBORHOOD
-			&& !(angleDirection <= minAngleVisionLimit && angleDirection >= maxAngleVisionLimit))
+			&& (minAngleVisionLimit <= angleDirection && angleDirection <= maxAngleVisionLimit))
 			return true;
+		
 		
 		return false;
 	}
