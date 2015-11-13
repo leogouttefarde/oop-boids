@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class BoidPredator extends Boid{
@@ -16,23 +17,32 @@ public class BoidPredator extends Boid{
 		PVector preyPosition = new PVector(0, 0);
 
 		// System.out.println("ruleFlyTowardCentreMass");
-		
-		for(Boid b : boids) {
-			if(isNeighbor(b) && b.behaviour == behaviour) {
-				preyPosition.add(b.position);
-				preyPosition.sub(position);
-			}
+		Iterator<Boid> it= boids.iterator();
+		Boid b = it.next();
+		while(it.hasNext() && !(isNeighbor(b) && b.behaviour == Behaviour.Prey)) {
+			b = it.next();
 		}
+		
+		if(isNeighbor(b) && b.behaviour == Behaviour.Prey){
+			preyPosition.add(b.position);
+			preyPosition.sub(position);
+		} 
 
 		// System.out.println(centerMassPosition);
 		return preyPosition.div(deplacementFactor);
 	}
 	
-	//à faire 
+	//à vérifier soit on attaque soit on suit ces semblable 
+	// on attaque des qu'il y a un proie dans son voisinage
 	@Override
 	public void move(){
-		// à faire 
-		// deplacement classique ou attaque
+		PVector preyPosition = ruleCatchPrey();
+		if(preyPosition.x != 0 && preyPosition.y != 0){
+			applyForce(preyPosition);
+			update();
+		} else {
+			super.move();
+		}
 	}
 	
 	
