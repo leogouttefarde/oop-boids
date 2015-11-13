@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
@@ -7,6 +8,7 @@ public class Boid implements Cloneable {
 	public static int DEFAULT_MAX_SPEED = 10;
 	public static int DEFAULT_MAX_FORCE = 77;
 	private static final int nbTrianglePoint = 3;
+	private static final int basicSize = 7;
 	
 	protected static final int deplacementFactor = 100;
 	protected static final int smallDistance = 14;
@@ -19,12 +21,15 @@ public class Boid implements Cloneable {
 	
 	protected enum Behaviour {Prey, Predator};
 	protected Behaviour behaviour;
+	
+	protected Color color;
+	protected int size;
 		
 	protected static double visionAngle = Math.PI/3;
 	protected double orientation;
 
-	public float maxforce;
-	public float maxspeed;
+	protected float maxforce;
+	protected float maxspeed;
 
 	public int triXPoints[];
 	public int triYPoints[];
@@ -35,6 +40,8 @@ public class Boid implements Cloneable {
 		acceleration = new PVector(ax, ay);
 		this.boids = boids;
 		behaviour = Behaviour.Prey;
+		color = Color.decode("#1f77b4");
+		size = basicSize;
 		orientation = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
 		
 		maxspeed = DEFAULT_MAX_SPEED;
@@ -55,42 +62,25 @@ public class Boid implements Cloneable {
 		
 		this.boids = boids;
 		behaviour = Behaviour.Prey;
+		color = Color.decode("#1f77b4");
 		orientation = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
 
 		triXPoints = new int[nbTrianglePoint];
 		triYPoints = new int[nbTrianglePoint];
 	}
 	
-	public Boid(float x, float y, float vx, float vy, float ax, float ay, ArrayList<Boid> boids, Behaviour behav) {
-		position = new PVector(x, y);
-		velocity = new PVector(vx, vy);
-		acceleration = new PVector(ax, ay);
-		this.boids = boids;
+	public Boid(float x, float y, float vx, float vy, float ax, float ay, ArrayList<Boid> boids, Behaviour behav, Color c, int size) {
+		this(x, y, vx, vy, ax, ay, boids);
 		behaviour = behav;
-		orientation = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
-		
-		maxspeed = DEFAULT_MAX_SPEED;
-		maxforce = DEFAULT_MAX_FORCE;
-
-		triXPoints = new int[nbTrianglePoint];
-		triYPoints = new int[nbTrianglePoint];
-		
+		color = c;
+		this.size = size;
 	}
 
-	public Boid(PVector p, PVector v, PVector a, float ms, float mf, ArrayList<Boid> boids, Behaviour behav) {
-		position = p;
-		velocity = v;
-		acceleration = a;
-		
-		maxspeed = ms;
-		maxforce = mf;
-		
-		this.boids = boids;
+	public Boid(PVector p, PVector v, PVector a, float ms, float mf, ArrayList<Boid> boids, Behaviour behav, Color c, int size) {
+		this(p, v, a, ms, mf, boids);
 		behaviour = behav;
-		orientation = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
-
-		triXPoints = new int[nbTrianglePoint];
-		triYPoints = new int[nbTrianglePoint];
+		color = c;
+		this.size = size;
 	}
 
 	public Boid clone() {
@@ -107,6 +97,14 @@ public class Boid implements Cloneable {
 	
 	public double getOrientation(){
 		return orientation;
+	}
+	
+	public Color getColor(){
+		return color;
+	}
+	
+	public int getSize(){
+		return size;
 	}
 
 	// public double[] rotateAroundCenter(double cx, double cy, double[] x, double[] y){
@@ -128,7 +126,7 @@ public class Boid implements Cloneable {
 		return res;
 	}
 
-	public void computeTrianglePoints(int size) {
+	public void computeTrianglePoints() {
 		double cx = position.getX();
 		double cy = position.getY();
 
@@ -189,8 +187,8 @@ public class Boid implements Cloneable {
 		}
 
 
-		if (this != b && position.distance(b.position) < NEIGHBORHOOD
-			&& (minAngleVisionLimit <= angleDirection && angleDirection <= maxAngleVisionLimit))
+		if (this != b && position.distance(b.position) < NEIGHBORHOOD)
+			//&& (minAngleVisionLimit <= angleDirection && angleDirection <= maxAngleVisionLimit))
 			return true;
 		
 		

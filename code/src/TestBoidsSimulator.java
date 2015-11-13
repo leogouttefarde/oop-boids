@@ -23,6 +23,9 @@ public class TestBoidsSimulator {
 		boids.add(100, 450, 7, 9, 3, -2);
 		boids.add(110, 430, 7, 9, -3, 2);
 		boids.add(250, 250, 0, -5, 0, 0);
+		
+		BoidPredator b = new BoidPredator(300, 300, 4, 5, 3, -2, boids.getBoids());
+		boids.add(b);
 
 		System.out.println(boids);
 
