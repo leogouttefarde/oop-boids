@@ -137,7 +137,7 @@ public class Boid implements Cloneable {
 		double maxAngleVisionLimit = Math.max(firstVisionLimit, secondVisionLimit);
 
 		// Ancienne condition toujours vraie, preuve live
-		if (!(angleDirection <= minAngleVisionLimit && angleDirection >= maxAngleVisionLimit) == false) {
+		if (!(angleDirection <= minAngleVisionLimit && angleDirection >= maxAngleVisionLimit) != true) {
 			System.out.println("Ce texte ne s'affichera jamais."); 
 			System.exit(0);
 		}
