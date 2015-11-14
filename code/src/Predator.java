@@ -8,10 +8,10 @@ public class Predator extends Boid {
 	private static final Color PRED_COLOR = Color.decode("#990000");
 	private static final int PRED_SIZE = 15;
 	private static final int PRED_MAX_SPEED = 12;
-	private static final int DEATH_RADIUS = 7;
+	private static final int DEATH_RADIUS = 10;
 
-	public Predator(double x, double y, double vx, double vy, double ax, double ay, LinkedList<Boid> boids) {
-		super(x, y, vx, vy, ax, ay, boids, Group.Predator, PRED_COLOR, PRED_SIZE);
+	public Predator(double x, double y, double vx, double vy, double ax, double ay) {
+		super(x, y, vx, vy, ax, ay, Group.Predator, PRED_COLOR, PRED_SIZE);
 		maxspeed = PRED_MAX_SPEED;
 	}
 
@@ -33,13 +33,14 @@ public class Predator extends Boid {
 
 		return f;
 	}
-	
+
 	protected boolean kill() {
 		Iterator<Boid> it = boids.iterator();
 		boolean killed = false;
 
 		while(it.hasNext() && !killed)  {
 			Boid b = it.next();
+
 			if(isNeighbor(b, Group.Prey) && position.distance(b.position) <= DEATH_RADIUS) {
 				it.remove();
 				killed = true;

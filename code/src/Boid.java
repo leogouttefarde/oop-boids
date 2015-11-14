@@ -2,16 +2,17 @@ import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
 
-public class Boid implements Cloneable {
+public abstract class Boid implements Cloneable {
 
-	public static int NEIGHBORHOOD = 55;
-	public static int BASE_MAX_SPEED = 10;
-	public static int BASE_MAX_FORCE = 77;
-	private static final int BASE_SIZE = 7;
+	protected static final int NEIGHBORHOOD = 55;
+	protected static final int BASE_MAX_SPEED = 10;
+	protected static final int BASE_MAX_FORCE = 77;
+	protected static final int BASE_SIZE = 7;
 
 	protected static final int MOVE_FACTOR = 100;
 	protected static final int SECURITY_DIST = 14;
 	protected static final int SPEED_FACTOR = 8;
+	protected static final double VISION = Math.PI/3;
 
 	protected PVector position;
 	protected PVector speed;
@@ -24,7 +25,6 @@ public class Boid implements Cloneable {
 	protected Color color;
 	protected int size;
 
-	protected static double visionAngle = Math.PI/3;
 	private double direction;
 
 	protected double maxforce;
@@ -34,11 +34,10 @@ public class Boid implements Cloneable {
 	protected int triYPoints[];
 
 
-	public Boid(double x, double y, double vx, double vy, double ax, double ay, LinkedList<Boid> boids) {
+	public Boid(double x, double y, double vx, double vy, double ax, double ay) {
 		position = new PVector(x, y);
 		speed = new PVector(vx, vy);
 		acceleration = new PVector(ax, ay);
-		this.boids = boids;
 		type = Group.Prey;
 		color = Color.decode("#1f77b4");
 		size = BASE_SIZE;
@@ -50,13 +49,13 @@ public class Boid implements Cloneable {
 
 		triXPoints = new int[3];
 		triYPoints = new int[3];
-		
 	}
 
-	public Boid(double x, double y, double vx, double vy, double ax, double ay, LinkedList<Boid> boids, Group behav, Color c, int size) {
-		this(x, y, vx, vy, ax, ay, boids);
-		type = behav;
-		color = c;
+	public Boid(double x, double y, double vx, double vy, double ax, double ay,
+				Group type, Color color, int size) {
+		this(x, y, vx, vy, ax, ay);
+		this.type = type;
+		this.color = color;
 		this.size = size;
 	}
 
@@ -74,6 +73,10 @@ public class Boid implements Cloneable {
 		}
 
 		return b;
+	}
+
+	public void setGroup(LinkedList<Boid> group) {
+		this.boids = group;
 	}
 
 	private void computeDirection() {
@@ -153,15 +156,15 @@ public class Boid implements Cloneable {
 	}
 
 	public boolean isNeighbor(Boid b, Group type) {
-		return (this.type == type) && isNeighbor(b);
+		return (b.type == type) && isNeighbor(b);
 	}
 
 	public boolean isNeighbor(Boid b) {
 		double angleDirection = b.getDirection();
 		double currentAngleDirection = getDirection();
 
-		double firstVisionLimit = ABS_ANGLE(currentAngleDirection + visionAngle);
-		double secondVisionLimit = ABS_ANGLE(currentAngleDirection - visionAngle);
+		double firstVisionLimit = ABS_ANGLE(currentAngleDirection + VISION);
+		double secondVisionLimit = ABS_ANGLE(currentAngleDirection - VISION);
 		
 		double minAngleVisionLimit = Math.min(firstVisionLimit, secondVisionLimit);
 		double maxAngleVisionLimit = Math.max(firstVisionLimit, secondVisionLimit);
@@ -269,7 +272,7 @@ public class Boid implements Cloneable {
 
 	public String toString() {
 		return "Boid(x : " + position.x + ", y :" + position.y + ", vx : " + speed.x + ", vy : " 
-				+ speed.y + ", ax : " + acceleration.x + ", ay : " + acceleration.y +", "+direction+")";
+				+ speed.y + ", ax : " + acceleration.x + ", ay : " + acceleration.y + ")";
 	}
 }
 

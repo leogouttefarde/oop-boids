@@ -8,8 +8,8 @@ public class Prey extends Boid {
 	private static int preySize = 7;
 	private static final int PREY_MAX_SPEED = 10;
 
-	public Prey(double x, double y, double vx, double vy, double ax, double ay, LinkedList<Boid> boids) {
-		super(x, y, vx, vy, ax, ay, boids, Group.Prey, color, preySize);
+	public Prey(double x, double y, double vx, double vy, double ax, double ay) {
+		super(x, y, vx, vy, ax, ay, Group.Prey, color, preySize);
 		maxspeed = PREY_MAX_SPEED;
 	}
 

@@ -14,13 +14,10 @@ public class Boids {
 		initialState = new LinkedList<Boid>();
 	}
 
-
-	public void add(double x, double y, double vx, double vy, double ax, double ay) {
-		add(new Boid(x, y, vx, vy, ax, ay, this.boids));
-	}
-
 	public void add(Boid b) {
 		boids.add(b);
+		b.setGroup(boids);
+
 		initialState.add(b.clone());
 	}
 
