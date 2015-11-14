@@ -16,23 +16,22 @@ public class Predator extends Boid {
 
 
 	protected PVector ruleCatchPrey() {
-		PVector f = new PVector();
 		Iterator<Boid> it = boids.iterator();
+		PVector force = new PVector();
 		Boid b;
 
 		do {
 			b = it.next();
 		} while (it.hasNext() && !isNeighbor(b, Group.Prey));
-
 		
 		if(isNeighbor(b, Group.Prey)) {
-			f.add(b.position);
-			f.sub(position);
-			f.mult(PRED_MAX_SPEED);
-			f.div(MOVE_FACTOR);
+			force.add(b.position);
+			force.sub(position);
+			force.mult(PRED_MAX_SPEED);
+			force.div(MOVE_FACTOR);
 		}
 
-		return f;
+		return force;
 	}
 
 	protected boolean kill() {
@@ -57,10 +56,10 @@ public class Predator extends Boid {
 		boolean killed = kill();
 
 		if(!killed) {
-			PVector f = ruleCatchPrey();
+			PVector force = ruleCatchPrey();
 
-			if(!f.isNull()) {
-				applyForce(f);
+			if(!force.isNull()) {
+				applyForce(force);
 				update();
 			}
 			else {

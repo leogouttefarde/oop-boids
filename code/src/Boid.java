@@ -7,7 +7,7 @@ public abstract class Boid implements Cloneable {
 	protected static final int NEIGHBORHOOD = 55;
 	protected static final int BASE_MAX_SPEED = 10;
 	protected static final int BASE_MAX_FORCE = 77;
-	protected static final int BASE_SIZE = 12;
+	protected static final int BASE_SIZE = 14;
 
 	protected static final int MOVE_FACTOR = 100;
 	protected static final int SECURITY_DIST = 14;
@@ -34,13 +34,11 @@ public abstract class Boid implements Cloneable {
 	protected int triYPts[];
 
 
-	public Boid(double x, double y, double vx, double vy, double ax, double ay) {
+	public Boid(double x, double y, double vx, double vy, double ax, double ay,
+				Group type, Color color, int size) {
 		position = new PVector(x, y);
 		speed = new PVector(vx, vy);
 		acceleration = new PVector(ax, ay);
-		type = Group.Prey;
-		color = Color.decode("#1f77b4");
-		size = BASE_SIZE;
 
 		computeDirection();
 
@@ -49,15 +47,12 @@ public abstract class Boid implements Cloneable {
 
 		triXPts = new int[3];
 		triYPts = new int[3];
-	}
 
-	public Boid(double x, double y, double vx, double vy, double ax, double ay,
-				Group type, Color color, int size) {
-		this(x, y, vx, vy, ax, ay);
 		this.type = type;
 		this.color = color;
 		this.size = size;
 	}
+
 
 	public Boid clone() {
 		Boid b = null;
@@ -120,17 +115,17 @@ public abstract class Boid implements Cloneable {
 		final double cx = position.getX();
 		final double cy = position.getY();
 		final double curSize = (double)size;
-		final double halfSize = curSize / 2;
+		final double downSize = curSize / 4;
 
 		double[] pts = turn(cx + 2*curSize/3, cy);
 		triXPts[0] = (int)pts[0];
 		triYPts[0] = (int)pts[1];
 
-		pts = turn(cx - curSize/3, cy + halfSize);
+		pts = turn(cx - curSize/3, cy + downSize);
 		triXPts[1] = (int)pts[0];
 		triYPts[1] = (int)pts[1];
 
-		pts = turn(cx - curSize/3, cy - halfSize);
+		pts = turn(cx - curSize/3, cy - downSize);
 		triXPts[2] = (int)pts[0];
 		triYPts[2] = (int)pts[1];
 	}
@@ -265,13 +260,13 @@ public abstract class Boid implements Cloneable {
 	}
 
 	public void move() {
-		PVector f;
+		PVector force;
 
-		f = ruleFlyToCenter();
-		f.add( ruleKeepDistance() );
-		f.add( ruleMatchSpeed() );
+		force = ruleFlyToCenter();
+		force.add( ruleKeepDistance() );
+		force.add( ruleMatchSpeed() );
 
-		applyForce(f);
+		applyForce(force);
 		update();
 	}
 

@@ -11,10 +11,12 @@ public class Life extends Automaton {
 		reset();
 	}
 
+
 	public void add(int x, int y) {
 		beginning.add(new Cell(x, y, ALIVE));
 		cells[x][y] = ALIVE;
 	}
+
 
 	protected boolean isNeighborMatch(int cell, int neighbor) {
 		boolean success = false;
