@@ -11,6 +11,29 @@
 \usepackage{xspace}
 \usepackage{url}
 \usepackage{titling}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1ex}
@@ -54,20 +77,41 @@ KACHER Ilyes}
 \section* {Introduction }
 \end{center}
 
-blabla intro
+
+L’objectif de ce TP était d’implémenter en \texttt{Java} des simulations
+graphiques de quelques systèmes multiagents. Un des points les plus importants de ce TP était d'aborder les aspects fondamentaux de la programmation orientée objet. Nous avons implémenter trois simulateurs de systèmes de type automate cellulaire: le jeu de la vie de Conway, un jeu de l'immigration et le modèle de ségrégation de Schelling en plus d'un simulateur d’un système
+de mouvement d’essaims auto-organisés : le modèle de Boids.
 
 
 $\newline$
 \section {Choix conceptuels}
-\subsection {Jeux de Conway}
+\subsection{Automates cellulaires}
+Nous avons cherché à factoriser notre code tout en profitant des avantages de la programmation orientée objet en implémentant deux classes abstraites \texttt{Automaton} et \texttt{AutomatonSimulator}. Pour chaque système d'automate cellulaire simulé il ya une classe concrète qui hérite la classe \texttt{Automaton} et implémente les règles du système et une classe qui le simule en héritant \texttt{AutomatonSimulator}. Nous avons remarqué plusieurs similarités entre l'implémentation du jeux de l'immigration et du modèle du Schelling, donc, dans le but de plus factoriser notre code, nous avons définie une autre classe abstraite \texttt{ExtendedAutomaton} qui étend \texttt{Automaton} et qui est hérité par les implémentations de ces deux systèmes.
 
-blabla
+\begin{tabular}{|l|c|c|c|}
+  \hline
+    Système & Implémentation & Simulateur & Test \\
+  \hline
+   Jeux de la vie de Conway & \texttt{Life} & \texttt{LifeSimulator} & \texttt{TestLifeSimulator}\\
+  \hline
+  Jeux de l'immigration & \texttt{Immigration} & \texttt{ImmigrationSimulator} & \texttt{TestLifeSimulator}\\
+  \hline
+  Modèle de Schelling & \texttt{Schelling} & \texttt{SchellingSimulator} & \texttt{TestSchellingSimulator}\\
+  \hline
+ 
+\end{tabular}
 
+Nous avons aussi généralisé l'utilisation de \texttt{EventManager} pour le calcul des générations suivantes pour tous les systèmes d'automate cellulaire simulés en définissant \texttt{AutomatonEvent} qui hérite la classe abstraite \texttt{Event}.
 
-\subsection {Modèle de Schelling}
+\subsubsection {Jeux de la vie de Conway}
+Pour visualiser l'exécution de ce simulateur, il faut exécuter la commande: \texttt{make exeLifeSim}
 
-blabla
+\subsubsection {Jeux de l'immigration}
+Pour visualiser l'exécution de ce simulateur, il faut exécuter la commande: \texttt{make exeImmSim}
 
+\subsubsection {Modèle de Schelling}
+Pour visualiser l'exécution de ce simulateur, il faut exécuter la commande: \texttt{make exeSSim}
+\subsection{Mouvement d’essaims auto-organisés: les Boids}
 
 \section {Tests}
 
