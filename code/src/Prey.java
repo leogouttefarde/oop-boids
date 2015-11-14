@@ -1,10 +1,11 @@
 import java.awt.Color;
 import java.util.Iterator;
 
+
 public class Prey extends Boid {
 	
 	private static final Color PREY_COLOR = Color.decode("#3366FF");
-	private static final int PREY_SIZE = 12;
+	private static final int PREY_SIZE = BASE_SIZE;
 	private static final int PREY_MAX_SPEED = 10;
 
 	public Prey(double x, double y, double vx, double vy, double ax, double ay) {
@@ -14,8 +15,8 @@ public class Prey extends Boid {
 
 
 	protected PVector ruleEscapeFromPredator() {
-		PVector f = new PVector();
 		Iterator<Boid> it = boids.iterator();
+		PVector force = new PVector();
 		Boid b;
 
 		do {
@@ -23,23 +24,24 @@ public class Prey extends Boid {
 		} while (it.hasNext() && !isNeighbor(b, Group.Predator));
 
 		if(isNeighbor(b, Group.Predator)) {
-			f.add(position);
-			f.sub(b.position);
-			f.mult(PREY_MAX_SPEED);
-			f.div(MOVE_FACTOR);
+			force.add(position);
+			force.sub(b.position);
+			force.mult(PREY_MAX_SPEED);
+			force.div(MOVE_FACTOR);
 		} 
 
-		return f;
+		return force;
 	}
 
 	@Override
 	public void move() {
-		PVector f = ruleEscapeFromPredator();
+		PVector force = ruleEscapeFromPredator();
 
-		if(!f.isNull()) {
-			applyForce(f);
+		if(!force.isNull()) {
+			applyForce(force);
 			update();
-		} else {
+		}
+		else {
 			super.move();
 		}
 	}
