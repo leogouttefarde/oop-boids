@@ -10,7 +10,7 @@ public abstract class Boid implements Cloneable {
 	protected static final int BASE_SIZE = 14;
 
 	protected static final int MOVE_FACTOR = 100;
-	protected static final int SECURITY_DIST = 14;
+	protected static final int SECURITY_DIST = 20;
 	protected static final int SPEED_FACTOR = 8;
 	protected static final double VISION = 2*Math.PI/3;
 
@@ -162,6 +162,14 @@ public abstract class Boid implements Cloneable {
 	public boolean isNeighbor(Boid b, Group type) {
 		return (b.type == type) && isNeighbor(b);
 	}
+	
+	public boolean isNear(Boid b, Group type) {
+		return (b.type == type) && isNear(b);
+	}
+	
+	public boolean isNear(Boid b) {
+		return this != b && position.distance(b.position) < NEIGHBORHOOD;
+	}
 
 	public boolean isNeighbor(Boid b) {
 		//final double neighborDir = b.getDirection();
@@ -179,9 +187,9 @@ public abstract class Boid implements Cloneable {
 			maxAngle = minAngle;
 			minAngle = tmp;
 		}
-
+			
 		if (this != b && position.distance(b.position) < NEIGHBORHOOD
-			 && (minAngle <= neighborDir && neighborDir <= maxAngle))
+			 && !(minAngle <= neighborDir && neighborDir <= maxAngle))
 			return true;
 		
 		
@@ -214,7 +222,7 @@ public abstract class Boid implements Cloneable {
 		PVector forces = new PVector();
 
 		for(Boid b : boids) {
-			if(isNeighbor(b, type)) {
+			if(isNear(b, type)) {
 				if(position.distance(b.position) < SECURITY_DIST) {
 					PVector force = new PVector();
 
@@ -246,7 +254,7 @@ public abstract class Boid implements Cloneable {
 			v.sub(speed);
 		}
 		
-		return v.div(SPEED_FACTOR);
+		return v;//.div(SPEED_FACTOR);
 	}
 
 	public void update() {
