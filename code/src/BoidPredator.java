@@ -51,10 +51,8 @@ public class BoidPredator extends Boid{
 		}
 		
 		return hasEat;
-		
-		//&& !(isNeighbor(b) && b.behaviour == Behaviour.Prey) && position.distance(b.position) > DISTANCE_TO_EAT)
 	}
-	//eatPrey bug : leve une exception lors de la suppression
+	
 	@Override
 	public void move(){
 		if(!eatPrey()){
