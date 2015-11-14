@@ -80,7 +80,7 @@ public abstract class Boid implements Cloneable {
 	}
 
 	private void computeDirection() {
-		direction = ABS_ANGLE(Math.atan2(speed.getY(), speed.getX()));
+		direction = aMod(Math.atan2(speed.getY(), speed.getX()));
 	}
 
 	public void reset(PVector position, PVector speed, PVector acceleration) {
@@ -138,19 +138,19 @@ public abstract class Boid implements Cloneable {
 		return triYPoints;
 	}
 
-	public static double ABS_MOD(double a, double b) {
+	public static double mod(double a, double b) {
 		double r = a % b;
 
 		return (r < 0) ? (r + b) : r;
 	}
 
-	public static double ABS_ANGLE(double a) {
-		return ABS_MOD(a, 2 * Math.PI);
+	public static double aMod(double a) {
+		return mod(a, 2 * Math.PI);
 	}
 
 	public void setPos(PVector pos) {
-		pos.x = ABS_MOD(pos.x, Boids.getWidth());
-		pos.y = ABS_MOD(pos.y, Boids.getHeight());
+		pos.x = mod(pos.x, Boids.getWidth());
+		pos.y = mod(pos.y, Boids.getHeight());
 
 		this.position.setLocation(pos);
 	}
@@ -163,8 +163,8 @@ public abstract class Boid implements Cloneable {
 		double angleDirection = b.getDirection();
 		double currentAngleDirection = getDirection();
 
-		double firstVisionLimit = ABS_ANGLE(currentAngleDirection + VISION);
-		double secondVisionLimit = ABS_ANGLE(currentAngleDirection - VISION);
+		double firstVisionLimit = aMod(currentAngleDirection + VISION);
+		double secondVisionLimit = aMod(currentAngleDirection - VISION);
 		
 		double minAngleVisionLimit = Math.min(firstVisionLimit, secondVisionLimit);
 		double maxAngleVisionLimit = Math.max(firstVisionLimit, secondVisionLimit);
@@ -183,14 +183,14 @@ public abstract class Boid implements Cloneable {
 		
 		return false;
 	}
-	
+
 	// First rule : Boids try to fly towards the center of mass of neighboring boids
 	protected PVector ruleFlyTowardCentreMass() {
 		PVector centerMassPosition = new PVector(0, 0);
 		int nb = 0;
 
 		for(Boid b : boids) {
-			if(isNeighbor(b) && b.type == type) {
+			if(isNeighbor(b, type)) {
 				centerMassPosition.add(b.position);
 				nb++;
 			}
@@ -209,7 +209,7 @@ public abstract class Boid implements Cloneable {
 		PVector d = new PVector(0, 0);
 
 		for(Boid b : boids) {
-			if(isNeighbor(b) && b.type == type) {
+			if(isNeighbor(b, type)) {
 				if(position.distance(b.position) < SECURITY_DIST) {
 					PVector tmp = new PVector(0, 0);
 
@@ -231,7 +231,7 @@ public abstract class Boid implements Cloneable {
 		int nb = 0;
 
 		for(Boid b : boids) {
-			if(isNeighbor(b) && b.type == type) {
+			if(isNeighbor(b, type)) {
 				v.add(b.speed);
 				nb++;
 			}
