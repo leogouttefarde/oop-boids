@@ -1,12 +1,12 @@
 import java.awt.Point;
 import java.util.Iterator;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Balls {
-	private ArrayList<Point> balls;
-	private ArrayList<Point> direction;
-	private ArrayList<Point> initialPosition;
+	private LinkedList<Point> balls;
+	private LinkedList<Point> direction;
+	private LinkedList<Point> initialPosition;
 	private static final int rndMin = 5;
 	private static int rndMax;
 	private static final int vitesseMax = 25;
@@ -15,9 +15,9 @@ public class Balls {
 	private int height;
 
 	public Balls() {
-		this.balls = new ArrayList<Point>();
-		this.direction = new ArrayList<Point>();
-		this.initialPosition = new ArrayList<Point>();
+		this.balls = new LinkedList<Point>();
+		this.direction = new LinkedList<Point>();
+		this.initialPosition = new LinkedList<Point>();
 	}
 
 	public void setWidth(int width) {

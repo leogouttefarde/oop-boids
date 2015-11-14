@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Iterator;
 
@@ -8,11 +7,11 @@ public class Boids {
 	private static int maxHeight;
 
 	private LinkedList<Boid> boids;
-	private ArrayList<Boid> initialState;
+	private LinkedList<Boid> initialState;
 
 	public Boids() {
 		boids = new LinkedList<Boid>();
-		initialState = new ArrayList<Boid>();
+		initialState = new LinkedList<Boid>();
 	}
 
 
@@ -24,7 +23,7 @@ public class Boids {
 		boids.add(b);
 		initialState.add(b.clone());
 	}
-	
+
 	public LinkedList<Boid> getBoids(){
 		return boids;
 	}
@@ -61,7 +60,7 @@ public class Boids {
 		System.out.println("\n\nreset !");
 		System.out.println(initialState);
 		System.out.println(boids);
-		for(Boid b : boids){
+		for(Boid b : boids) {
 			currentBoid = it.next();
 			b.reset(currentBoid.position, currentBoid.velocity, currentBoid.acceleration);
 		}

@@ -1,9 +1,9 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Schelling extends ExtendedAutomaton {
 	
 	private int threshold;
-	private ArrayList<Cell> vacantHousing;
+	private LinkedList<Cell> vacantHousing;
 
 
 	public Schelling(int n, int m, int states, int threshold) {
@@ -14,7 +14,7 @@ public class Schelling extends ExtendedAutomaton {
 		super(n, m, states, defaultState);
 
 		this.threshold = threshold;
-		vacantHousing = new ArrayList<Cell>();
+		vacantHousing = new LinkedList<Cell>();
 	}
 	
 	public void initVacantHousing(){
@@ -64,7 +64,7 @@ public class Schelling extends ExtendedAutomaton {
 					nextCells[x][y] = defaultState;
 					vacantHousing.add(new Cell(x, y, defaultState));
 
-					Cell c = vacantHousing.remove(0);
+					Cell c = vacantHousing.remove();
 					nextCells[c.x][c.y] = cellState;
 				}
 			}
