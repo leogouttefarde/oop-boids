@@ -4,42 +4,44 @@ import java.util.Iterator;
 
 public class Prey extends Boid {
 	
-	private static Color color = Color.decode("#3366FF");
-	private static int preySize = 7;
+	private static final Color PREY_COLOR = Color.decode("#3366FF");
+	private static final int PREY_SIZE = 7;
 	private static final int PREY_MAX_SPEED = 10;
 
 	public Prey(double x, double y, double vx, double vy, double ax, double ay) {
-		super(x, y, vx, vy, ax, ay, Group.Prey, color, preySize);
+		super(x, y, vx, vy, ax, ay, Group.Prey, PREY_COLOR, PREY_SIZE);
 		maxspeed = PREY_MAX_SPEED;
 	}
 
-	protected PVector ruleEscapeFromPredator(){
-		PVector predatorPosition = new PVector(0, 0);
+	protected PVector ruleEscapeFromPredator() {
+		PVector f = new PVector(0, 0);
 		
 		Iterator<Boid> it= boids.iterator();
 		Boid b = it.next();
-		while(it.hasNext() && !(isNeighbor(b) && b.type == Group.Predator)) {
+		while(it.hasNext() && !isNeighbor(b, Group.Predator)) {
 			b = it.next();
 		}
 
-		if(isNeighbor(b) && b.type == Group.Predator){
-			predatorPosition.add(b.position);
-			predatorPosition.sub(position);
-			predatorPosition.mult(-PREY_MAX_SPEED);
+		if(isNeighbor(b, Group.Predator)) {
+			f.add(b.position);
+			f.sub(position);
+			f.mult(-PREY_MAX_SPEED);
+			f.div(MOVE_FACTOR);
 		} 
 
-		return predatorPosition.div(MOVE_FACTOR);
+		return f;
 	}
 
 	@Override
-	public void move(){
-		PVector predatorPosition = ruleEscapeFromPredator();
-		if(predatorPosition.x != 0 && predatorPosition.y != 0){
-			//System.out.println("PREDATOR near !!!!");
-			applyForce(predatorPosition);
+	public void move() {
+		PVector f = ruleEscapeFromPredator();
+
+		if(!f.isNull()) {
+			applyForce(f);
 			update();
 		} else {
 			super.move();
 		}
 	}
 }
+
