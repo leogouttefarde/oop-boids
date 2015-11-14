@@ -162,10 +162,10 @@ public abstract class Boid implements Cloneable {
 	public boolean isNeighbor(Boid b, Group type) {
 		return (b.type == type) && isNeighbor(b);
 	}
-	
+	/*
 	public boolean isNear(Boid b, Group type) {
 		return (b.type == type) && isNear(b);
-	}
+	}*/
 	
 	public boolean isNear(Boid b) {
 		return this != b && position.distance(b.position) < NEIGHBORHOOD;
@@ -222,7 +222,7 @@ public abstract class Boid implements Cloneable {
 		PVector forces = new PVector();
 
 		for(Boid b : boids) {
-			if(isNear(b, type)) {
+			if(isNear(b)) {
 				if(position.distance(b.position) < SECURITY_DIST) {
 					PVector force = new PVector();
 
