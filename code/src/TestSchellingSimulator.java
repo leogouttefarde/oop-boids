@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class TestSchellingSimulator {
 
 	public static void main(String[] args) {
-		
+
 		int numberOfColor = 7;
 		Color color[] = new Color[numberOfColor + 1];
 		color[0] = new Color(255, 255, 255);
@@ -37,8 +37,6 @@ public class TestSchellingSimulator {
 			nbHabitant++;
 		}
 
-		sch.initVacantHouse();
-		
 		GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
 
 		gui.setSimulable(new SchellingSimulator(gui, sch, color));

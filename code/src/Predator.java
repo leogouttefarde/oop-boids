@@ -14,6 +14,7 @@ public class Predator extends Boid {
 		maxspeed = PRED_MAX_SPEED;
 	}
 
+
 	protected PVector ruleCatchPrey() {
 		PVector f = new PVector();
 		Iterator<Boid> it = boids.iterator();

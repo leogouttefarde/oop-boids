@@ -12,6 +12,7 @@ public class Prey extends Boid {
 		maxspeed = PREY_MAX_SPEED;
 	}
 
+
 	protected PVector ruleEscapeFromPredator() {
 		PVector f = new PVector();
 		Iterator<Boid> it = boids.iterator();

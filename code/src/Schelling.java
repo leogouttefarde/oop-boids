@@ -3,7 +3,7 @@ import java.util.LinkedList;
 public class Schelling extends ExtendedAutomaton {
 	
 	private int k;
-	private LinkedList<Cell> vacantHouse;
+	private LinkedList<Cell> vacantHouses;
 
 
 	public Schelling(int n, int m, int states, int k) {
@@ -12,68 +12,66 @@ public class Schelling extends ExtendedAutomaton {
 
 	public Schelling(int n, int m, int states, int k, int defaultState) {
 		super(n, m, states, defaultState);
-
 		this.k = k;
-		vacantHouse = new LinkedList<Cell>();
+
+		vacantHouses = new LinkedList<Cell>();
+		initVacantHouses();
 	}
-	
-	public void initVacantHouse(){
-		vacantHouse.clear();
+
+	public void initVacantHouses() {
+		vacantHouses.clear();
+
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < m; y++) {
 				if(cells[x][y] == defaultState)
-					vacantHouse.add(new Cell(x, y, defaultState));
+					vacantHouses.add(new Cell(x, y, defaultState));
 			}
 		}
 	}
 
-	public void nextGeneration() {
 
+	protected void preGeneration() {
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < m; y++) {
 				nextCells[x][y] = cells[x][y];
 			}
 		}
+	}
 
-		for (int x = 0; x < n; x++) {
-			for (int y = 0; y < m; y++) {
-				final int cellState = cells[x][y];
+	protected boolean skipCellGen(int cell) {
+		boolean skip = false;
 
-				if (cellState == defaultState)
-					continue;
+		if (cell == defaultState)
+			skip = true;
 
-				int nbNeighbors = 0;
-				for (int i = 0; i < 3; i++) {
-					for (int j = 0; j < 3; j++) {
+		return skip;
+	}
 
-						if (i != 1 || j != 1) {
-							final int nx = getNeighbor(x, i, n);
-							final int ny = getNeighbor(y, j, m);
+	protected boolean isNeighborMatch(int cell, int neighbor) {
+		boolean success = false;
 
-							final int state = cells[nx][ny];
+		if (neighbor != cell && neighbor != defaultState) {
+			success = true;
+		}
 
-							if (state != cellState && state != defaultState) {
-									nbNeighbors++;
-							}
-						}
-					}
-				}
+		return success;
+	}
 
-				if(nbNeighbors > k) {
-					nextCells[x][y] = defaultState;
-					vacantHouse.add(new Cell(x, y, defaultState));
+	protected void endCellGen(int x, int y, int nbNeighbors) {
+		if(nbNeighbors > k) {
+			nextCells[x][y] = defaultState;
+			vacantHouses.add(new Cell(x, y, defaultState));
 
-					Cell c = vacantHouse.remove();
-					nextCells[c.getX()][c.getY()] = cellState;
-				}
-			}
+			Cell cell = vacantHouses.remove();
+			nextCells[ cell.getX() ][ cell.getY() ] = cells[x][y];
 		}
 	}
-	
+
+
 	@Override
 	public void reset() {
 		super.reset();
-		initVacantHouse();
+		initVacantHouses();
 	}
 
 	public String toString() {

@@ -16,37 +16,26 @@ public class Life extends Automaton {
 		cells[x][y] = ALIVE;
 	}
 
-	public void nextGeneration() {
-		for (int x = 0; x < n; x++) {
-			for (int y = 0; y < m; y++) {
+	protected boolean isNeighborMatch(int cell, int neighbor) {
+		boolean success = false;
 
-				int nbNeighbors = 0;
-
-				for (int i = 0; i < 3; i++) {
-					for (int j = 0; j < 3; j++) {
-
-						if (i != 1 || j != 1) {
-							final int nx = getNeighbor(x, i, n);
-							final int ny = getNeighbor(y, j, m);
-
-							switch (cells[nx][ny]) {
-								case ALIVE:
-								case DYING:
-									nbNeighbors++;
-							}
-						}
-					}
-				}
-
-				if (cells[x][y] == DEAD && nbNeighbors == 3)
-					cells[x][y] = BIRTH;
-
-				else if (cells[x][y] == ALIVE && nbNeighbors != 2
-							&& nbNeighbors != 3)
-						cells[x][y] = DYING;
-			}
+		switch (neighbor) {
+			case ALIVE:
+			case DYING:
+				success = true;
 		}
+
+		return success;
 	}
+
+	protected void endCellGen(int x, int y, int nbNeighbors) {
+		if (cells[x][y] == DEAD && nbNeighbors == 3)
+			cells[x][y] = BIRTH;
+
+		else if (cells[x][y] == ALIVE && nbNeighbors != 2 && nbNeighbors != 3)
+				cells[x][y] = DYING;
+	}
+
 
 	public void finishGeneration() {
 		for (int x = 0; x < n; x++) {
