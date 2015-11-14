@@ -10,16 +10,17 @@ public class Immigration extends ExtendedAutomaton {
 	}
 
 	public void nextGeneration() {
+		int nbNeighbors;
+
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < m; y++) {
-
-				int nbNeighbors = 0;
 				final int k = cells[x][y];
 				final int kp = (k + 1) % states;
 
+				nbNeighbors = 0;
+
 				for (int i = 0; i < 3; i++) {
 					for (int j = 0; j < 3; j++) {
-
 						if (i != 1 || j != 1) {
 							final int nx = getNeighbor(x, i, n);
 							final int ny = getNeighbor(y, j, m);
@@ -37,7 +38,6 @@ public class Immigration extends ExtendedAutomaton {
 					nextCells[x][y] = k;
 			}
 		}
-
 	}
 
 	public String toString() {
@@ -49,6 +49,5 @@ public class Immigration extends ExtendedAutomaton {
 
 		return str;
 	}
-
 }
 
