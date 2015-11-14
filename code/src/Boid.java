@@ -7,12 +7,12 @@ public abstract class Boid implements Cloneable {
 	protected static final int NEIGHBORHOOD = 55;
 	protected static final int BASE_MAX_SPEED = 10;
 	protected static final int BASE_MAX_FORCE = 77;
-	protected static final int BASE_SIZE = 7;
+	protected static final int BASE_SIZE = 12;
 
 	protected static final int MOVE_FACTOR = 100;
 	protected static final int SECURITY_DIST = 14;
 	protected static final int SPEED_FACTOR = 8;
-	protected static final double VISION = Math.PI/3;
+	protected static final double VISION = 2*Math.PI/3;
 
 	protected PVector position;
 	protected PVector speed;
@@ -122,17 +122,18 @@ public abstract class Boid implements Cloneable {
 		final double curSize = (double)size;
 		final double halfSize = curSize / 2;
 
-		double[] pts = turn(cx + curSize, cy);
+		double[] pts = turn(cx + 2*curSize/3, cy);
 		triXPts[0] = (int)pts[0];
 		triYPts[0] = (int)pts[1];
 
-		pts = turn(cx - curSize, cy + halfSize);
+		pts = turn(cx - curSize/3, cy + halfSize);
 		triXPts[1] = (int)pts[0];
 		triYPts[1] = (int)pts[1];
 
-		pts = turn(cx - curSize, cy - halfSize);
+		pts = turn(cx - curSize/3, cy - halfSize);
 		triXPts[2] = (int)pts[0];
 		triYPts[2] = (int)pts[1];
+
 	}
 
 	public int[] getTriangleX() {
@@ -165,7 +166,12 @@ public abstract class Boid implements Cloneable {
 	}
 
 	public boolean isNeighbor(Boid b) {
-		final double neighborDir = b.getDirection();
+		//final double neighborDir = b.getDirection();
+		
+		double tmp1 = b.position.x - position.x;
+		double tmp2 = b.position.y - position.y;
+		
+		double neighborDir = aMod(Math.atan2(tmp2, tmp1));
 
 		double minAngle = aMod(direction + VISION);
 		double maxAngle = aMod(direction - VISION);
@@ -176,15 +182,8 @@ public abstract class Boid implements Cloneable {
 			minAngle = tmp;
 		}
 
-		// Ancienne condition toujours vraie, preuve live
-		if (!(neighborDir <= minAngle && neighborDir >= maxAngle) != true) {
-			System.out.println("Ce texte ne s'affichera jamais."); 
-			System.exit(0);
-		}
-
-
-		if (this != b && position.distance(b.position) < NEIGHBORHOOD)
-			// && (minAngle <= neighborDir && neighborDir <= maxAngle))
+		if (this != b && position.distance(b.position) < NEIGHBORHOOD
+			 && (minAngle <= neighborDir && neighborDir <= maxAngle))
 			return true;
 		
 		

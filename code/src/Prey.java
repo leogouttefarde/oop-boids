@@ -4,7 +4,7 @@ import java.util.Iterator;
 public class Prey extends Boid {
 	
 	private static final Color PREY_COLOR = Color.decode("#3366FF");
-	private static final int PREY_SIZE = 7;
+	private static final int PREY_SIZE = 12;
 	private static final int PREY_MAX_SPEED = 10;
 
 	public Prey(double x, double y, double vx, double vy, double ax, double ay) {

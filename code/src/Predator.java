@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class Predator extends Boid {
 	
 	private static final Color PRED_COLOR = Color.decode("#990000");
-	private static final int PRED_SIZE = 15;
+	private static final int PRED_SIZE = 20;
 	private static final int PRED_MAX_SPEED = 12;
 	private static final int DEATH_RADIUS = 10;
 
