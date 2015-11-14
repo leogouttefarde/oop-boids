@@ -8,7 +8,7 @@ public class BoidPredator extends Boid{
 	private static Color color = Color.decode("#990000");
 	private static int predatorSize = 15;
 	private static final int PREDATOR_MAX_SPEED = 12;
-	private static final int DISTANCE_TO_EAT = 5;
+	private static final int DISTANCE_TO_EAT = 7;
 
 	public BoidPredator(PVector p, PVector v, PVector a, float ms, float mf, LinkedList<Boid> boids) {
 		super(p, v, a, ms, mf, boids, Behaviour.Predator, color, predatorSize);
@@ -38,19 +38,19 @@ public class BoidPredator extends Boid{
 	}
 	
 	protected boolean eatPrey(){
-		
 		Iterator<Boid> it= boids.iterator();
-		Boid b = it.next();
-		while(it.hasNext() && !(isNeighbor(b) && b.behaviour == Behaviour.Prey) && position.distance(b.position) > DISTANCE_TO_EAT) {
-			b = it.next();
+		boolean hasEat = false;
+		while(it.hasNext() && !hasEat)  {
+			Boid b = it.next();
+			if(isNeighbor(b) && b.behaviour == Behaviour.Prey && position.distance(b.position) <= DISTANCE_TO_EAT && !hasEat){
+				it.remove();
+				hasEat = true;
+				//System.out.println("Prey eaten");
+			}
 		}
-		if(isNeighbor(b) && b.behaviour == Behaviour.Prey && position.distance(b.position) <= DISTANCE_TO_EAT){
-			it.remove();
-			return true;
-		}
-		return false;
+		return hasEat;
 	}
-	//eatPrey bug : leve une exception lors de la suppression
+	
 	@Override
 	public void move(){
 		if(!eatPrey()){
