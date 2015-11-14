@@ -128,7 +128,6 @@ public abstract class Boid implements Cloneable {
 		pts = turn(cx - curSize/3, cy - downSize);
 		triXPts[2] = (int)pts[0];
 		triYPts[2] = (int)pts[1];
-
 	}
 
 	public int[] getTriangleX() {
