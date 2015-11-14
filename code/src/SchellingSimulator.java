@@ -13,7 +13,7 @@ public class SchellingSimulator extends AutomatonSimulator {
 	}
 
 	protected void updateFrame() {
-		int cells[][] = ((Schelling)game).getCells();
+		int cells[][] = ((Schelling)automaton).getCells();
 
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {

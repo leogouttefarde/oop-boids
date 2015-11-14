@@ -10,7 +10,7 @@ public class ImmigrationSimulator extends AutomatonSimulator {
 	}
 
 	protected void updateFrame() {
-		int cells[][] = ((Immigration)game).getCells();
+		int cells[][] = ((Immigration)automaton).getCells();
 
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {

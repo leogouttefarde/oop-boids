@@ -10,7 +10,7 @@ public class LifeSimulator extends AutomatonSimulator {
 	}
 
 	protected void updateFrame() {
-		int cells[][] = ((Life)game).getCells();
+		int cells[][] = ((Life)automaton).getCells();
 
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {
