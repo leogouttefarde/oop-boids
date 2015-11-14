@@ -1,5 +1,6 @@
 
-public class AutomatonEvent extends Event{
+public class AutomatonEvent extends Event {
+	
 	private Automaton automaton;
 
 	public AutomatonEvent(long date, Automaton automaton) {

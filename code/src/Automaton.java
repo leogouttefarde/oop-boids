@@ -59,14 +59,26 @@ public abstract class Automaton {
 	}
 
 	public class Cell {
-		public int x;
-		public int y;
-		public int state;
+		private int x;
+		private int y;
+		private int state;
 
 		public Cell(int x, int y, int state) {
 			this.x = x;
 			this.y = y;
 			this.state = state;
+		}
+		
+		public int getX(){
+			return x;
+		}
+		
+		public int getY(){
+			return y;
+		}
+		
+		public int getState(){
+			return state;
 		}
 
 		public String toString() {

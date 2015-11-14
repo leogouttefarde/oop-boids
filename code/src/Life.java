@@ -1,10 +1,10 @@
 
 public class Life extends Automaton {
 
-	public static final int ALIVE = 0;
-	public static final int BIRTH = 1;
-	public static final int DEAD = 2;
-	public static final int DYING = 3;
+	public static final int DEAD = 0;
+	public static final int DYING = 1;
+	public static final int ALIVE = 2;
+	public static final int BIRTH = 3;
 
 	public Life(int n, int m) {
 		super(n, m, 4, DEAD);
@@ -65,16 +65,14 @@ public class Life extends Automaton {
 	}
 
 	public void reset() {
-		// Arrays.fill(cells, new State[m]);
 		for (int i = 0; i < n; i++) {
-			// cells[i] = new State[m];
 			for (int j = 0; j < m; j++) {
 				cells[i][j] = DEAD;
 			}
 		}
 
 		for (Cell c : initialCells) {
-			cells[c.x][c.y] = ALIVE;
+			cells[c.getX()][c.getY()] = ALIVE;
 		}
 	}
 
