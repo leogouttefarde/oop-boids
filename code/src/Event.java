@@ -20,7 +20,7 @@ public abstract class Event implements Comparable<Event> {
 			return -1;
 		}
 		else {
-			return (diff > 0 ? 1 : 0);
+			return (diff > 0) ? 1 : 0;
 		}
 	}
 }

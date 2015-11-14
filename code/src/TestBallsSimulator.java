@@ -13,6 +13,6 @@ public class TestBallsSimulator {
 		
 		GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
 
-		gui.setSimulable(new BallsSimulator(b, gui));
+		gui.setSimulable(new BallsSimulator(gui, b));
 	}
 }

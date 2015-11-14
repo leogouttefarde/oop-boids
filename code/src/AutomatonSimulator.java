@@ -16,7 +16,6 @@ public abstract class AutomatonSimulator implements Simulable {
 	public AutomatonSimulator(GUISimulator gui, Automaton automaton) {
 		this.gui = gui;
 		this.automaton = automaton;
-		cells = automaton.getCells();
 
 		EventManager.Get().addEvent(new AutomatonEvent(1, automaton));
 	}
@@ -28,6 +27,8 @@ public abstract class AutomatonSimulator implements Simulable {
 	protected abstract Color getCellColor(int x, int y);
 
 	protected void updateFrame() {
+		cells = automaton.getCells();
+
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {
 				gui.addGraphicalElement(viewCell(x, y, getCellColor(x, y)));
@@ -38,7 +39,6 @@ public abstract class AutomatonSimulator implements Simulable {
 	@Override 
 	public void next() {
 		EventManager.Get().next();
-		System.out.println(automaton);
 		gui.reset();
 		updateFrame();
 	}

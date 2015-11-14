@@ -1,7 +1,10 @@
+
+
 public abstract class ExtendedAutomaton extends Automaton {
 	
 	protected int nextCells[][];
-	
+
+
 	public ExtendedAutomaton(int n, int m, int states, int defaultState) {
 		super(n, m, states, defaultState);
 		nextCells = new int[n][m];
@@ -11,7 +14,6 @@ public abstract class ExtendedAutomaton extends Automaton {
 		this(size, size, states, defaultState);
 	}
 
-	protected abstract void nextGeneration();
 
 	public void finishGeneration() {
 		int tmp[][] = cells;

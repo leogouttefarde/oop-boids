@@ -41,7 +41,7 @@ public abstract class Automaton {
 		int pos = cell + n;
 
 		if (pos == 0)
-			pos = max-1;
+			pos = max - 1;
 
 		else
 			pos = (pos - 1) % max;
@@ -57,6 +57,7 @@ public abstract class Automaton {
 	public String toString() {
 		return "Automaton("+n+", "+m+")";
 	}
+
 
 	public class Cell {
 		private int x;

@@ -1,5 +1,6 @@
 import java.util.PriorityQueue;
 
+
 public class EventManager {
 	
 	private long currentDate;
@@ -8,7 +9,6 @@ public class EventManager {
 
 	private EventManager() {
 		events = new PriorityQueue<Event>();
-		currentDate = 0;
 	}
 
 	public static EventManager GetInstance() {
@@ -24,9 +24,10 @@ public class EventManager {
 	};
 
 	public void next() {
+		Event d = events.poll();
+
 		currentDate++;
 		// System.out.println("Next... Current date : " + currentDate);
-		Event d = events.poll();
 
 		while (d != null && d.getDate() <= currentDate) {
 			d.execute();
@@ -43,7 +44,7 @@ public class EventManager {
 	};
 	
 	public void restart() {
-		currentDate = 1;
 		events.clear();
+		currentDate = 0;
 	};
 }
