@@ -1,6 +1,6 @@
 import java.awt.geom.Point2D;
 
-public class PVector extends Point2D.Double implements Cloneable {
+public class PVector extends Point2D.Double {
 
 	public PVector() {
 		super();
@@ -9,6 +9,7 @@ public class PVector extends Point2D.Double implements Cloneable {
 	public PVector(double x, double y) {
 		super(x, y);
 	}
+
 
 	public PVector clone() {
 		return (PVector)super.clone();
@@ -33,7 +34,7 @@ public class PVector extends Point2D.Double implements Cloneable {
 	}
 
 	public double norm() {
-		double n = (double)Math.sqrt(x*x + y*y);
+		double n = Math.sqrt(x*x + y*y);
 
 		return n;
 	}

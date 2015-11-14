@@ -23,6 +23,7 @@ public abstract class Automaton {
 		this(size, size, states, defaultState);
 	}
 
+
 	public int[][] getCells() {
 		return cells;
 	}
@@ -33,8 +34,47 @@ public abstract class Automaton {
 	}
 
 	public abstract void reset();
-	protected abstract void nextGeneration();
 	protected abstract void finishGeneration();
+
+
+	protected abstract boolean isNeighborMatch(int cell, int neighbor);
+	protected abstract void endCellGen(int x, int y, int nbNeighbors);
+
+	protected void preGeneration() {}
+
+	protected boolean skipCellGen(int cell) {
+		return false;
+	}
+
+	protected void nextGeneration() {
+		int nbNeighbors;
+
+		preGeneration();
+
+		for (int x = 0; x < n; x++) {
+			for (int y = 0; y < m; y++) {
+				final int cell = cells[x][y];
+
+				if (!skipCellGen(cell)) {
+					nbNeighbors = 0;
+
+					for (int i = 0; i < 3; i++) {
+						for (int j = 0; j < 3; j++) {
+							if (i != 1 || j != 1) {
+								final int nx = getNeighbor(x, i, n);
+								final int ny = getNeighbor(y, j, m);
+
+								if (isNeighborMatch(cell, cells[nx][ny]))
+									nbNeighbors++;
+							}
+						}
+					}
+
+					endCellGen(x, y, nbNeighbors);
+				}
+			}
+		}
+	}
 
 	protected int getNeighbor(int cell, int n, int max) {
 

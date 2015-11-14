@@ -9,35 +9,26 @@ public class Immigration extends ExtendedAutomaton {
 		super(n, m, states, defaultState);	
 	}
 
-	public void nextGeneration() {
-		int nbNeighbors;
 
-		for (int x = 0; x < n; x++) {
-			for (int y = 0; y < m; y++) {
-				final int k = cells[x][y];
-				final int kp = (k + 1) % states;
+	protected boolean isNeighborMatch(int cell, int neighbor) {
+		final int next = (cell + 1) % states;
+		boolean success = false;
 
-				nbNeighbors = 0;
+		if (neighbor == next)
+			success = true;
 
-				for (int i = 0; i < 3; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (i != 1 || j != 1) {
-							final int nx = getNeighbor(x, i, n);
-							final int ny = getNeighbor(y, j, m);
+		return success;
+	}
 
-							if (cells[nx][ny] == kp)
-								nbNeighbors++;
-						}
-					}
-				}
+	protected void endCellGen(int x, int y, int nbNeighbors) {
+		final int state = cells[x][y];
+		final int next = (state + 1) % states;
 
-				if (nbNeighbors >= 3)
-					nextCells[x][y] = kp;
+		if (nbNeighbors >= 3)
+			nextCells[x][y] = next;
 
-				else
-					nextCells[x][y] = k;
-			}
-		}
+		else
+			nextCells[x][y] = state;
 	}
 
 	public String toString() {
