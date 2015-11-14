@@ -79,7 +79,7 @@ public class Schelling extends ExtendedAutomaton {
 	public String toString() {
 		String str = new String("Schelling("+n+", "+m+")\n");
 
-		for (Cell c : initialCells) {
+		for (Cell c : beginning) {
 			str += c + "\n";
 		}
 

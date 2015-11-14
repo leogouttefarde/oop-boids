@@ -12,7 +12,7 @@ public class Life extends Automaton {
 	}
 
 	public void add(int x, int y) {
-		initialCells.add(new Cell(x, y, ALIVE));
+		beginning.add(new Cell(x, y, ALIVE));
 		cells[x][y] = ALIVE;
 	}
 
@@ -71,7 +71,7 @@ public class Life extends Automaton {
 			}
 		}
 
-		for (Cell c : initialCells) {
+		for (Cell c : beginning) {
 			cells[c.getX()][c.getY()] = ALIVE;
 		}
 	}
@@ -79,7 +79,7 @@ public class Life extends Automaton {
 	public String toString() {
 		String str = new String("Life("+n+", "+m+")\n");
 
-		for (Cell c : initialCells) {
+		for (Cell c : beginning) {
 			str += c + "\n";
 		}
 

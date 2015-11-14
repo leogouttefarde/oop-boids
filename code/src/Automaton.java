@@ -7,7 +7,7 @@ public abstract class Automaton {
 	protected int defaultState;
 	protected int states;
 	protected int cells[][];
-	protected ArrayList<Cell> initialCells;
+	protected ArrayList<Cell> beginning;
 
 	public Automaton(int n, int m, int states, int defaultState) {
 		this.n = n;
@@ -16,7 +16,7 @@ public abstract class Automaton {
 		this.defaultState = defaultState;
 		
 		cells = new int[n][m];
-		initialCells = new ArrayList<Cell>();
+		beginning = new ArrayList<Cell>();
 	}
 
 	public Automaton(int size, int states, int defaultState) {
@@ -28,7 +28,7 @@ public abstract class Automaton {
 	}
 
 	public void add(int x, int y, int state) {
-		initialCells.add(new Cell(x, y, state));
+		beginning.add(new Cell(x, y, state));
 		cells[x][y] = state;
 	}
 
