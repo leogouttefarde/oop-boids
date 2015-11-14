@@ -105,9 +105,9 @@ public class Balls {
 			b.setLocation(itPos.next());
 		
 		for(Point dir : direction)
-			dir.setLocation(d);
+			dir.setLocation(BASE_DIR);
 	}
-	
+
 	public Iterator<Point> iterator() {
 		return this.balls.iterator();
 	}
