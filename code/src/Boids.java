@@ -15,7 +15,7 @@ public class Boids {
 	}
 
 
-	public void add(float x, float y, float vx, float vy, float ax, float ay) {
+	public void add(double x, double y, double vx, double vy, double ax, double ay) {
 		add(new Boid(x, y, vx, vy, ax, ay, this.boids));
 	}
 
@@ -62,7 +62,7 @@ public class Boids {
 		System.out.println(this);
 		for(Boid b : boids) {
 			currentBoid = it.next();
-			b.reset(currentBoid.position, currentBoid.velocity, currentBoid.acceleration);
+			b.reset(currentBoid.position, currentBoid.speed, currentBoid.acceleration);
 		}
 		System.out.println(this);
 	}

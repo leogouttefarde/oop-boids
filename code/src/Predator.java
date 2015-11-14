@@ -5,65 +5,63 @@ import java.util.Iterator;
 
 public class Predator extends Boid {
 	
-	private static Color color = Color.decode("#990000");
-	private static int predatorSize = 15;
-	private static final int PREDATOR_MAX_SPEED = 12;
-	private static final int DISTANCE_TO_EAT = 7;
+	private static final Color PRED_COLOR = Color.decode("#990000");
+	private static final int PRED_SIZE = 15;
+	private static final int PRED_MAX_SPEED = 12;
+	private static final int DEATH_RADIUS = 7;
 
-	public Predator(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids) {
-		super(x, y, vx, vy, ax, ay, boids, Behaviour.Predator, color, predatorSize);
-		maxspeed = PREDATOR_MAX_SPEED;
+	public Predator(double x, double y, double vx, double vy, double ax, double ay, LinkedList<Boid> boids) {
+		super(x, y, vx, vy, ax, ay, boids, Group.Predator, PRED_COLOR, PRED_SIZE);
+		maxspeed = PRED_MAX_SPEED;
 	}
 
-	// public Predator clone() {
-	// 	Predator b = null;
-
-	// 	b = (Predator)super.clone();
-
-	// 	return b;
-	// }
-	
-	protected PVector ruleCatchPrey(){
-		PVector preyPosition = new PVector(0, 0);
+	protected PVector ruleCatchPrey() {
+		PVector f = new PVector(0, 0);
 
 		Iterator<Boid> it= boids.iterator();
 		Boid b = it.next();
-		while(it.hasNext() && !(isNeighbor(b) && b.behaviour == Behaviour.Prey)) {
+		while(it.hasNext() && !isNeighbor(b, Group.Prey)) {
 			b = it.next();
 		}
 		
-		if(isNeighbor(b) && b.behaviour == Behaviour.Prey){
-			preyPosition.add(b.position);
-			preyPosition.sub(position);
-			preyPosition.mult(PREDATOR_MAX_SPEED);
-			preyPosition.div(deplacementFactor);
+		if(isNeighbor(b, Group.Prey)) {
+			f.add(b.position);
+			f.sub(position);
+			f.mult(PRED_MAX_SPEED);
+			f.div(MOVE_FACTOR);
 		}
 
-		return preyPosition;
+		return f;
 	}
 	
-	protected boolean eatPrey(){
-		Iterator<Boid> it= boids.iterator();
-		boolean hasEat = false;
-		while(it.hasNext() && !hasEat)  {
+	protected boolean kill() {
+		Iterator<Boid> it = boids.iterator();
+		boolean killed = false;
+
+		while(it.hasNext() && !killed)  {
 			Boid b = it.next();
-			if(isNeighbor(b) && b.behaviour == Behaviour.Prey && position.distance(b.position) <= DISTANCE_TO_EAT){
+			if(isNeighbor(b, Group.Prey) && position.distance(b.position) <= DEATH_RADIUS) {
 				it.remove();
-				hasEat = true;
-				//System.out.println("Prey eaten");
+				killed = true;
+				System.out.println("Prey eaten");
 			}
 		}
-		return hasEat;
+
+		return killed;
 	}
-	
+
 	@Override
-	public void move(){
-		if(!eatPrey()){
-			PVector preyPosition = ruleCatchPrey();
-			if(preyPosition.x != 0 && preyPosition.y != 0){
-				applyForce(preyPosition);
+	public void move() {
+		boolean killed = kill();
+
+		if(!killed) {
+			PVector f = ruleCatchPrey();
+
+			if(!f.isNull()) {
+				applyForce(f);
 				update();
-			} else {
+			}
+			else {
 				super.move();
 			}
 		}
@@ -71,18 +69,4 @@ public class Predator extends Boid {
 			super.move();
 		}
 	}
-	
-	// @Override
-	// public void move(){
-	// 	PVector preyPosition = ruleCatchPrey();
-	// 	if(preyPosition.x != 0 && preyPosition.y != 0){
-	// 		//System.out.println("There is a prey near");
-	// 		applyForce(preyPosition);
-	// 		update();
-	// 	} else {
-	// 		super.move();
-	// 	}
-	// }
-	
-	
 }

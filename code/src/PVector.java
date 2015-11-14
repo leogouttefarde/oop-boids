@@ -1,22 +1,17 @@
 import java.awt.geom.Point2D;
 
-public class PVector extends Point2D.Float implements Cloneable {
+public class PVector extends Point2D.Double implements Cloneable {
 
-	public PVector(float x, float y) {
+	public PVector(double x, double y) {
 		super(x, y);
 	}
 
 	public PVector clone() {
-		PVector p = null;
+		return (PVector)super.clone();
+	}
 
-		// try {
-			p = (PVector)super.clone();
-		// }
-		// catch (CloneNotSupportedException e) {
-		// 	System.out.println("CloneError"); 
-		// }
-
-		return p;
+	public boolean isNull() {
+		return (x == 0 && y == 0);
 	}
 
 	public PVector add(PVector p) {
@@ -33,13 +28,13 @@ public class PVector extends Point2D.Float implements Cloneable {
 		return this;
 	}
 
-	public float norm() {
-		float n = (float)Math.sqrt(x*x + y*y);
+	public double norm() {
+		double n = (double)Math.sqrt(x*x + y*y);
 
 		return n;
 	}
 
-	public float getLimit(float value, float lim) {
+	public double getLimit(double value, double lim) {
 
 		if (value > lim)
 			value = lim;
@@ -50,14 +45,14 @@ public class PVector extends Point2D.Float implements Cloneable {
 		return value;
 	}
 
-	public PVector limit(float lim) {
+	public PVector limit(double lim) {
 		x = getLimit(x, lim);
 		y = getLimit(y, lim);
 
 		return this;
 	}
 
-	public PVector mult(float v) {
+	public PVector mult(double v) {
 		x *= v;
 		y *= v;
 
@@ -71,7 +66,7 @@ public class PVector extends Point2D.Float implements Cloneable {
 		return this;
 	}
 
-	public PVector div(float v) {
+	public PVector div(double v) {
 		x /= v;
 		y /= v;
 

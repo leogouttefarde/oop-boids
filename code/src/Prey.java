@@ -8,38 +8,27 @@ public class Prey extends Boid {
 	private static int preySize = 7;
 	private static final int PREY_MAX_SPEED = 10;
 
-	public Prey(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids) {
-		super(x, y, vx, vy, ax, ay, boids, Behaviour.Prey, color, preySize);
+	public Prey(double x, double y, double vx, double vy, double ax, double ay, LinkedList<Boid> boids) {
+		super(x, y, vx, vy, ax, ay, boids, Group.Prey, color, preySize);
 		maxspeed = PREY_MAX_SPEED;
 	}
-
-	// public Prey clone() {
-	// 	Prey b = null;
-
-	// 	b = (Prey)super.clone();
-	// 	System.out.println("this.v == b.v ?");
-	// 	System.out.println(this == b);
-
-
-	// 	return b;
-	// }
 
 	protected PVector ruleEscapeFromPredator(){
 		PVector predatorPosition = new PVector(0, 0);
 		
 		Iterator<Boid> it= boids.iterator();
 		Boid b = it.next();
-		while(it.hasNext() && !(isNeighbor(b) && b.behaviour == Behaviour.Predator)) {
+		while(it.hasNext() && !(isNeighbor(b) && b.type == Group.Predator)) {
 			b = it.next();
 		}
 
-		if(isNeighbor(b) && b.behaviour == Behaviour.Predator){
+		if(isNeighbor(b) && b.type == Group.Predator){
 			predatorPosition.add(b.position);
 			predatorPosition.sub(position);
 			predatorPosition.mult(-PREY_MAX_SPEED);
 		} 
 
-		return predatorPosition.div(deplacementFactor);
+		return predatorPosition.div(MOVE_FACTOR);
 	}
 
 	@Override

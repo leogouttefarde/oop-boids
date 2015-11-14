@@ -5,22 +5,21 @@ import java.util.LinkedList;
 public class Boid implements Cloneable {
 
 	public static int NEIGHBORHOOD = 55;
-	public static int DEFAULT_MAX_SPEED = 10;
-	public static int DEFAULT_MAX_FORCE = 77;
-	private static final int nbTrianglePoint = 3;
-	private static final int basicSize = 7;
+	public static int BASE_MAX_SPEED = 10;
+	public static int BASE_MAX_FORCE = 77;
+	private static final int BASE_SIZE = 7;
 
-	protected static final int deplacementFactor = 100;
-	protected static final int smallDistance = 14;
-	protected static final int velocityFactor = 8;
+	protected static final int MOVE_FACTOR = 100;
+	protected static final int SECURITY_DIST = 14;
+	protected static final int SPEED_FACTOR = 8;
 
 	protected PVector position;
-	protected PVector velocity;
+	protected PVector speed;
 	protected PVector acceleration;
 	protected LinkedList<Boid> boids;
 
-	protected enum Behaviour {Prey, Predator};
-	protected Behaviour behaviour;
+	protected enum Group { Prey, Predator };
+	protected Group type;
 
 	protected Color color;
 	protected int size;
@@ -28,34 +27,35 @@ public class Boid implements Cloneable {
 	protected static double visionAngle = Math.PI/3;
 	private double direction;
 
-	protected float maxforce;
-	protected float maxspeed;
+	protected double maxforce;
+	protected double maxspeed;
 
-	public int triXPoints[];
-	public int triYPoints[];
+	protected int triXPoints[];
+	protected int triYPoints[];
 
-	public Boid(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids) {
+
+	public Boid(double x, double y, double vx, double vy, double ax, double ay, LinkedList<Boid> boids) {
 		position = new PVector(x, y);
-		velocity = new PVector(vx, vy);
+		speed = new PVector(vx, vy);
 		acceleration = new PVector(ax, ay);
 		this.boids = boids;
-		behaviour = Behaviour.Prey;
+		type = Group.Prey;
 		color = Color.decode("#1f77b4");
-		size = basicSize;
+		size = BASE_SIZE;
 
 		computeDirection();
 
-		maxspeed = DEFAULT_MAX_SPEED;
-		maxforce = DEFAULT_MAX_FORCE;
+		maxspeed = BASE_MAX_SPEED;
+		maxforce = BASE_MAX_FORCE;
 
-		triXPoints = new int[nbTrianglePoint];
-		triYPoints = new int[nbTrianglePoint];
+		triXPoints = new int[3];
+		triYPoints = new int[3];
 		
 	}
 
-	public Boid(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids, Behaviour behav, Color c, int size) {
+	public Boid(double x, double y, double vx, double vy, double ax, double ay, LinkedList<Boid> boids, Group behav, Color c, int size) {
 		this(x, y, vx, vy, ax, ay, boids);
-		behaviour = behav;
+		type = behav;
 		color = c;
 		this.size = size;
 	}
@@ -66,7 +66,7 @@ public class Boid implements Cloneable {
 		try {
 			b = (Boid)super.clone();
 			b.position = position.clone();
-			b.velocity = velocity.clone();
+			b.speed = speed.clone();
 			b.acceleration = acceleration.clone();
 		}
 		catch (CloneNotSupportedException e) {
@@ -77,17 +77,21 @@ public class Boid implements Cloneable {
 	}
 
 	private void computeDirection() {
-		direction = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
+		direction = ABS_ANGLE(Math.atan2(speed.getY(), speed.getX()));
 	}
 
-	public void reset(PVector position, PVector velocity, PVector acceleration) {
+	public void reset(PVector position, PVector speed, PVector acceleration) {
 		this.position.setLocation(position);
-		this.velocity.setLocation(velocity);
+		this.speed.setLocation(speed);
 		this.acceleration.setLocation(acceleration);
 
 		computeDirection();
 	}
-	
+
+	public int getMass() {
+		return 1;
+	}
+
 	public double getDirection() {
 		return direction;
 	}
@@ -131,31 +135,33 @@ public class Boid implements Cloneable {
 		return triYPoints;
 	}
 
-	public float mod(float a, float b) {
-		float r = a % b;
-
-		return (r < 0) ? r+b : r;
-	}
-	
-	public double mod(double a, double b) {
+	public static double ABS_MOD(double a, double b) {
 		double r = a % b;
 
-		return (r < 0) ? r+b : r;
+		return (r < 0) ? (r + b) : r;
+	}
+
+	public static double ABS_ANGLE(double a) {
+		return ABS_MOD(a, 2 * Math.PI);
 	}
 
 	public void setPos(PVector pos) {
-		pos.x = mod(pos.x, Boids.getWidth());
-		pos.y = mod(pos.y, Boids.getHeight());
+		pos.x = ABS_MOD(pos.x, Boids.getWidth());
+		pos.y = ABS_MOD(pos.y, Boids.getHeight());
 
 		this.position.setLocation(pos);
+	}
+
+	public boolean isNeighbor(Boid b, Group type) {
+		return (this.type == type) && isNeighbor(b);
 	}
 
 	public boolean isNeighbor(Boid b) {
 		double angleDirection = b.getDirection();
 		double currentAngleDirection = getDirection();
 
-		double firstVisionLimit = mod(currentAngleDirection + visionAngle, 2*Math.PI);
-		double secondVisionLimit = mod(currentAngleDirection - visionAngle, 2*Math.PI);
+		double firstVisionLimit = ABS_ANGLE(currentAngleDirection + visionAngle);
+		double secondVisionLimit = ABS_ANGLE(currentAngleDirection - visionAngle);
 		
 		double minAngleVisionLimit = Math.min(firstVisionLimit, secondVisionLimit);
 		double maxAngleVisionLimit = Math.max(firstVisionLimit, secondVisionLimit);
@@ -180,10 +186,8 @@ public class Boid implements Cloneable {
 		PVector centerMassPosition = new PVector(0, 0);
 		int nb = 0;
 
-		// System.out.println("ruleFlyTowardCentreMass");
-
 		for(Boid b : boids) {
-			if(isNeighbor(b) && b.behaviour == behaviour) {
+			if(isNeighbor(b) && b.type == type) {
 				centerMassPosition.add(b.position);
 				nb++;
 			}
@@ -194,20 +198,16 @@ public class Boid implements Cloneable {
 			centerMassPosition.sub(position);
 		}
 
-		// System.out.println(centerMassPosition);
-		return centerMassPosition.div(deplacementFactor);
+		return centerMassPosition.div(MOVE_FACTOR);
 	}
 
 	// Second rule : Boids try to keep a small distance away from other objects (including other Boids)
 	protected PVector ruleKeepDistance() {
-		// System.out.println("ruleKeepDistance");
 		PVector d = new PVector(0, 0);
-		// System.out.println("d");
-		// System.out.println(d);
 
 		for(Boid b : boids) {
-			if(isNeighbor(b) && b.behaviour == behaviour) {
-				if(position.distance(b.position) < smallDistance) {
+			if(isNeighbor(b) && b.type == type) {
+				if(position.distance(b.position) < SECURITY_DIST) {
 					PVector tmp = new PVector(0, 0);
 
 					tmp.add(b.position);
@@ -219,50 +219,43 @@ public class Boid implements Cloneable {
 			}
 		}
 
-		// System.out.println("d");
-		// System.out.println(d);
-
 		return d;
 	}
 
-	// Third rule : Boids try to match velocity with near boids
+	// Third rule : Boids try to match speed with near boids
 	protected PVector ruleMatchVelocity() {
 		PVector v = new PVector(0, 0);
 		int nb = 0;
 
-		// System.out.println("ruleMatchVelocity");
-
 		for(Boid b : boids) {
-			if(isNeighbor(b) && b.behaviour == behaviour) {
-				v.add(b.velocity);
+			if(isNeighbor(b) && b.type == type) {
+				v.add(b.speed);
 				nb++;
 			}
 		}
 
 		if (nb > 0) {
 			v.div(nb);
-			v.sub(velocity);
+			v.sub(speed);
 		}
 		
-		// System.out.println(v);
-		return v.div(velocityFactor);
+		return v.div(SPEED_FACTOR);
 	}
 
 	public void update() {
-		velocity.add(acceleration);
-		velocity.limit(maxspeed);
+		speed.add(acceleration);
+		speed.limit(maxspeed);
 		computeDirection();
 
-		setPos(position.clone().add(velocity));
+		setPos(position.clone().add(speed));
 		acceleration.mult(0);
 	}
 
 	public void applyForce(PVector force) {
-		float m = 1; // m = masse du Boid
 		force.limit(maxforce);
-		acceleration.add(force.div(m));
+		acceleration.add(force.div(getMass()));
 	}
-	
+
 	public void move() {
 		PVector f;
 
@@ -275,8 +268,8 @@ public class Boid implements Cloneable {
 	}
 
 	public String toString() {
-		return "Boid(x : " + position.x + ", y :" + position.y + ", vx : " + velocity.x + ", vy : " 
-				+ velocity.y + ", ax : " + acceleration.x + ", ay : " + acceleration.y +", "+direction+")";
+		return "Boid(x : " + position.x + ", y :" + position.y + ", vx : " + speed.x + ", vy : " 
+				+ speed.y + ", ax : " + acceleration.x + ", ay : " + acceleration.y +", "+direction+")";
 	}
 }
 
