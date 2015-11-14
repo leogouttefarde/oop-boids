@@ -160,24 +160,26 @@ public abstract class Boid implements Cloneable {
 	}
 
 	public boolean isNeighbor(Boid b) {
-		double angleDirection = b.getDirection();
-		double currentAngleDirection = getDirection();
+		final double neighborDir = b.getDirection();
 
-		double firstVisionLimit = aMod(currentAngleDirection + VISION);
-		double secondVisionLimit = aMod(currentAngleDirection - VISION);
+		double minAngle = aMod(direction + VISION);
+		double maxAngle = aMod(direction - VISION);
 		
-		double minAngleVisionLimit = Math.min(firstVisionLimit, secondVisionLimit);
-		double maxAngleVisionLimit = Math.max(firstVisionLimit, secondVisionLimit);
+		if (maxAngle < minAngle) {
+			final double tmp = maxAngle;
+			maxAngle = minAngle;
+			minAngle = tmp;
+		}
 
 		// Ancienne condition toujours vraie, preuve live
-		if (!(angleDirection <= minAngleVisionLimit && angleDirection >= maxAngleVisionLimit) != true) {
+		if (!(neighborDir <= minAngle && neighborDir >= maxAngle) != true) {
 			System.out.println("Ce texte ne s'affichera jamais."); 
 			System.exit(0);
 		}
 
 
 		if (this != b && position.distance(b.position) < NEIGHBORHOOD)
-			// && (minAngleVisionLimit <= angleDirection && angleDirection <= maxAngleVisionLimit))
+			// && (minAngle <= neighborDir && neighborDir <= maxAngle))
 			return true;
 		
 		
@@ -185,60 +187,61 @@ public abstract class Boid implements Cloneable {
 	}
 
 	// First rule : Boids try to fly towards the center of mass of neighboring boids
-	protected PVector ruleFlyTowardCentreMass() {
-		PVector centerMassPosition = new PVector(0, 0);
-		int nb = 0;
+	protected PVector ruleFlyToCenter() {
+		PVector force = new PVector(0, 0);
+		int count = 0;
 
 		for(Boid b : boids) {
 			if(isNeighbor(b, type)) {
-				centerMassPosition.add(b.position);
-				nb++;
+				force.add(b.position);
+				count++;
 			}
 		}
 
-		if (nb > 0) {
-			centerMassPosition.div(nb);
-			centerMassPosition.sub(position);
+		if (count > 0) {
+			force.div(count);
+			force.sub(position);
+			force.div(MOVE_FACTOR);
 		}
 
-		return centerMassPosition.div(MOVE_FACTOR);
+		return force;
 	}
 
 	// Second rule : Boids try to keep a small distance away from other objects (including other Boids)
 	protected PVector ruleKeepDistance() {
-		PVector d = new PVector(0, 0);
+		PVector forces = new PVector(0, 0);
 
 		for(Boid b : boids) {
 			if(isNeighbor(b, type)) {
 				if(position.distance(b.position) < SECURITY_DIST) {
-					PVector tmp = new PVector(0, 0);
+					PVector force = new PVector(0, 0);
 
-					tmp.add(b.position);
-					tmp.sub(position);
-					tmp.mult(-1);
+					force.add(b.position);
+					force.sub(position);
+					force.mult(-1);
 
-					d.add(tmp);
+					forces.add(force);
 				}
 			}
 		}
 
-		return d;
+		return forces;
 	}
 
 	// Third rule : Boids try to match speed with near boids
-	protected PVector ruleMatchVelocity() {
+	protected PVector ruleMatchSpeed() {
 		PVector v = new PVector(0, 0);
-		int nb = 0;
+		int count = 0;
 
 		for(Boid b : boids) {
 			if(isNeighbor(b, type)) {
 				v.add(b.speed);
-				nb++;
+				count++;
 			}
 		}
 
-		if (nb > 0) {
-			v.div(nb);
+		if (count > 0) {
+			v.div(count);
 			v.sub(speed);
 		}
 		
@@ -262,9 +265,9 @@ public abstract class Boid implements Cloneable {
 	public void move() {
 		PVector f;
 
-		f = ruleFlyTowardCentreMass();
+		f = ruleFlyToCenter();
 		f.add( ruleKeepDistance() );
-		f.add( ruleMatchVelocity() );
+		f.add( ruleMatchSpeed() );
 
 		applyForce(f);
 		update();
