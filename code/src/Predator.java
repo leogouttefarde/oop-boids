@@ -3,22 +3,25 @@ import java.util.LinkedList;
 import java.util.Iterator;
 
 
-public class BoidPredator extends Boid{
+public class Predator extends Boid {
 	
 	private static Color color = Color.decode("#990000");
 	private static int predatorSize = 15;
 	private static final int PREDATOR_MAX_SPEED = 12;
 	private static final int DISTANCE_TO_EAT = 7;
 
-	public BoidPredator(PVector p, PVector v, PVector a, float ms, float mf, LinkedList<Boid> boids) {
-		super(p, v, a, ms, mf, boids, Behaviour.Predator, color, predatorSize);
-		maxspeed = PREDATOR_MAX_SPEED;
-	}
-
-	public BoidPredator(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids) {
+	public Predator(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids) {
 		super(x, y, vx, vy, ax, ay, boids, Behaviour.Predator, color, predatorSize);
 		maxspeed = PREDATOR_MAX_SPEED;
 	}
+
+	// public Predator clone() {
+	// 	Predator b = null;
+
+	// 	b = (Predator)super.clone();
+
+	// 	return b;
+	// }
 	
 	protected PVector ruleCatchPrey(){
 		PVector preyPosition = new PVector(0, 0);
@@ -33,8 +36,10 @@ public class BoidPredator extends Boid{
 			preyPosition.add(b.position);
 			preyPosition.sub(position);
 			preyPosition.mult(PREDATOR_MAX_SPEED);
-		} 
-		return preyPosition.div(deplacementFactor);
+			preyPosition.div(deplacementFactor);
+		}
+
+		return preyPosition;
 	}
 	
 	protected boolean eatPrey(){
@@ -42,7 +47,7 @@ public class BoidPredator extends Boid{
 		boolean hasEat = false;
 		while(it.hasNext() && !hasEat)  {
 			Boid b = it.next();
-			if(isNeighbor(b) && b.behaviour == Behaviour.Prey && position.distance(b.position) <= DISTANCE_TO_EAT && !hasEat){
+			if(isNeighbor(b) && b.behaviour == Behaviour.Prey && position.distance(b.position) <= DISTANCE_TO_EAT){
 				it.remove();
 				hasEat = true;
 				//System.out.println("Prey eaten");

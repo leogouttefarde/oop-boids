@@ -7,7 +7,14 @@ public class PVector extends Point2D.Float implements Cloneable {
 	}
 
 	public PVector clone() {
-		PVector p = new PVector(x, y);
+		PVector p = null;
+
+		// try {
+			p = (PVector)super.clone();
+		// }
+		// catch (CloneNotSupportedException e) {
+		// 	System.out.println("CloneError"); 
+		// }
 
 		return p;
 	}

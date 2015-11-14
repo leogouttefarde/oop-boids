@@ -59,12 +59,12 @@ public class Boids {
 		Iterator<Boid> it= initialState.iterator();
 		System.out.println("\n\nreset !");
 		System.out.println(initialState);
-		System.out.println(boids);
+		System.out.println(this);
 		for(Boid b : boids) {
 			currentBoid = it.next();
 			b.reset(currentBoid.position, currentBoid.velocity, currentBoid.acceleration);
 		}
-		System.out.println(boids);
+		System.out.println(this);
 	}
 
 	public Iterator<Boid> iterator(){

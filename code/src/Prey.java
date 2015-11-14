@@ -2,22 +2,28 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Iterator;
 
-public class BoidPrey extends Boid{
+public class Prey extends Boid {
 	
 	private static Color color = Color.decode("#3366FF");
 	private static int preySize = 7;
 	private static final int PREY_MAX_SPEED = 10;
-	
-	public BoidPrey(PVector p, PVector v, PVector a, float ms, float mf, LinkedList<Boid> boids) {
-		super(p, v, a, ms, mf, boids, Behaviour.Prey, color, preySize);
-		maxspeed = PREY_MAX_SPEED;
-	}
 
-	public BoidPrey(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids) {
+	public Prey(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids) {
 		super(x, y, vx, vy, ax, ay, boids, Behaviour.Prey, color, preySize);
 		maxspeed = PREY_MAX_SPEED;
 	}
-	
+
+	// public Prey clone() {
+	// 	Prey b = null;
+
+	// 	b = (Prey)super.clone();
+	// 	System.out.println("this.v == b.v ?");
+	// 	System.out.println(this == b);
+
+
+	// 	return b;
+	// }
+
 	protected PVector ruleEscapeFromPredator(){
 		PVector predatorPosition = new PVector(0, 0);
 		

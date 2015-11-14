@@ -26,7 +26,7 @@ public class Boid implements Cloneable {
 	protected int size;
 
 	protected static double visionAngle = Math.PI/3;
-	protected double orientation;
+	private double direction;
 
 	protected float maxforce;
 	protected float maxspeed;
@@ -42,33 +42,17 @@ public class Boid implements Cloneable {
 		behaviour = Behaviour.Prey;
 		color = Color.decode("#1f77b4");
 		size = basicSize;
-		orientation = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
+
+		computeDirection();
 
 		maxspeed = DEFAULT_MAX_SPEED;
 		maxforce = DEFAULT_MAX_FORCE;
-
+		
 		triXPoints = new int[nbTrianglePoint];
 		triYPoints = new int[nbTrianglePoint];
 		
 	}
 
-	public Boid(PVector p, PVector v, PVector a, float ms, float mf, LinkedList<Boid> boids) {
-		position = p;
-		velocity = v;
-		acceleration = a;
-		
-		maxspeed = ms;
-		maxforce = mf;
-		
-		this.boids = boids;
-		behaviour = Behaviour.Prey;
-		color = Color.decode("#1f77b4");
-		orientation = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
-
-		triXPoints = new int[nbTrianglePoint];
-		triYPoints = new int[nbTrianglePoint];
-	}
-	
 	public Boid(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids, Behaviour behav, Color c, int size) {
 		this(x, y, vx, vy, ax, ay, boids);
 		behaviour = behav;
@@ -76,53 +60,51 @@ public class Boid implements Cloneable {
 		this.size = size;
 	}
 
-	public Boid(PVector p, PVector v, PVector a, float ms, float mf, LinkedList<Boid> boids, Behaviour behav, Color c, int size) {
-		this(p, v, a, ms, mf, boids);
-		behaviour = behav;
-		color = c;
-		this.size = size;
-	}
-
 	public Boid clone() {
-		Boid b = new Boid(position.clone(), velocity.clone(), acceleration.clone(), maxspeed, maxforce, this.boids);
+		Boid b = null;
+
+		try {
+			b = (Boid)super.clone();
+			b.position = position.clone();
+			b.velocity = velocity.clone();
+			b.acceleration = acceleration.clone();
+
+			b.computeDirection();
+		}
+		catch (CloneNotSupportedException e) {
+			System.out.println("CloneError");
+		}
 
 		return b;
 	}
-	
-	public void reset(PVector position, PVector velocity, PVector acceleration){
+
+	private void computeDirection() {
+		direction = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
+	}
+
+	public void reset(PVector position, PVector velocity, PVector acceleration) {
 		this.position.setLocation(position);
 		this.velocity.setLocation(velocity);
 		this.acceleration.setLocation(acceleration);
+
+		computeDirection();
 	}
 	
-	public double getOrientation(){
-		return orientation;
+	public double getDirection() {
+		return direction;
 	}
 	
-	public Color getColor(){
+	public Color getColor() {
 		return color;
 	}
 	
-	public int getSize(){
+	public int getSize() {
 		return size;
 	}
 
-	// public double[] rotateAroundCenter(double cx, double cy, double[] x, double[] y){
-	// 	double[] res = new int[x.length + y.length];
-	// 	for (int i = 0; i < res.length; i++) {
-	// 		if (i % 2)
-	// 			value = y[(i - 1) / 2];
-	// 		else
-	// 			value = x[i/2];
-	// 		res[i] = value;
-	// 	}
-	// 	AffineTransform.getRotateInstance(orientation, cx, cy).transform(res, 0, res, 0, res.length);
-	// 	return res;
-	// }
-
-	public double[] rotateAroundCenter(double cx, double cy, double x, double y){
+	public double[] rotateAroundCenter(double cx, double cy, double x, double y) {
 		double[] res = {x , y};
-		AffineTransform.getRotateInstance(orientation, cx, cy).transform(res, 0, res, 0, 1);
+		AffineTransform.getRotateInstance(getDirection(), cx, cy).transform(res, 0, res, 0, 1);
 		return res;
 	}
 
@@ -163,7 +145,7 @@ public class Boid implements Cloneable {
 		return (r < 0) ? r+b : r;
 	}
 
-	public void setPos(PVector pos){
+	public void setPos(PVector pos) {
 		pos.x = mod(pos.x, Boids.getWidth());
 		pos.y = mod(pos.y, Boids.getHeight());
 
@@ -171,8 +153,8 @@ public class Boid implements Cloneable {
 	}
 
 	public boolean isNeighbor(Boid b) {
-		double angleDirection = mod(Math.atan2((double)b.velocity.getY(), (double)b.velocity.getX()), 2*Math.PI);
-		double currentAngleDirection = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
+		double angleDirection = b.getDirection();
+		double currentAngleDirection = getDirection();
 
 		double firstVisionLimit = mod(currentAngleDirection + visionAngle, 2*Math.PI);
 		double secondVisionLimit = mod(currentAngleDirection - visionAngle, 2*Math.PI);
@@ -196,7 +178,7 @@ public class Boid implements Cloneable {
 	}
 	
 	// First rule : Boids try to fly towards the center of mass of neighboring boids
-	protected PVector ruleFlyTowardCentreMass(){
+	protected PVector ruleFlyTowardCentreMass() {
 		PVector centerMassPosition = new PVector(0, 0);
 		int nb = 0;
 
@@ -225,9 +207,9 @@ public class Boid implements Cloneable {
 		// System.out.println("d");
 		// System.out.println(d);
 
-		for(Boid b : boids){
+		for(Boid b : boids) {
 			if(isNeighbor(b) && b.behaviour == behaviour) {
-				if(position.distance(b.position) < smallDistance){
+				if(position.distance(b.position) < smallDistance) {
 					PVector tmp = new PVector(0, 0);
 
 					tmp.add(b.position);
@@ -271,9 +253,10 @@ public class Boid implements Cloneable {
 	public void update() {
 		velocity.add(acceleration);
 		velocity.limit(maxspeed);
+		computeDirection();
+
 		setPos(position.clone().add(velocity));
 		acceleration.mult(0);
-		orientation = mod(Math.atan2((double)velocity.getY(), (double)velocity.getX()), 2*Math.PI);
 	}
 
 	public void applyForce(PVector force) {
@@ -282,21 +265,20 @@ public class Boid implements Cloneable {
 		acceleration.add(force.div(m));
 	}
 	
-	public void move(){
-		PVector v1, v2, v3;
-		v1 = ruleFlyTowardCentreMass();
-		v2 = ruleKeepDistance();
-		v3 = ruleMatchVelocity();
-		
-		applyForce(v1);
-		applyForce(v2);
-		applyForce(v3);
+	public void move() {
+		PVector f;
+
+		f = ruleFlyTowardCentreMass();
+		f.add( ruleKeepDistance() );
+		f.add( ruleMatchVelocity() );
+
+		applyForce(f);
 		update();
 	}
 
 	public String toString() {
 		return "Boid(x : " + position.x + ", y :" + position.y + ", vx : " + velocity.x + ", vy : " 
-				+ velocity.y + ", ax : " + acceleration.x + ", ay : " + acceleration.y +")";
+				+ velocity.y + ", ax : " + acceleration.x + ", ay : " + acceleration.y +", "+direction+")";
 	}
 }
 
