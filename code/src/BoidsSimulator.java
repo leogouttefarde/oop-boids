@@ -19,9 +19,11 @@ public class BoidsSimulator implements Simulable {
 	}
 
 	private void updateFrame() {
-		Iterator<Boid> it = this.boids.iterator();
-		while(it.hasNext()){
-			Boid b = it.next();
+		Iterator<Boid> it = boids.iterator();
+		Boid b;
+
+		while(it.hasNext()) {
+			b = it.next();
 			b.computeTriangle();
 			gui.addGraphicalElement(new Triangle(b.getTriangleX(), b.getTriangleY(), b.getColor(), b.getColor()));
 		}
@@ -30,7 +32,6 @@ public class BoidsSimulator implements Simulable {
 	@Override 
 	public void next() {
 		EventManager.Get().next();
-		//System.out.println(boids.toString());
 		gui.reset();
 		updateFrame();
 	}
@@ -38,7 +39,6 @@ public class BoidsSimulator implements Simulable {
 	@Override
 	public void restart() {
 		boids.reset();
-		// System.out.println(boids.toString());
 		gui.reset();
 		updateFrame();
 	}
