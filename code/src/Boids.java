@@ -22,11 +22,11 @@ public class Boids {
 	}
 
 	public static void setWidth(int width) {
-		width = width;
+		Boids.width = width;
 	}
 
 	public static void setHeight(int height) {
-		height = height;
+		Boids.height = height;
 	}
 
 	public static int getWidth() {
