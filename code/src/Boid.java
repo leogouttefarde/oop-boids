@@ -47,7 +47,7 @@ public class Boid implements Cloneable {
 
 		maxspeed = DEFAULT_MAX_SPEED;
 		maxforce = DEFAULT_MAX_FORCE;
-		
+
 		triXPoints = new int[nbTrianglePoint];
 		triYPoints = new int[nbTrianglePoint];
 		
@@ -68,8 +68,6 @@ public class Boid implements Cloneable {
 			b.position = position.clone();
 			b.velocity = velocity.clone();
 			b.acceleration = acceleration.clone();
-
-			b.computeDirection();
 		}
 		catch (CloneNotSupportedException e) {
 			System.out.println("CloneError");
