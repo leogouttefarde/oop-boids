@@ -4,26 +4,28 @@ import gui.Simulable;
 public abstract class AutomatonSimulator implements Simulable {
 
 	protected GUISimulator gui;
-	protected Automaton game;
+	protected Automaton automaton;
 
-	public AutomatonSimulator(GUISimulator gui, Automaton game) {
+	public AutomatonSimulator(GUISimulator gui, Automaton automaton) {
 		this.gui = gui;
-		this.game = game;
+		this.automaton = automaton;
+		
+		EventManager.Get().addEvent(new AutomatonEvent(1, automaton));
 	}
 
 	protected abstract void updateFrame();
 
 	@Override 
 	public void next() {
-		game.generate();
-		System.out.println(game);
+		EventManager.Get().next();
+		System.out.println(automaton);
 		gui.reset();
 		updateFrame();
 	}
 
 	@Override
 	public void restart() {
-		game.reset();
+		automaton.reset();
 		gui.reset();
 		updateFrame();
 	}
