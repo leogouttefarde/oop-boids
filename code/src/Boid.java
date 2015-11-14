@@ -187,8 +187,8 @@ public class Boid implements Cloneable {
 		}
 
 
-		if (this != b && position.distance(b.position) < NEIGHBORHOOD)
-			//&& (minAngleVisionLimit <= angleDirection && angleDirection <= maxAngleVisionLimit))
+		if (this != b && position.distance(b.position) < NEIGHBORHOOD
+			&& (minAngleVisionLimit <= angleDirection && angleDirection <= maxAngleVisionLimit))
 			return true;
 		
 		
