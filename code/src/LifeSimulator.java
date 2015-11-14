@@ -1,7 +1,5 @@
 import java.awt.Color;
-
 import gui.GUISimulator;
-import gui.Rectangle;
 
 public class LifeSimulator extends AutomatonSimulator {
 
@@ -9,29 +7,20 @@ public class LifeSimulator extends AutomatonSimulator {
 		super(g, life);
 	}
 
-	protected void updateFrame() {
-		int cells[][] = ((Life)automaton).getCells();
+	protected Color getCellColor(int x, int y) {
+		Color color;
 
-		for (int x = 0; x < cells.length; x++) {
-			for (int y = 0; y < cells[x].length; y++) {
-				switch (cells[x][y]) {
-					case Life.ALIVE:
-						gui.addGraphicalElement(
-							new Rectangle(10+x * 12,10+ y*12,
-								Color.BLUE,
-								Color.BLUE, 10));
-						break;
+		switch (cells[x][y]) {
+			case Life.ALIVE:
+				color = Color.BLUE;
+				break;
 
-					case Life.DEAD:
-						gui.addGraphicalElement(
-							new Rectangle(10+x * 12,10+ y*12,
-								Color.GRAY,
-								Color.GRAY, 10));
-						break;
-					default:
-						break;
-				}
-			}
+			case Life.DEAD:
+			default:
+				color = Color.GRAY;
+				break;
 		}
+
+		return color;
 	}
 }
