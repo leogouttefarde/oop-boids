@@ -1,7 +1,9 @@
 import java.util.Iterator;
+import java.awt.Color;
 
 import gui.GUISimulator;
 import gui.Simulable;
+import gui.Oval;
 
 public class BoidsSimulator implements Simulable {
 
@@ -21,12 +23,25 @@ public class BoidsSimulator implements Simulable {
 	private void updateFrame() {
 		Iterator<Boid> it = boids.iterator();
 		Boid b;
+		Color transp = new Color(0,0,0,0);
 
 		while(it.hasNext()) {
 			b = it.next();
 			b.computeTriangle();
-			gui.addGraphicalElement(new Triangle(b.getTriangleX(),
-				b.getTriangleY(), b.getColor(), b.getColor()));
+
+			switch (b.getType()) {
+				case Prey:
+				case Predator:
+					gui.addGraphicalElement(new Triangle(b.getTriangleX(),
+						b.getTriangleY(), b.getColor(), b.getColor()));
+					break;
+
+				case Lighter:
+					gui.addGraphicalElement(new Oval((int)b.position.x, (int)b.position.y,
+						transp, b.getColor(), b.size));
+
+				default:
+			}
 		}
 	}
 

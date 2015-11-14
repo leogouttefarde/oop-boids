@@ -23,6 +23,11 @@ public class TestBoidsSimulator {
 		boids.add(new Prey(100, 450, 7, 9, 3, -2));
 		boids.add(new Prey(110, 430, 7, 9, -3, 2));
 		boids.add(new Prey(250, 250, 0, -5, 0, 0));
+		boids.add(new Lighter(55, 77, 0, -5, 0, 0));
+		boids.add(new Lighter(255, 277, 11, -27, 12, 20));
+		boids.add(new Lighter(255, 277, 11, -27, 12, 20));
+		boids.add(new Lighter(250, 277, 11, -27, 12, 20));
+		boids.add(new Lighter(255, 250, 11, -27, 12, 20));
 
 		System.out.println(boids);
 

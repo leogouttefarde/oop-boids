@@ -19,7 +19,7 @@ public abstract class Boid implements Cloneable {
 	protected PVector acceleration;
 	protected LinkedList<Boid> boids;
 
-	protected enum Group { Prey, Predator };
+	protected enum Group { Prey, Predator, Lighter };
 	protected Group type;
 
 	protected Color color;
@@ -68,6 +68,10 @@ public abstract class Boid implements Cloneable {
 		}
 
 		return b;
+	}
+
+	public Group getType() {
+		return type;
 	}
 
 	public void setGroup(LinkedList<Boid> group) {
