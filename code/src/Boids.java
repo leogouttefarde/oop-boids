@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Iterator;
 
 public class Boids {
@@ -6,11 +7,11 @@ public class Boids {
 	private static int maxWidth;
 	private static int maxHeight;
 
-	private ArrayList<Boid> boids;
+	private LinkedList<Boid> boids;
 	private ArrayList<Boid> initialState;
 
 	public Boids() {
-		boids = new ArrayList<Boid>();
+		boids = new LinkedList<Boid>();
 		initialState = new ArrayList<Boid>();
 	}
 
@@ -24,7 +25,7 @@ public class Boids {
 		initialState.add(b.clone());
 	}
 	
-	public ArrayList<Boid> getBoids(){
+	public LinkedList<Boid> getBoids(){
 		return boids;
 	}
 
@@ -46,11 +47,10 @@ public class Boids {
 
 	public void moveAllBoids(){
 		for(Boid b : boids){
-			if(b.behaviour != Behaviour.Dead)
-				b.move();
+			b.move();
 		}
 	}
-	
+
 	public void update() {
 		moveAllBoids();
 	}

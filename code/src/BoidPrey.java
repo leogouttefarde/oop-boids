@@ -1,5 +1,5 @@
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Iterator;
 
 public class BoidPrey extends Boid{
@@ -8,12 +8,12 @@ public class BoidPrey extends Boid{
 	private static int preySize = 7;
 	private static final int PREY_MAX_SPEED = 10;
 	
-	public BoidPrey(PVector p, PVector v, PVector a, float ms, float mf, ArrayList<Boid> boids) {
+	public BoidPrey(PVector p, PVector v, PVector a, float ms, float mf, LinkedList<Boid> boids) {
 		super(p, v, a, ms, mf, boids, Behaviour.Prey, color, preySize);
 		maxspeed = PREY_MAX_SPEED;
 	}
 
-	public BoidPrey(float x, float y, float vx, float vy, float ax, float ay, ArrayList<Boid> boids) {
+	public BoidPrey(float x, float y, float vx, float vy, float ax, float ay, LinkedList<Boid> boids) {
 		super(x, y, vx, vy, ax, ay, boids, Behaviour.Prey, color, preySize);
 		maxspeed = PREY_MAX_SPEED;
 	}

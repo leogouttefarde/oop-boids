@@ -44,6 +44,9 @@ testBoids:
 testEvents:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestEventManager.java
 
+testPred:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestPreyPredatorSimulator.java
+
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -70,6 +73,9 @@ exeBoids: testBoids
 
 exeEvents: testEvents
 	java -classpath bin:bin/gui.jar TestEventManager
+
+exePred: testPred
+	java -classpath bin:bin/gui.jar TestPreyPredatorSimulator
 
 clean:
 	rm -rf bin/*.class
