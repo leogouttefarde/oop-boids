@@ -2,27 +2,27 @@ import java.util.LinkedList;
 
 public class Schelling extends ExtendedAutomaton {
 	
-	private int threshold;
-	private LinkedList<Cell> vacantHousing;
+	private int k;
+	private LinkedList<Cell> vacantHouse;
 
 
-	public Schelling(int n, int m, int states, int threshold) {
-		this(n, m, states, threshold, 0);
+	public Schelling(int n, int m, int states, int k) {
+		this(n, m, states, k, 0);
 	}
 
-	public Schelling(int n, int m, int states, int threshold, int defaultState) {
+	public Schelling(int n, int m, int states, int k, int defaultState) {
 		super(n, m, states, defaultState);
 
-		this.threshold = threshold;
-		vacantHousing = new LinkedList<Cell>();
+		this.k = k;
+		vacantHouse = new LinkedList<Cell>();
 	}
 	
-	public void initVacantHousing(){
-		vacantHousing.clear();
+	public void initVacantHouse(){
+		vacantHouse.clear();
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < m; y++) {
 				if(cells[x][y] == defaultState)
-					vacantHousing.add(new Cell(x, y, defaultState));
+					vacantHouse.add(new Cell(x, y, defaultState));
 			}
 		}
 	}
@@ -59,13 +59,12 @@ public class Schelling extends ExtendedAutomaton {
 					}
 				}
 
-				if(nbNeighbors > threshold) {
-					System.out.println(x + " " + y);
+				if(nbNeighbors > k) {
 					nextCells[x][y] = defaultState;
-					vacantHousing.add(new Cell(x, y, defaultState));
+					vacantHouse.add(new Cell(x, y, defaultState));
 
-					Cell c = vacantHousing.remove();
-					nextCells[c.x][c.y] = cellState;
+					Cell c = vacantHouse.remove();
+					nextCells[c.getX()][c.getY()] = cellState;
 				}
 			}
 		}
@@ -74,13 +73,13 @@ public class Schelling extends ExtendedAutomaton {
 	@Override
 	public void reset() {
 		super.reset();
-		initVacantHousing();
+		initVacantHouse();
 	}
 
 	public String toString() {
 		String str = new String("Schelling("+n+", "+m+")\n");
 
-		for (Cell c : initialCells) {
+		for (Cell c : beginning) {
 			str += c + "\n";
 		}
 

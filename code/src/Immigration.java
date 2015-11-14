@@ -16,7 +16,6 @@ public class Immigration extends ExtendedAutomaton {
 				int nbNeighbors = 0;
 				final int k = cells[x][y];
 				final int kp = (k + 1) % states;
-				// System.out.println(k+", "+kp);
 
 				for (int i = 0; i < 3; i++) {
 					for (int j = 0; j < 3; j++) {
@@ -44,7 +43,7 @@ public class Immigration extends ExtendedAutomaton {
 	public String toString() {
 		String str = new String("Immigration("+n+", "+m+")\n");
 		
-		for (Cell c : initialCells) {
+		for (Cell c : beginning) {
 			str += c + "\n";
 		}
 

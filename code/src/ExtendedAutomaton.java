@@ -1,5 +1,3 @@
-
-
 public abstract class ExtendedAutomaton extends Automaton {
 	
 	protected int nextCells[][];
@@ -28,17 +26,16 @@ public abstract class ExtendedAutomaton extends Automaton {
 			}
 		}
 
-		for (Cell c : initialCells) {
-			// System.out.println(c.x+", "+c.y);
-			cells[c.x][c.y] = c.state;
+		for (Cell c : beginning) {
+			cells[c.getX()][c.getY()] = c.getState();
 		}
 	}
 
 	public String toString() {
 		String str = new String("ExtendedAutomaton("+n+", "+m+")\n");
 		
-		for (Cell c : initialCells) {
-			str += c.x+ ", " + c.y+ ", " + c.state + "\n";
+		for (Cell c : beginning) {
+			str += c.getX()+ ", " + c.getY() + ", " + c.getState() + "\n";
 		}
 
 		return str;

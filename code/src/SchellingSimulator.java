@@ -17,7 +17,9 @@ public class SchellingSimulator extends AutomatonSimulator {
 
 		for (int x = 0; x < cells.length; x++) {
 			for (int y = 0; y < cells[x].length; y++) {
-				gui.addGraphicalElement(new Rectangle(10+x * 12,10+ y*12, color[cells[x][y]], color[cells[x][y]], 10));
+				gui.addGraphicalElement(
+						new Rectangle(10+x * 12,10+ y*12, 
+								color[cells[x][y]], color[cells[x][y]], 10));
 			}
 		}
 	}

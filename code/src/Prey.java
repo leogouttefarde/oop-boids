@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.util.LinkedList;
 import java.util.Iterator;
 
 public class Prey extends Boid {
