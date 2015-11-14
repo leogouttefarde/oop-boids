@@ -46,10 +46,11 @@ public class Boids {
 
 	public void moveAllBoids(){
 		for(Boid b : boids){
-			b.move();
+			if(b.behaviour != Behaviour.Dead)
+				b.move();
 		}
 	}
-
+	
 	public void update() {
 		moveAllBoids();
 	}

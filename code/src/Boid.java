@@ -19,7 +19,6 @@ public class Boid implements Cloneable {
 	protected PVector acceleration;
 	protected ArrayList<Boid> boids;
 	
-	protected enum Behaviour {Prey, Predator};
 	protected Behaviour behaviour;
 	
 	protected Color color;
@@ -187,8 +186,8 @@ public class Boid implements Cloneable {
 		}
 
 
-		if (this != b && position.distance(b.position) < NEIGHBORHOOD
-			&& (minAngleVisionLimit <= angleDirection && angleDirection <= maxAngleVisionLimit))
+		if (this != b && position.distance(b.position) < NEIGHBORHOOD)
+			//&& (minAngleVisionLimit <= angleDirection && angleDirection <= maxAngleVisionLimit))
 			return true;
 		
 		

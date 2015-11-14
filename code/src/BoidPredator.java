@@ -8,7 +8,7 @@ public class BoidPredator extends Boid{
 	private static Color color = Color.decode("#990000");
 	private static int predatorSize = 15;
 	private static final int PREDATOR_MAX_SPEED = 12;
-	private static final int DISTANCE_TO_EAT = 5;
+	private static final int DISTANCE_TO_EAT = 7;
 
 	public BoidPredator(PVector p, PVector v, PVector a, float ms, float mf, ArrayList<Boid> boids) {
 		super(p, v, a, ms, mf, boids, Behaviour.Predator, color, predatorSize);
@@ -40,17 +40,21 @@ public class BoidPredator extends Boid{
 	protected boolean eatPrey(){
 		
 		Iterator<Boid> it= boids.iterator();
-		Boid b = it.next();
-		while(it.hasNext() && !(isNeighbor(b) && b.behaviour == Behaviour.Prey) && position.distance(b.position) > DISTANCE_TO_EAT) {
-			b = it.next();
+		boolean hasEat = false;
+		while(it.hasNext() && !hasEat)  {
+			Boid b = it.next();
+			if(isNeighbor(b) && b.behaviour == Behaviour.Prey && position.distance(b.position) <= DISTANCE_TO_EAT && !hasEat){
+				b.behaviour = Behaviour.Dead;
+				hasEat = true;
+				System.out.println("Prey eaten");
+			}
 		}
-		if(isNeighbor(b) && b.behaviour == Behaviour.Prey && position.distance(b.position) <= DISTANCE_TO_EAT){
-			it.remove();
-			return true;
-		}
-		return false;
+		
+		return hasEat;
+		
+		//&& !(isNeighbor(b) && b.behaviour == Behaviour.Prey) && position.distance(b.position) > DISTANCE_TO_EAT)
 	}
-	/*//eatPrey bug : leve une exception lors de la suppression
+	//eatPrey bug : leve une exception lors de la suppression
 	@Override
 	public void move(){
 		if(!eatPrey()){
@@ -65,20 +69,5 @@ public class BoidPredator extends Boid{
 		else {
 			super.move();
 		}
-	}
-	*/
-	
-	@Override
-	public void move(){
-		PVector preyPosition = ruleCatchPrey();
-		if(preyPosition.x != 0 && preyPosition.y != 0){
-			//System.out.println("There is a prey near");
-			applyForce(preyPosition);
-			update();
-		} else {
-			super.move();
-		}
-	}
-	
-	
+	}	
 }
