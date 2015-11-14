@@ -16,13 +16,14 @@ public class Predator extends Boid {
 	}
 
 	protected PVector ruleCatchPrey() {
-		PVector f = new PVector(0, 0);
+		PVector f = new PVector();
+		Iterator<Boid> it = boids.iterator();
+		Boid b;
 
-		Iterator<Boid> it= boids.iterator();
-		Boid b = it.next();
-		while(it.hasNext() && !isNeighbor(b, Group.Prey)) {
+		do {
 			b = it.next();
-		}
+		} while (it.hasNext() && !isNeighbor(b, Group.Prey));
+
 		
 		if(isNeighbor(b, Group.Prey)) {
 			f.add(b.position);

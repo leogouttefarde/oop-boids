@@ -14,18 +14,18 @@ public class Prey extends Boid {
 	}
 
 	protected PVector ruleEscapeFromPredator() {
-		PVector f = new PVector(0, 0);
-		
-		Iterator<Boid> it= boids.iterator();
-		Boid b = it.next();
-		while(it.hasNext() && !isNeighbor(b, Group.Predator)) {
+		PVector f = new PVector();
+		Iterator<Boid> it = boids.iterator();
+		Boid b;
+
+		do {
 			b = it.next();
-		}
+		} while (it.hasNext() && !isNeighbor(b, Group.Predator));
 
 		if(isNeighbor(b, Group.Predator)) {
-			f.add(b.position);
-			f.sub(position);
-			f.mult(-PREY_MAX_SPEED);
+			f.add(position);
+			f.sub(b.position);
+			f.mult(PREY_MAX_SPEED);
 			f.div(MOVE_FACTOR);
 		} 
 

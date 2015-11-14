@@ -193,7 +193,7 @@ public abstract class Boid implements Cloneable {
 
 	// First rule : Boids try to fly towards the center of mass of neighboring boids
 	protected PVector ruleFlyToCenter() {
-		PVector force = new PVector(0, 0);
+		PVector force = new PVector();
 		int count = 0;
 
 		for(Boid b : boids) {
@@ -214,16 +214,15 @@ public abstract class Boid implements Cloneable {
 
 	// Second rule : Boids try to keep a small distance away from other objects (including other Boids)
 	protected PVector ruleKeepDistance() {
-		PVector forces = new PVector(0, 0);
+		PVector forces = new PVector();
 
 		for(Boid b : boids) {
 			if(isNeighbor(b, type)) {
 				if(position.distance(b.position) < SECURITY_DIST) {
-					PVector force = new PVector(0, 0);
+					PVector force = new PVector();
 
-					force.add(b.position);
-					force.sub(position);
-					force.mult(-1);
+					force.add(position);
+					force.sub(b.position);
 
 					forces.add(force);
 				}
@@ -235,7 +234,7 @@ public abstract class Boid implements Cloneable {
 
 	// Third rule : Boids try to match speed with near boids
 	protected PVector ruleMatchSpeed() {
-		PVector v = new PVector(0, 0);
+		PVector v = new PVector();
 		int count = 0;
 
 		for(Boid b : boids) {
@@ -259,7 +258,7 @@ public abstract class Boid implements Cloneable {
 		computeDirection();
 
 		setPos(position.clone().add(speed));
-		acceleration.mult(0);
+		acceleration.reset();
 	}
 
 	public void applyForce(PVector force) {
