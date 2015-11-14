@@ -30,8 +30,8 @@ public abstract class Boid implements Cloneable {
 	protected double maxforce;
 	protected double maxspeed;
 
-	protected int triXPoints[];
-	protected int triYPoints[];
+	protected int triXPts[];
+	protected int triYPts[];
 
 
 	public Boid(double x, double y, double vx, double vy, double ax, double ay) {
@@ -47,8 +47,8 @@ public abstract class Boid implements Cloneable {
 		maxspeed = BASE_MAX_SPEED;
 		maxforce = BASE_MAX_FORCE;
 
-		triXPoints = new int[3];
-		triYPoints = new int[3];
+		triXPts = new int[3];
+		triYPts = new int[3];
 	}
 
 	public Boid(double x, double y, double vx, double vy, double ax, double ay,
@@ -107,35 +107,40 @@ public abstract class Boid implements Cloneable {
 		return size;
 	}
 
-	public double[] rotateAroundCenter(double cx, double cy, double x, double y) {
-		double[] res = {x , y};
-		AffineTransform.getRotateInstance(getDirection(), cx, cy).transform(res, 0, res, 0, 1);
-		return res;
+	public double[] turn(double x, double y) {
+		double[] pts = { x , y };
+
+		AffineTransform.getRotateInstance(getDirection(), position.getX(),
+							position.getY()).transform(pts, 0, pts, 0, 1);
+
+		return pts;
 	}
 
-	public void computeTrianglePoints() {
-		double cx = position.getX();
-		double cy = position.getY();
+	public void computeTriangle() {
+		final double cx = position.getX();
+		final double cy = position.getY();
+		final double curSize = (double)size;
+		final double halfSize = curSize / 2;
 
-		double[] res = rotateAroundCenter(cx, cy, cx + (double)size, cy);
-		triXPoints[0] = (int)res[0];
-		triYPoints[0] = (int)res[1];
+		double[] pts = turn(cx + curSize, cy);
+		triXPts[0] = (int)pts[0];
+		triYPts[0] = (int)pts[1];
 
-		res = rotateAroundCenter(cx, cy, cx - (double)size, cy + ((double)size)/2);
-		triXPoints[1] = (int)res[0];
-		triYPoints[1] = (int)res[1];
+		pts = turn(cx - curSize, cy + halfSize);
+		triXPts[1] = (int)pts[0];
+		triYPts[1] = (int)pts[1];
 
-		res = rotateAroundCenter(cx, cy, cx - (double)size, cy - ((double)size)/2);
-		triXPoints[2] = (int)res[0];
-		triYPoints[2] = (int)res[1];
+		pts = turn(cx - curSize, cy - halfSize);
+		triXPts[2] = (int)pts[0];
+		triYPts[2] = (int)pts[1];
 	}
 
-	public int[] getTriangleXPoints() {
-		return triXPoints;
+	public int[] getTriangleX() {
+		return triXPts;
 	}
 
-	public int[] getTriangleYPoints() {
-		return triYPoints;
+	public int[] getTriangleY() {
+		return triYPts;
 	}
 
 	public static double mod(double a, double b) {

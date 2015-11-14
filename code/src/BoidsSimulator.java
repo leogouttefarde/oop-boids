@@ -22,8 +22,8 @@ public class BoidsSimulator implements Simulable {
 		Iterator<Boid> it = this.boids.iterator();
 		while(it.hasNext()){
 			Boid b = it.next();
-			b.computeTrianglePoints();
-			gui.addGraphicalElement(new Triangle(b.getTriangleXPoints(), b.getTriangleYPoints(), b.getColor(), b.getColor()));
+			b.computeTriangle();
+			gui.addGraphicalElement(new Triangle(b.getTriangleX(), b.getTriangleY(), b.getColor(), b.getColor()));
 		}
 	}
 
