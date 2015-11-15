@@ -18,7 +18,7 @@ public class TestBallsSimulator {
 
 	/**
 	 * Méthode main de démarrage du test des classes Balls et BallsSimulator.
-	 * @param args les arguments (non utilisés)
+	 * @param args Arguments (non utilisés)
 	 */
 	public static void main(String[] args) {
 		Balls b = new Balls();

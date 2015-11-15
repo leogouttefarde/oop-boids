@@ -23,7 +23,7 @@ public class TestBoidsSimulator {
 	/**
 	 * Méthode main de démarrage du test des classes
 	 * Boid, Boids, Prey, Lighter et BoidsSimulator.
-	 * @param args les arguments (non utilisés)
+	 * @param args Arguments (non utilisés)
 	 */
 	public static void main(String[] args) {
 

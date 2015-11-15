@@ -16,7 +16,6 @@ public class TestEventManager {
 	/**
 	 * Méthode main de démarrage du test des classes Event et EventManager.
 	 * @param args Arguments (non utilisés)
-	 * @throws InterruptedException	InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
 

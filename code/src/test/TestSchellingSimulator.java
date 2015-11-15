@@ -18,14 +18,14 @@ public class TestSchellingSimulator {
 	/**
 	 * Méthode main de démarrage du test des classes Schelling et 
 	 * SchellingSimulator.
-	 * @param args les arguments (non utilisés)
+	 * @param args Arguments (non utilisés)
 	 */
 	public static void main(String[] args) {
 
 		int numberOfColor = 7;
-		
+
 		/* 
-		 * tirage aléatoire de numberOfColor couleurs pour l'affichage
+		 * Tirage aléatoire de numberOfColor couleurs pour l'affichage
 		 * des familles
 		 */
 		Color color[] = new Color[numberOfColor + 1];
@@ -46,8 +46,9 @@ public class TestSchellingSimulator {
 		Schelling sch = new Schelling(n, m, numberOfColor + 1, k);
 
 		int nbMaxHabitant = (4 * n * m)/5;
+
 		/* 
-		* tirage aléatoire d'un état (correspondant à une couleur dans Color[])
+		* Tirage aléatoire d'un état (correspondant à une couleur dans Color[])
 		* pour nbMaxHabitant
 		*/
 		int nbHabitant = 0;

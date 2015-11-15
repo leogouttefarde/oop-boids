@@ -15,9 +15,8 @@ import java.awt.Color;
 public class TestImmigrationSimulator {
 
 	/**
-	 * Méthode main de démarrage du test des classes Immigration et
-	 *  ImmigrationSimulator.
-	 * @param args les arguments (non utilisés)
+	 * Méthode main de démarrage du test des classes Immigration et ImmigrationSimulator.
+	 * @param args Arguments (non utilisés)
 	 */
 	public static void main(String[] args) {
 

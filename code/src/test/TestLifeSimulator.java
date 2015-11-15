@@ -11,16 +11,16 @@ import java.awt.Color;
  * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
  * @see Life
  * @see LifeSimulator
- *
  */
 public class TestLifeSimulator {
 	
 	/**
-	 * Méthode pour initialisé une zone du plateau de jeu 
+	 * Méthode pour initialiser une zone du plateau de jeu 
 	 * pour le test de la figure 5 du sujet
-	 * @param life le plateau de jeu
-	 * @param x la coordonnée des abscisses
-	 * @param y la coordonnée des ordonnées
+	 *
+	 * @param life Plateau de jeu
+	 * @param x Abscisse
+	 * @param y Ordonnée
 	 */
 	private static void basicTest(Life life, int x, int y) {
 		life.add(x, y);
@@ -31,12 +31,13 @@ public class TestLifeSimulator {
 	}
 	
 	/**
-	 * Méthode pour initialisé une zone du plateau de jeu 
+	 * Méthode pour initialiser une zone du plateau de jeu 
 	 * pour le test blinker de la page wikipédia :
 	 * https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns
-	 * @param life le plateau de jeu
-	 * @param x la coordonnée des abscisses
-	 * @param y la coordonnée des ordonnées
+	 *
+	 * @param life Plateau de jeu
+	 * @param x Abscisse
+	 * @param y Ordonnée
 	 */
 	private static void blinker(Life life, int x, int y) {
 		life.add(x, y);
@@ -45,12 +46,13 @@ public class TestLifeSimulator {
 	}
 	
 	/**
-	 * Méthode pour initialisé une zone du plateau de jeu 
+	 * Méthode pour initialiser une zone du plateau de jeu 
 	 * pour le test pulsar de la page wikipédia :
 	 * https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns
-	 * @param life le plateau de jeu
-	 * @param x la coordonnée des abscisses
-	 * @param y la coordonnée des ordonnées
+	 *
+	 * @param life Plateau de jeu
+	 * @param x Abscisse
+	 * @param y Ordonnée
 	 */
 	private static void pulsar(Life life, int x, int y) {
 		life.add(x, y - 1);
@@ -121,12 +123,13 @@ public class TestLifeSimulator {
 	}
 	
 	/**
-	 * Méthode pour initialisé une zone du plateau de jeu 
+	 * Méthode pour initialiser une zone du plateau de jeu 
 	 * pour le test toad de la page wikipédia :
 	 * https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns
-	 * @param life le plateau de jeu
-	 * @param x la coordonnée des abscisses
-	 * @param y la coordonnée des ordonnées
+	 *
+	 * @param life Plateau de jeu
+	 * @param x Abscisse
+	 * @param y Ordonnée
 	 */
 	private static void toad(Life life, int x, int y) {
 		life.add(x - 1, y);
@@ -141,7 +144,7 @@ public class TestLifeSimulator {
 
 	/**
 	 * Méthode main de démarrage du test des classes Life et LifeSimulator.
-	 * @param args les arguments (non utilisés)
+	 * @param args Arguments (non utilisés)
 	 */
 	public static void main(String[] args) {
 

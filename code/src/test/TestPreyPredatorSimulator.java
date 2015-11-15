@@ -23,7 +23,7 @@ public class TestPreyPredatorSimulator {
 	/**
 	 * Méthode main de démarrage du test des classes Prey, Predator, Lighter, 
 	 * Boids, BoidsSimulator.
-	 * @param args les arguments (non utilisés)
+	 * @param args Arguments (non utilisés)
 	 */
 	public static void main(String[] args) {
 		Boids boids = new Boids();
@@ -59,7 +59,5 @@ public class TestPreyPredatorSimulator {
 		GUISimulator gui = new GUISimulator(850, 500, Color.BLACK);
 
 		gui.setSimulable(new BoidsSimulator(gui, boids));
-
 	}
-
 }
