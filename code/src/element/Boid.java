@@ -524,7 +524,9 @@ public abstract class Boid implements Cloneable {
 	}
 	
 	/**
-	 * @return Retourne une String qui contient l'état du Boid à afficher
+	 * Affiche un Boid
+	 * 
+	 * @return Représentation du Boid
 	 */
 	public String toString() {
 		return "Boid(x : " + position.x + ", y :" + position.y + ", vx : " + speed.x + ", vy : " 

@@ -41,9 +41,6 @@ public class Lighter extends Boid {
 		randLight();
 	}
 
-	/**
-	 * @Inherit
-	 */
 	@Override
 	public void reset(PVector position, PVector speed, PVector acceleration) {
 		super.reset(position, speed, acceleration);
@@ -61,7 +58,7 @@ public class Lighter extends Boid {
 	}
 
 	/**
-	 * Calcul de la couleur d'affichage
+	 * Calcule la couleur d'affichage
 	 * 
 	 * @param light Taux de brillance
 	 */
@@ -69,17 +66,11 @@ public class Lighter extends Boid {
 		color = new Color(light, 255, 255, 255);
 	}
 
-	/**
-	 * @Inherit
-	 */
 	@Override
 	public int GetMinDist() {
 		return Lighter.MIN_DIST;
 	}
 
-	/**
-	 * @Inherit
-	 */
 	@Override
 	public void update() {
 		super.update();

@@ -7,13 +7,13 @@ import java.awt.Color;
 import java.util.Iterator;
 
 /**
- * Classe qui hérite de boid pour implémenter un nouveau type de boid : le type Predator.
- * Le boid Predator est un boid qui se déplace en essaim de même type, qui attaque, mange les boids de type Prey et Lighter.
+ * Classe qui hérite de Boid pour implémenter un nouveau type de Boid : le type Predator.
+ * Le boid Predator est un Boid qui se déplace en essaim de même type, qui attaque
+ * et tue les Boids de type Prey.
+ * 
  * @see Boid
  * @see Prey
- * @see Lighter
- * @author ilyes
- *
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
  */
 public class Predator extends Boid {
 	
@@ -23,13 +23,14 @@ public class Predator extends Boid {
 	private static final int DEATH_RADIUS = 10;
 
 	/**
-	 * Crée un boid de type Predator
-	 * @param x la coordonnée x de position
-	 * @param y la coordonnée y de position
-	 * @param sx la coordonnée x de speed
-	 * @param sy la coordonnée y de speed
-	 * @param ax la coordonnée x de acceleration
-	 * @param ay la coordonnée y de acceleration
+	 * Crée un Boid de type Predator
+	 * 
+	 * @param x 	Coordonnée en x
+	 * @param y 	Coordonnée en y
+	 * @param sx 	Vitesse en x
+	 * @param sy 	Vitesse en y
+	 * @param ax 	Accélération en x
+	 * @param ay 	Accélération en y
 	 * @see Type
 	 * @see Boid#Boid(double, double, double, double, double, double, Type, Color, int)
 	 */
@@ -40,8 +41,9 @@ public class Predator extends Boid {
 
 	/**
 	 * Première règle d'attaque pour le Predator. 
-	 * Le boid Predator attaque à vitesse maximal la première proie dans son voisinage visible.
-	 * @return Retourne le vecteur de déplacement pour chasser sa proie.
+	 * Le boid Predator attaque à vitesse maximale la première proie dans son voisinage visible.
+	 * 
+	 * @return Vecteur de déplacement de chasse
 	 * @see Boid#isNeighbor(Boid, Type)
 	 * @see PVector
 	 */
@@ -65,9 +67,11 @@ public class Predator extends Boid {
 	}
 
 	/**
-	 * Deuxième règle d'attaque pour le Predator. 
-	 * Le boid Predator mange la première proie dans son voisinage visible à une distance DEATH_RADIUS.
-	 * @return Retourne le vecteur de déplacement pour chasser sa proie.
+	 * Seconde règle d'attaque pour le Predator. 
+	 * Le boid Predator mange la première proie dans son voisinage visible
+	 * à une distance DEATH_RADIUS.
+	 * 
+	 * @return Vecteur de déplacement de chasse
 	 * @see Boid#isNeighbor(Boid, Type)
 	 * @see Predator#DEATH_RADIUS
 	 * @see PVector
@@ -90,9 +94,12 @@ public class Predator extends Boid {
 	}
 	
 	/**
-	 * Applique les trois règle de déplacement de l'essaim de même type et les deux règles d'attaque du Predator. 
-	 * Les règles sont appliquées par priorité : Manger, Chasser, Se déplacer en essaim de même type.
-	 * Met à jour l'état du boid.
+	 * Applique les trois règles de déplacement de l'essaim de même type
+	 * et les deux règles d'attaque du Predator. 
+	 * Les règles sont appliquées par priorité :
+	 * Manger, Chasser, Se déplacer en essaim de même type.
+	 * Met à jour l'état du Boid.
+	 *
 	 * @see Boid#ruleFlyToCenter()
 	 * @see Boid#ruleKeepDistance()
 	 * @see Boid#ruleMatchSpeed()
