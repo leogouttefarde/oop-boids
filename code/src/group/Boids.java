@@ -80,6 +80,7 @@ public class Boids {
 
 			b.move();
 
+			// On retire les Boid tués
 			if (b.isDead()) {
 				it.remove();
 			}

@@ -42,6 +42,7 @@ public class Life extends Automaton {
 	protected boolean isNeighborMatch(int cell, int neighbor) {
 		boolean success = false;
 
+		// Si un voisin est encore en vie, on le compte
 		switch (neighbor) {
 			case ALIVE:
 			case DYING:
@@ -55,9 +56,12 @@ public class Life extends Automaton {
 	 * @see group.Automaton#endCellGen(int, int, int)
 	 */
 	protected void endCellGen(int x, int y, int nbNeighbors) {
+
+		// Si une cellule morte a exactement 3 voisins, elle naît
 		if (cells[x][y] == DEAD && nbNeighbors == 3)
 			cells[x][y] = BIRTH;
 
+		// Si une cellule vivante ne possède ni 2 ni 3 voisines vivantes, elle meurt
 		else if (cells[x][y] == ALIVE && nbNeighbors != 2 && nbNeighbors != 3)
 				cells[x][y] = DYING;
 	}
@@ -71,10 +75,13 @@ public class Life extends Automaton {
 			for (int y = 0; y < m; y++) {
 
 				switch (cells[x][y]) {
+
+					// Toute cellule née devient vivante
 					case BIRTH:
 						cells[x][y] = ALIVE;
 						break;
 
+					// Toute mourante devient morte
 					case DYING:
 						cells[x][y] = DEAD;
 				}

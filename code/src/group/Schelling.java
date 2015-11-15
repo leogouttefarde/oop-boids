@@ -64,6 +64,7 @@ public class Schelling extends ExtendedAutomaton {
 	 */
 	protected void preGeneration() {
 
+		// Initialise les maisons vacantes la première fois
 		if (init) {
 			initVacantHouses();
 			init = false;
@@ -82,6 +83,7 @@ public class Schelling extends ExtendedAutomaton {
 	protected boolean skipCellGen(int cell) {
 		boolean skip = false;
 
+		// Si une maison est vacante, elle ne va pas déménager
 		if (cell == defaultState)
 			skip = true;
 
@@ -94,6 +96,7 @@ public class Schelling extends ExtendedAutomaton {
 	protected boolean isNeighborMatch(int cell, int neighbor) {
 		boolean success = false;
 
+		// Si un voisin est différent, on le compte
 		if (neighbor != cell && neighbor != defaultState) {
 			success = true;
 		}
@@ -105,10 +108,15 @@ public class Schelling extends ExtendedAutomaton {
 	 * @see group.Automaton#endCellGen(int, int, int)
 	 */
 	protected void endCellGen(int x, int y, int nbNeighbors) {
+
+		// Si plus de K voisins différents, on déménage
 		if(nbNeighbors > K) {
+
+			// La maison courante devient vacante
 			nextCells[x][y] = defaultState;
 			vacantHouses.add(new Cell(x, y, defaultState));
 
+			// Choix d'une nouvelle maison vacante
 			Cell cell = vacantHouses.remove();
 			nextCells[ cell.getX() ][ cell.getY() ] = cells[x][y];
 		}

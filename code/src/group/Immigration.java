@@ -38,6 +38,7 @@ public class Immigration extends ExtendedAutomaton {
 		final int next = (cell + 1) % states;
 		boolean success = false;
 
+		// Si un voisin est dans l'état suivant, on le compte
 		if (neighbor == next)
 			success = true;
 
@@ -51,9 +52,11 @@ public class Immigration extends ExtendedAutomaton {
 		final int state = cells[x][y];
 		final int next = (state + 1) % states;
 
+		// S'il y a 3 voisins ou plus dans l'état suivant, on y passe aussi
 		if (nbNeighbors >= 3)
 			nextCells[x][y] = next;
 
+		// Sinon on ne change rien
 		else
 			nextCells[x][y] = state;
 	}

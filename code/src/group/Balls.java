@@ -96,7 +96,7 @@ public class Balls {
 			final int dx = randomDir();
 			final int dy = randomDir();
 
-			// Verification pour toutes les collision possible
+			// Traitement des collisions
 			if (b.x + dir.x > width && b.y + dir.y > height) {
 				dir.setLocation(-dx, -dy);
 				b.translate(width - b.x, height - b.y);
