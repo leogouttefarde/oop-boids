@@ -1,13 +1,24 @@
 Ensimag 2A POO - TP 2015/16
 ============================
 
-- src: contient les classes fournies par les enseignants 
-  -> TestGUI.java : cree une fenetre graphique "Invaders", pas de simulation
-  Et c'est tout, en fait!
+Les questions 1 à 12 ont été réalisées et testées, elles semblent fonctionnelles.
+
+- src: contient les classes du projet, ces classes sont repartit dans différents paquetages
+	-> element
+	-> event
+	-> group
+	-> simulator
+	-> test
+	-> utility
 
 - bin/gui.jar: archive Java contenant les classes de l'interface graphique. Voir un exemple d'utilisation dans TestGUI.java
 
-- doc_gui: la documentation (API) des classes de l'interface graphique contenues dans gui.jar. Point d'entrée: index.html
+- rapport.pdf: rapport du projet
 
-- Makefile: quelques explications sur la compilation en ligne, notamment la notion de classpath et l'utilisation de ihm.jar
+- UML: contient le graphique UML du projet au format jpeg
+
+- doc: contient la javadoc en html (à générer à l'aide du Makefile)
+
+- Makefile: 
+	-> make doc: permet de générer la javadoc 
 
