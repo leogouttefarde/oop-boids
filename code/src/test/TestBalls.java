@@ -3,8 +3,17 @@ package test;
 import group.Balls;
 import java.awt.Point;
 
+/**
+ * Classe de démarrage du test de la classe Balls. (Question 1 du sujet)
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
+ * @see Balls
+ */
 public class TestBalls {
 
+	/**
+	 * Méthode main de démarrage du test de la classe Balls.
+	 * @param args les arguments (non utilisés)
+	 */
 	public static void main(String[] args) {
 		Balls b = new Balls();
 		
