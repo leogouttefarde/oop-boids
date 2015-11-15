@@ -26,6 +26,9 @@ all: testBoids
 testGUI:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/test/TestGUI.java
 
+testBalls:
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/test/TestBalls.java
+
 testBSim:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/test/TestBallsSimulator.java
 
@@ -58,6 +61,9 @@ doc:
 exeGUI: testGUI
 	java -classpath bin:bin/gui.jar test/TestGUI
 
+exeBalls: testBalls
+	java -classpath bin:bin/gui.jar test/TestBalls
+
 exeBSim: testBSim
 	java -classpath bin:bin/gui.jar test/TestBallsSimulator
 
@@ -82,6 +88,6 @@ exePred: testPred
 clean:
 	rm -rf bin/*.class
 
-run: exeBoids
+run: exePred
 
 
