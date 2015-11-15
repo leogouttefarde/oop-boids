@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.Iterator;
 
 /**
+ * Groupe de Boids
+ * 
  * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
  */
 public class Boids {

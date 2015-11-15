@@ -4,6 +4,7 @@ import element.Boid;
 import group.Boids;
 import event.EventManager;
 import event.BoidsEvent;
+import event.LighterEvent;
 import utility.Triangle;
 
 import java.util.Iterator;
@@ -27,6 +28,7 @@ public class BoidsSimulator implements Simulable {
 		Boids.setHeight(gui.getPanelHeight());
 
 		EventManager.Get().addEvent(new BoidsEvent(1, boids));
+		EventManager.Get().addEvent(new LighterEvent(7));
 	}
 
 	private void updateFrame() {

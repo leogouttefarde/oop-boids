@@ -8,6 +8,11 @@ import gui.GUISimulator;
 import gui.Simulable;
 import gui.Rectangle;
 
+/**
+ * Simulateur d'automate générique
+ * 
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
+ */
 public abstract class AutomatonSimulator implements Simulable {
 
 	private final int BORDER = 10;
@@ -18,6 +23,12 @@ public abstract class AutomatonSimulator implements Simulable {
 	protected Automaton automaton;
 	protected int cells[][];
 
+	/**
+	 * Crée un simulateur d'automate
+	 * 
+	 * @param gui		Simulateur de l'interface graphique liée
+	 * @param automaton	Automate à simuler
+	 */
 	public AutomatonSimulator(GUISimulator gui, Automaton automaton) {
 		this.gui = gui;
 		this.automaton = automaton;
@@ -25,12 +36,31 @@ public abstract class AutomatonSimulator implements Simulable {
 		EventManager.Get().addEvent(new AutomatonEvent(1, automaton));
 	}
 
+	/**
+	 * Construit le rectangle affichable d'une cellule
+	 * 
+	 * @param x		Position en x
+	 * @param y		Position en y
+	 * @param col	Couleur
+	 * 
+	 * @return	Cellule affichable
+	 */
 	protected Rectangle viewCell(int x, int y, Color col) {
 		return new Rectangle(BORDER + x * DIM, BORDER + y * DIM, col, col, SIZE);
 	}
 
+	/**
+	 * Indique la couleur d'une cellule
+	 * 
+	 * @param x	Position en x
+	 * @param y	Position en y
+	 * @return	Couleur
+	 */
 	protected abstract Color getCellColor(int x, int y);
 
+	/**
+	 * Met à jour l'affichage
+	 */
 	protected void updateFrame() {
 		cells = automaton.getCells();
 
@@ -41,6 +71,9 @@ public abstract class AutomatonSimulator implements Simulable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see gui.Simulable#next()
+	 */
 	@Override 
 	public void next() {
 		EventManager.Get().next();
@@ -48,6 +81,9 @@ public abstract class AutomatonSimulator implements Simulable {
 		updateFrame();
 	}
 
+	/* (non-Javadoc)
+	 * @see gui.Simulable#restart()
+	 */
 	@Override
 	public void restart() {
 		automaton.reset();

@@ -1,6 +1,8 @@
 package group;
 
 /**
+ * Jeu de la vie de Conway
+ * 
  * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
  */
 public class Life extends Automaton {
