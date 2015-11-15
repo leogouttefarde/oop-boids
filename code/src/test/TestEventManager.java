@@ -1,5 +1,6 @@
 package test;
 
+import event.Event;
 import event.EventManager;
 import event.MessageEvent;
 
@@ -9,14 +10,13 @@ import event.MessageEvent;
  * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
  * @see Event
  * @see EventManager
- *
  */
 public class TestEventManager {
 
 	/**
 	 * Méthode main de démarrage du test des classes Event et EventManager.
-	 * @param args les arguments (non utilisés)
-	 * @throws InterruptedException
+	 * @param args Arguments (non utilisés)
+	 * @throws InterruptedException	InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
 

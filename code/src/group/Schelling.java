@@ -2,26 +2,52 @@ package group;
 
 import java.util.LinkedList;
 
+/**
+ * Modèle de Schelling
+ * 
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
+ */
 public class Schelling extends ExtendedAutomaton {
 	
-	private int k;
+	private int K;
 	private LinkedList<Cell> vacantHouses;
 	private boolean init;
 
 
-	public Schelling(int n, int m, int states, int k) {
-		this(n, m, states, k, 0);
+	/**
+	 * Crée un modèle de Shelling de taille n x m, avec {@code states} états et de seuil K
+	 * 
+	 * @param n				Nombre de cellules en largeur
+	 * @param m 			Nombre de cellules en hauteur
+	 * @param states		Nombre d'états
+	 * @param K				Seuil
+	 */
+	public Schelling(int n, int m, int states, int K) {
+		this(n, m, states, K, 0);
 		init = true;
 	}
 
-	public Schelling(int n, int m, int states, int k, int defaultState) {
+	/**
+	 * Crée un modèle de Shelling de taille n x m, avec {@code states} états, de seuil K
+	 * et en spécifiant l'état par défaut.
+	 * 
+	 * @param n				Nombre de cellules en largeur
+	 * @param m 			Nombre de cellules en hauteur
+	 * @param states		Nombre d'états
+	 * @param K				Seuil
+	 * @param defaultState	Etat par défaut
+	 */
+	public Schelling(int n, int m, int states, int K, int defaultState) {
 		super(n, m, states, defaultState);
-		this.k = k;
+		this.K = K;
 
 		vacantHouses = new LinkedList<Cell>();
 	}
 
 
+	/**
+	 * Initialise les maisons vacantes
+	 */
 	private void initVacantHouses() {
 		vacantHouses.clear();
 
@@ -33,6 +59,9 @@ public class Schelling extends ExtendedAutomaton {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see group.Automaton#preGeneration()
+	 */
 	protected void preGeneration() {
 
 		if (init) {
@@ -47,6 +76,9 @@ public class Schelling extends ExtendedAutomaton {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see group.Automaton#skipCellGen(int)
+	 */
 	protected boolean skipCellGen(int cell) {
 		boolean skip = false;
 
@@ -56,6 +88,9 @@ public class Schelling extends ExtendedAutomaton {
 		return skip;
 	}
 
+	/* (non-Javadoc)
+	 * @see group.Automaton#isNeighborMatch(int, int)
+	 */
 	protected boolean isNeighborMatch(int cell, int neighbor) {
 		boolean success = false;
 
@@ -66,8 +101,11 @@ public class Schelling extends ExtendedAutomaton {
 		return success;
 	}
 
+	/* (non-Javadoc)
+	 * @see group.Automaton#endCellGen(int, int, int)
+	 */
 	protected void endCellGen(int x, int y, int nbNeighbors) {
-		if(nbNeighbors > k) {
+		if(nbNeighbors > K) {
 			nextCells[x][y] = defaultState;
 			vacantHouses.add(new Cell(x, y, defaultState));
 
@@ -77,12 +115,18 @@ public class Schelling extends ExtendedAutomaton {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see group.ExtendedAutomaton#reset()
+	 */
 	@Override
 	public void reset() {
 		super.reset();
 		initVacantHouses();
 	}
 
+	/* (non-Javadoc)
+	 * @see group.ExtendedAutomaton#toString()
+	 */
 	public String toString() {
 		String str = new String("Schelling("+n+", "+m+")\n");
 

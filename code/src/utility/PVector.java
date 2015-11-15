@@ -3,23 +3,23 @@ package utility;
 import java.awt.geom.Point2D;
 
 /**
- * Classe de vecteur avec des méthodes pour leurs manipulation
+ * Classe de vecteur munie de méthodes pour leur manipulation
+ * 
  * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
- *
  */
 public class PVector extends Point2D.Double {
 
 	/**
-	 * Crée un PVector = (0, 0)
+	 * Crée un PVector (0, 0)
 	 */
 	public PVector() {
 		super();
 	}
 
 	/**
-	 * Crée un PVector = (x, y)
-	 * @param x la coordonnée des abscisses du vecteur
-	 * @param y la coordonnée des ordonnées du vecteur
+	 * Crée un PVector (x, y)
+	 * @param x 	Abscisse
+	 * @param y 	Ordonnée
 	 */
 	public PVector(double x, double y) {
 		super(x, y);
@@ -27,7 +27,7 @@ public class PVector extends Point2D.Double {
 
 
 	/**
-	 * @return Retourne un copie du vecteur
+	 * @return Retourne une copie du vecteur
 	 */
 	public PVector clone() {
 		return (PVector)super.clone();
@@ -42,8 +42,10 @@ public class PVector extends Point2D.Double {
 
 	/**
 	 * Calcul la somme du vecteur this et du vecteur p.
-	 * @param p un vecteur
-	 * @return Retourne la somme du vecteur this et du vecteur p
+	 * 
+	 * @param p 	Un vecteur
+	 * 
+	 * @return Somme du vecteur this et du vecteur p
 	 */
 	public PVector add(PVector p) {
 		x += p.x;
@@ -54,8 +56,10 @@ public class PVector extends Point2D.Double {
 
 	/**
 	 * Calcul la difference du vecteur this et du vecteur p.
-	 * @param p un vecteur
-	 * @return Retourne la difference du vecteur this et du vecteur p
+	 * 
+	 * @param p		Un vecteur
+	 * 
+	 * @return Difference du vecteur this et du vecteur p
 	 */
 	public PVector sub(PVector p) {
 		x -= p.x;
@@ -65,8 +69,9 @@ public class PVector extends Point2D.Double {
 	}
 
 	/**
+	 * Calcule la norme du vecteur
 	 * 
-	 * @return Retourne la norme du vecteur
+	 * @return Norme
 	 */
 	public double norm() {
 		double n = Math.sqrt(x*x + y*y);
@@ -75,13 +80,14 @@ public class PVector extends Point2D.Double {
 	}
 
 	/**
+	 * Calcule une valeur limite
 	 * 
-	 * @param value une valeur
-	 * @param lim une limite
-	 * @return Retourne une valeur appartenant à l'intervalle [-lim, lim], 
-	 * si value est hors de cette intervalle la valeur de retour est lim ou -lim selon les cas.
+	 * @param value Valeur
+	 * @param lim	Limite
+	 * 
+	 * @return Valeur tronquée
 	 */
-	public double getLimit(double value, double lim) {
+	public static double getLimit(double value, double lim) {
 
 		if (value > lim)
 			value = lim;
@@ -93,8 +99,11 @@ public class PVector extends Point2D.Double {
 	}
 
 	/**
-	 * @param lim un limite
-	 * @return Retourne un vecteur appartenant à l'intervalle [-lim, lim]x[-lim, lim].
+	 * Limite le vecteur
+	 * 
+	 * @param lim	Limite
+	 * 
+	 * @return	Vecteur limité
 	 * @see PVector#getLimit(double, double)
 	 */
 	public PVector limit(double lim) {
@@ -105,9 +114,11 @@ public class PVector extends Point2D.Double {
 	}
 
 	/**
-	 * Calcul le produit du vecteur this par v.
-	 * @param v une valeur
-	 * @return Retourne le vecteur multiplié par v
+	 * Calcule le produit du vecteur this par v.
+	 * 
+	 * @param v Valeur
+	 * 
+	 * @return Vecteur produit
 	 */
 	public PVector mult(double v) {
 		x *= v;
@@ -117,9 +128,9 @@ public class PVector extends Point2D.Double {
 	}
 
 	/**
-	 * Calcul le produit du vecteur this et du vecteur p.
-	 * @param p un vecteur
-	 * @return Retourne la difference du vecteur this et du vecteur p
+	 * Calcule le produit du vecteur this et du vecteur p.
+	 * @param p Un vecteur
+	 * @return Vecteur produit
 	 */
 	public PVector mult(PVector p) {
 		x *= p.x;
@@ -129,9 +140,9 @@ public class PVector extends Point2D.Double {
 	}
 
 	/**
-	 * Calcul le quotient du vecteur this par v.
-	 * @param v une valeur
-	 * @return Retourne le vecteur divisé par v
+	 * Divise le vecteur this par v.
+	 * @param v Une valeur
+	 * @return Résultat
 	 */
 	public PVector div(double v) {
 		x /= v;
