@@ -70,13 +70,12 @@ public abstract class Automaton {
 	}
 
 	/**
-	 * Méthode abstraite de réinitialisation de l'automate.
+	 * Réinitialise l'automate.
 	 */
 	public abstract void reset();
 
 	/**
-	 * Méthode abstraite appelée après la génération de l'état suivant pour
-	 * finaliser les cellules.
+	 * Finalise les cellules après la génération de l'état suivant
 	 */
 	protected abstract void finishGeneration();
 
@@ -190,6 +189,10 @@ public abstract class Automaton {
 		finishGeneration();
 	}
 
+	/**
+	 * Affiche l'automate
+	 * @return	Représentation textuelle
+	 */
 	public String toString() {
 		return "Automaton("+n+", "+m+")";
 	}
