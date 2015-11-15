@@ -42,7 +42,7 @@ public class Predator extends Boid {
 			Boid b = it.next();
 
 			if(isNeighbor(b, Group.Prey) && position.distance(b.position) <= DEATH_RADIUS) {
-				it.remove();
+				b.die();
 				killed = true;
 				System.out.println("Prey eaten");
 			}

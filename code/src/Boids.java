@@ -38,8 +38,17 @@ public class Boids {
 	}
 
 	public void moveAllBoids(){
-		for(Boid b : boids){
+		Iterator<Boid> it = boids.iterator();
+		Boid b;
+
+		while (it.hasNext()) {
+			b = it.next();
+
 			b.move();
+
+			if (b.isDead()) {
+				it.remove();
+			}
 		}
 	}
 

@@ -26,6 +26,12 @@ public class TestPreyPredatorSimulator {
 		
 		boids.add(new Predator(300, 300, 4, 5, 3, -2));
 
+		boids.add(new Lighter(55, 77, 0, -5, 0, 0));
+		boids.add(new Lighter(255, 277, 11, -27, 12, 20));
+		boids.add(new Lighter(255, 277, 11, -27, 12, 20));
+		boids.add(new Lighter(250, 277, 11, -27, 12, 20));
+		boids.add(new Lighter(255, 250, 11, -27, 12, 20));
+
 		System.out.println(boids);
 
 
