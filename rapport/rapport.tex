@@ -98,14 +98,14 @@ graphiques de quelques systèmes multiagents. Un des points les plus importants 
 $\newline$
 \section {Choix conceptuels}
 \subsection{Organisation en package}
-Afin de faciliter la navigation à travers les différentes classes du projet, nous les avons classé dans des différents package:
+Afin de faciliter la navigation à travers les différentes classes du projet et de regrouper les classes similaire, nous avons crée différents paquetage :
 \begin{itemize}
 \item \texttt{element} : contient les classes qui implémentent les différents agents (\texttt{Boid}, \texttt{Lighter}, \texttt{Predator} et \texttt{Prey})
-\item \texttt{event} : contient l'\texttt{EventManager} et les différentes classes pour gérer les différents types d'\texttt{event}
-\item \texttt{group} : contient les différentes classes qui implémentent les groupes des agents
+\item \texttt{event} : contient l'\texttt{EventManager} et les classes pour gérer les différents types d'\texttt{event}
+\item \texttt{group} : contient les classes qui implémentent les groupes des agents
 \item \texttt{simulator} : contient toutes les classes simulator qui réalisent \texttt{Simulable}
 \item \texttt{test} : contient tous les tests
-\item \texttt{utility} : contient des classes divers utilisés par les autres classes du projet
+\item \texttt{utility} : contient des classes diverses utilisés par les autres classes du projet
 \end{itemize}
 \subsection{Un premier simulateur : Balls}
 Pour réaliser ce simulateur nous avons suivi le sujet qui a été assez guidé. Cette étape nous a permis de nous familiarisé avec la librairie \texttt{gui.jar} fournie et en particulier l'interface \texttt{Simulable}.
