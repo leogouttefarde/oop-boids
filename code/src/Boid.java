@@ -10,7 +10,7 @@ public abstract class Boid implements Cloneable {
 	protected static final int BASE_SIZE = 14;
 
 	protected static final int MOVE_FACTOR = 100;
-	protected static final int SECURITY_DIST = 20;
+	protected static final int MIN_DIST = 20;
 	protected static final int SPEED_FACTOR = 8;
 	protected static final double VISION = 2*Math.PI/3;
 
@@ -72,6 +72,10 @@ public abstract class Boid implements Cloneable {
 
 	public Group getType() {
 		return type;
+	}
+
+	public int GetMinDist() {
+		return Boid.MIN_DIST;
 	}
 
 	public void setGroup(LinkedList<Boid> group) {
@@ -223,7 +227,7 @@ public abstract class Boid implements Cloneable {
 
 		for(Boid b : boids) {
 			if(isNear(b)) {
-				if(position.distance(b.position) < SECURITY_DIST) {
+				if(position.distance(b.position) < GetMinDist()) {
 					PVector force = new PVector();
 
 					force.add(position);

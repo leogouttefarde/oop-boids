@@ -1,39 +1,64 @@
 import java.awt.Color;
-import java.util.Iterator;
+import java.util.Random;
 
 
 public class Lighter extends Boid {
 
 	private static final int SIZE = 40;
 	private static final int MAX_SPEED = 10;
-	private int alpha;
+	protected static final int MIN_DIST = 44;
+
+	protected static final int STEP = 40;
+	protected static final int MIN_LIGHT = 0;
+	protected static final int MAX_LIGHT = 170;
+
+	private int light;
 	private int diff;
+
 
 	public Lighter(double x, double y, double vx, double vy, double ax, double ay) {
 		super(x, y, vx, vy, ax, ay, Group.Lighter, Color.WHITE, SIZE);
 		maxspeed = MAX_SPEED;
 
-		alpha = 255;
-		diff = -50;
+		diff = STEP;
+		randLight();
 	}
 
+
+	public void reset(PVector position, PVector speed, PVector acceleration) {
+		super.reset(position, speed, acceleration);
+		randLight();
+	}
+
+	protected void randLight() {
+		Random rand = new Random();
+		setLight(rand.nextInt(MAX_LIGHT - MIN_LIGHT) + MIN_LIGHT);
+	}
+
+	protected void setLight(int light) {
+		this.light = light;
+		color = new Color(light, 255, 255, 255);
+	}
+
+	public int GetMinDist() {
+		return Lighter.MIN_DIST;
+	}
 
 	public void update() {
 		super.update();
 
-		alpha += diff;
+		light -= diff;
 
-		if (alpha <= 77) {
-			alpha = 77;
+		if (light <= MIN_LIGHT) {
+			light = MIN_LIGHT;
+			diff *= -1;
+		}
+		else if (light >= MAX_LIGHT) {
+			light = MAX_LIGHT;
 			diff *= -1;
 		}
 
-		else if (alpha >= 255) {
-			alpha = 255;
-			diff *= -1;
-		}
-
-		color = new Color(255, 255, 255, alpha);
+		setLight(light);
 	}
 }
 
