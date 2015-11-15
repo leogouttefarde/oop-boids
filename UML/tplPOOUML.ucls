@@ -465,6 +465,7 @@
     <end type="TARGET" refId="19"/>  
   </generalization>  
   <association id="83">    
+    <bendpoint x="587" y="620"/>    
     <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="84" name="acceleration"/>      
       <multiplicity id="85" minimum="0" maximum="1"/>    
@@ -489,6 +490,7 @@
     <end type="TARGET" refId="19"/>  
   </generalization>  
   <association id="90">    
+    <bendpoint x="554" y="508"/>    
     <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="91" name="position"/>      
       <multiplicity id="92" minimum="0" maximum="1"/>    
