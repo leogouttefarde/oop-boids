@@ -9,8 +9,8 @@ import gui.GraphicalElement;
 
 /**
  * Classe de l'élément graphique Triangle
+ * 
  * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
- *
  */
 public class Triangle implements GraphicalElement {
 
@@ -22,10 +22,11 @@ public class Triangle implements GraphicalElement {
 
 	/**
 	 * Crée un Triangle
-	 * @param xPoints les coordonnées x des points du triangle
-	 * @param yPoints les coordonnées y des points du triangle
-	 * @param drawColor la couleur du tracé
-	 * @param fillColor la couleur du remplisage
+	 * 
+	 * @param xPoints 	Coordonnées x des points du triangle
+	 * @param yPoints 	Coordonnées y des points du triangle
+	 * @param drawColor Couleur du tracé
+	 * @param fillColor Couleur du remplissage
 	 */
 	public Triangle(int xPoints[], int yPoints[], Color drawColor, Color fillColor)
 	{
@@ -37,7 +38,7 @@ public class Triangle implements GraphicalElement {
 
 	/**
 	 * Dessine le triangle dans le Graphics2D g2d
-	 * @inheritDoc
+	 * {@inheritDoc}
 	 */
 	public void paint(Graphics2D g2d)
 	{
@@ -55,7 +56,9 @@ public class Triangle implements GraphicalElement {
 	}
 	
 	/**
-	 * @return Retourne une String contenant la couleur du triangle
+	 * Affiche le triangle.
+	 * 
+	 * @return Représentation textuelle
 	 */
 	public String toString()
 	{

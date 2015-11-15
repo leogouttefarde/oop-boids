@@ -7,12 +7,12 @@ import java.awt.Color;
 import java.util.Iterator;
 
 /**
- * Classe qui hérite de boid pour implémenter un nouveau type de boid : le type Prey.
- * Le boid Prey est un boid qui se déplace en essaim de même type et qui fuit ces prédateur.
+ * Classe qui hérite de Boid pour implémenter un nouveau type de Boid : le type Prey.
+ * Le Boid Prey est un Boid qui se déplace en essaim de même type et qui fuit le Predator.
+ * 
  * @see Boid
  * @see Predator
- * @author ilyes
- *
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
  */
 public class Prey extends Boid {
 	
@@ -22,12 +22,13 @@ public class Prey extends Boid {
 	
 	/**
 	 * Crée un boid de type Prey
-	 * @param x la coordonnée x de position
-	 * @param y la coordonnée y de position
-	 * @param sx la coordonnée x de speed
-	 * @param sy la coordonnée y de speed
-	 * @param ax la coordonnée x de acceleration
-	 * @param ay la coordonnée y de acceleration
+	 * 
+	 * @param x 	Coordonnée en x
+	 * @param y 	Coordonnée en y
+	 * @param sx 	Vitesse en x
+	 * @param sy 	Vitesse en y
+	 * @param ax 	Accélération en x
+	 * @param ay 	Accélération en y
 	 * @see Type
 	 * @see Boid#Boid(double, double, double, double, double, double, Type, Color, int)
 	 */
@@ -37,9 +38,10 @@ public class Prey extends Boid {
 	}
 
 	/**
-	 * Nouvelle règle de fuite pour le Prey. 
-	 * Le boid Prey fuit à vitesse maximal le premier prédateur dans son voisinage visible.
-	 * @return Retourne le vecteur de déplacement pour fuir son prédateur.
+	 * Nouvelle règle de fuite pour le Boid Prey.
+	 * Il fuit à vitesse maximale le premier prédateur dans son voisinage visible.
+	 * 
+	 * @return Vecteur de déplacement de fuite
 	 * @see Boid#isNeighbor(Boid, Type)
 	 * @see PVector
 	 */
@@ -63,9 +65,12 @@ public class Prey extends Boid {
 	}
 
 	/**
-	 * Applique les trois règle de déplacement de l'essaim de même type et la règle de fuite du Prey. 
-	 * Les règles sont appliquées par priorité : Fuir, Se déplacer en essaim de même type.
+	 * Applique les trois règles de déplacement de l'essaim de même type
+	 * et la règle de fuite.
+	 * Les règles sont appliquées par priorité :
+	 * Fuir, Se déplacer en essaim de même type.
 	 * Met à jour l'état du boid.
+	 * 
 	 * @see Boid#ruleFlyToCenter()
 	 * @see Boid#ruleKeepDistance()
 	 * @see Boid#ruleMatchSpeed()

@@ -3,8 +3,21 @@ package test;
 import event.EventManager;
 import event.MessageEvent;
 
+/**
+ * Classe de démarrage du test des classes Event et EventManager. 
+ * (Question 9 du sujet)
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
+ * @see Event
+ * @see EventManager
+ *
+ */
 public class TestEventManager {
 
+	/**
+	 * Méthode main de démarrage du test des classes Event et EventManager.
+	 * @param args les arguments (non utilisés)
+	 * @throws InterruptedException
+	 */
 	public static void main(String[] args) throws InterruptedException {
 
 		// On crée un simulateur
