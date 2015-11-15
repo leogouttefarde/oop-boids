@@ -21,7 +21,7 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testBoids
+all: testGUI testBSim testLifeSim testImmSim testSSim testBoids testBoids testEvents testPred
 
 testGUI:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/test/TestGUI.java
@@ -80,7 +80,7 @@ exePred: testPred
 	java -classpath bin:bin/gui.jar test/TestPreyPredatorSimulator
 
 clean:
-	rm -rf bin/*.class
+	rm -rf bin/*/*.class
 
 run: exeBoids
 
