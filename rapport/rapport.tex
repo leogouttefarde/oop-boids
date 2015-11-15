@@ -13,6 +13,19 @@
 \usepackage{titling}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{array}
+\usepackage{makecell}
+\newcolumntype{x}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{tikz}
+\newcommand\diag[4]{%
+  \multicolumn{1}{p{#2}|}{\hskip-\tabcolsep
+  $\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,inner sep=#1]
+  \path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
+  \node[minimum width={#2+2\tabcolsep},minimum height=\baselineskip+\extrarowheight] (box) {};
+  \draw (box.north west) -- (box.south east);
+  \node[anchor=south west] at (box.south west) {#3};
+  \node[anchor=north east] at (box.north east) {#4};
+ \end{tikzpicture}}$\hskip-\tabcolsep}}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -91,7 +104,7 @@ Afin de faciliter la navigation à travers les différentes classes du projet, n
 \item \texttt{event} : contient l'\texttt{EventManager} et les différentes classes pour gérer les différents types d'\texttt{event}
 \item \texttt{group} : contient les différentes classes qui implémentent les groupes des agents
 \item \texttt{simulator} : contient toutes les classes simulator qui réalisent \texttt{Simulable}
-\item \texttt{test} : contient tous les test
+\item \texttt{test} : contient tous les tests
 \item \texttt{utility} : contient des classes divers utilisés par les autres classes du projet
 \end{itemize}
 \subsection{Un premier simulateur: Balls}
@@ -159,19 +172,32 @@ Tous les classes test sont dans le package \texttt{test} et sont repatis selont 
 
 \subsection {Résultats}
 \subsubsection {Jeux de la vie de Conway}
-BLA BLA BLA
-
+Pour tester ce système, nous avons implémenter certains \textit{pattern} calssiques comme \textit{toad}, \textit{pulsar} ou \textit{blinker} que nous avons récupéré sur cette adresse: 
+\newline
+\url{https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns}
+\newline
+Nous avons réussi à obtenir les résultats attendus avec le bon nombre d'itérations.
 \subsubsection {Jeux de l'immigration}
-BLA BLA BLA
+Nous avons pu constater l'effet des règles du jeux sur les cellules, en particulier, comment un état se propage sur la grille.
 
 \subsubsection {Modèle de Schelling}
-BLA BLA BLA
+Le tableau suivant contient le nombre des itérations nécessaires avant d'obtenir une ségrégation en fonction du seuil \textit{K} et du nombre des couleurs:
+\begin{center}
+\begin{tabular}{|x{5cm}|x{.5cm}|x{.5cm}|x{.5cm}|x{.5cm}|}\hline
+\diag{.1em}{5cm}{\texttt{numberOfColor}}{\textit{K}}&5&10&50&100\\ \hline
+2&?&?&?&?\\ \hline
+7&?&?&?&?\\ \hline
+14&?&?&?&?\\ \hline
+49&?&?&?&?\\ \hline
+
+\end{tabular}
+\end{center}
 
 \subsubsection {Boids}
-BLA BLA BLA
+Sur une même grille, nous avons lancer deux groupe de boids différents: des boids triangulaires (les \texttt{Pray}) et des boids qui sont circulaires (les \texttt{Lighter}). Nous avons réussi à visualiser la cohabitation entre ces deux groupes différents sur une même grille.
 
 \subsubsection {Système Proie/Prédateur}
-BLA BLA BLA
+Les \texttt{Predator} cherchent à attrapper les \texttt{Pray} sans se laisser géner par les \texttt{Lighter} qui partagent la même grille avec eux. On constate bien le rôle joué par l'event manager qui est de gérer le calcule des états suivants des agents à des fréquences différentes.
 
 \begin{center}
 \section* {Conclusion }
