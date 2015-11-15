@@ -86,7 +86,7 @@ exePred: testPred
 	java -classpath bin:bin/gui.jar test/TestPreyPredatorSimulator
 
 clean:
-	rm -rf bin/*/*.class
+	rm -f bin/*/*.class
 
 run: exePred
 
