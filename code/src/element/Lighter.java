@@ -53,7 +53,7 @@ public class Lighter extends Boid {
 	/**
 	 * Calcule un taux de brillance aléatoire.
 	 *
-	 * @see Lighter#setLight(int)
+	 * @see Lighter#setBrightness(int)
 	 */
 	protected void randLight() {
 		Random rand = new Random();

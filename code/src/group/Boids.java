@@ -54,7 +54,7 @@ public class Boids {
 
 	/**
 	 * Getter de la largeur
-	 * return	Largeur
+	 * @return	Largeur
 	 */
 	public static int getWidth() {
 		return width;
@@ -62,7 +62,7 @@ public class Boids {
 
 	/**
 	 * Getter de la hauteur
-	 * return	Hauteur
+	 * @return	Hauteur
 	 */
 	public static int getHeight() {
 		return height;

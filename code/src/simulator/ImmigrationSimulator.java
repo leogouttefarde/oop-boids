@@ -18,8 +18,8 @@ public class ImmigrationSimulator extends AutomatonSimulator {
 	 * @param gui		Simulateur de l'interface graphique liée
 	 * @param imm		Jeu de l'Immigration à simuler
 	 */
-	public ImmigrationSimulator(GUISimulator g, Immigration imm) {
-		super(g, imm);
+	public ImmigrationSimulator(GUISimulator gui, Immigration imm) {
+		super(gui, imm);
 	}
 
 	/* (non-Javadoc)

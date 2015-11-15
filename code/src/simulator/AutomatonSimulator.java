@@ -71,18 +71,18 @@ public abstract class AutomatonSimulator implements Simulable {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see gui.Simulable#next()
+	/**
+	 * Avance la simulation d'un pas
 	 */
-	@Override 
+	@Override
 	public void next() {
 		EventManager.Get().next();
 		gui.reset();
 		updateFrame();
 	}
 
-	/* (non-Javadoc)
-	 * @see gui.Simulable#restart()
+	/**
+	 * Relance la simulation
 	 */
 	@Override
 	public void restart() {

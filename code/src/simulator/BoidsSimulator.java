@@ -15,11 +15,22 @@ import gui.GUISimulator;
 import gui.Simulable;
 import gui.Oval;
 
+/**
+ * Simulateur de Boids
+ * 
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
+ */
 public class BoidsSimulator implements Simulable {
 
 	private GUISimulator gui;
 	private Boids boids;
 
+	/**
+	 * Crée un simulateur de Boids
+	 * 
+	 * @param gui		Simulateur de l'interface graphique liée
+	 * @param boids		Boids à simuler
+	 */
 	public BoidsSimulator(GUISimulator gui, Boids boids) {
 		this.gui = gui;
 		this.boids = boids;
@@ -31,6 +42,9 @@ public class BoidsSimulator implements Simulable {
 		EventManager.Get().addEvent(new LighterEvent(7));
 	}
 
+	/**
+	 * Met à jour l'affichage
+	 */
 	private void updateFrame() {
 		final Color transp = new Color(0,0,0,0);
 		Iterator<Boid> it = boids.iterator();
@@ -59,13 +73,19 @@ public class BoidsSimulator implements Simulable {
 		}
 	}
 
-	@Override 
+	/**
+	 * Avance la simulation d'un pas
+	 */
+	@Override
 	public void next() {
 		EventManager.Get().next();
 		gui.reset();
 		updateFrame();
 	}
 
+	/**
+	 * Relance la simulation
+	 */
 	@Override
 	public void restart() {
 		boids.reset();

@@ -17,8 +17,8 @@ public class LifeSimulator extends AutomatonSimulator {
 	 * @param gui		Simulateur de l'interface graphique liée
 	 * @param life		Jeu de la vie à simuler
 	 */
-	public LifeSimulator(GUISimulator g, Life life) {
-		super(g, life);
+	public LifeSimulator(GUISimulator gui, Life life) {
+		super(gui, life);
 	}
 
 	/* (non-Javadoc)

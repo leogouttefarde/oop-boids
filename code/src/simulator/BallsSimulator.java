@@ -3,6 +3,7 @@ package simulator;
 import group.Balls;
 import event.EventManager;
 import event.BallsEvent;
+
 import java.awt.Color;
 import java.awt.Point;
 import java.util.Iterator;
@@ -11,6 +12,11 @@ import gui.GUISimulator;
 import gui.Oval;
 import gui.Simulable;
 
+/**
+ * Simulateur de Balls
+ * 
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
+ */
 public class BallsSimulator implements Simulable {
 
 	private Balls balls;
@@ -18,6 +24,12 @@ public class BallsSimulator implements Simulable {
 	public static final int BALLSIZE = 7; // Rayon des ball
 	private static final int GUI_BORDERS = 3; // bordure du panel GUI
 
+	/**
+	 * Crée un simulateur de Balls
+	 * 
+	 * @param gui		Simulateur de l'interface graphique liée
+	 * @param balls		Balls à simuler
+	 */
 	public BallsSimulator(GUISimulator gui, Balls balls) {
 		this.gui = gui;
 		this.balls = balls;
@@ -29,6 +41,9 @@ public class BallsSimulator implements Simulable {
 		EventManager.Get().addEvent(new BallsEvent(1, balls));
 	}
 
+	/**
+	 * Met à jour l'affichage
+	 */
 	private void updateFrame() {
 		Iterator<Point> it = balls.iterator();
 
@@ -42,13 +57,19 @@ public class BallsSimulator implements Simulable {
 		}
 	}
 
-	@Override 
+	/**
+	 * Avance la simulation d'un pas
+	 */
+	@Override
 	public void next() {
 		EventManager.Get().next();
 		gui.reset();
 		updateFrame();
 	}
 
+	/**
+	 * Relance la simulation
+	 */
 	@Override
 	public void restart() {
 		balls.reInit();
