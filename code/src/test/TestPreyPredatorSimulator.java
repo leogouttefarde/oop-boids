@@ -8,8 +8,23 @@ import simulator.BoidsSimulator;
 import gui.GUISimulator;
 import java.awt.Color;
 
+/**
+ * Classe de démarrage du test des classes Prey, Predator, Lighter, 
+ * Boids, BoidsSimulator. (Question 12 du sujet)
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
+ * @see Prey
+ * @see Predator
+ * @see Lighter
+ * @see Boids
+ * @see BoidsSimulator
+ */
 public class TestPreyPredatorSimulator {
 
+	/**
+	 * Méthode main de démarrage du test des classes Prey, Predator, Lighter, 
+	 * Boids, BoidsSimulator.
+	 * @param args les arguments (non utilisés)
+	 */
 	public static void main(String[] args) {
 		Boids boids = new Boids();
 		

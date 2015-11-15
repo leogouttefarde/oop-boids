@@ -8,8 +8,23 @@ import simulator.BoidsSimulator;
 import gui.GUISimulator;
 import java.awt.Color;
 
+/**
+ * Classe de démarrage du test des classes BoidsSimulator, 
+ * Boid, Boids, Prey et Lighter. (Question 8, 10, 11 du sujet)
+ * @author Ilyes Kacher, Léo Gouttefarde, Nejmeddine Douma
+ * @see Prey
+ * @see Lighter
+ * @see Boids
+ * @see BoidsSimulator
+ *
+ */
 public class TestBoidsSimulator {
 
+	/**
+	 * Méthode main de démarrage du test des classes
+	 * Boid, Boids, Prey, Lighter et BoidsSimulator.
+	 * @param args les arguments (non utilisés)
+	 */
 	public static void main(String[] args) {
 
 		Boids boids = new Boids();
