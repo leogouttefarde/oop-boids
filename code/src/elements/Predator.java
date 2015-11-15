@@ -5,6 +5,7 @@ import utilities.Type;
 import java.awt.Color;
 import java.util.Iterator;
 
+
 public class Predator extends Boid {
 	
 	private static final Color PRED_COLOR = Color.decode("#990000");
@@ -45,7 +46,7 @@ public class Predator extends Boid {
 			Boid b = it.next();
 
 			if(isNeighbor(b, Type.Prey) && position.distance(b.position) <= DEATH_RADIUS) {
-				it.remove();
+				b.die();
 				killed = true;
 				System.out.println("Prey eaten");
 			}

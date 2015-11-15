@@ -28,6 +28,7 @@ public abstract class Boid implements Cloneable {
 
 	protected Color color;
 	protected int size;
+	private boolean dead;
 
 	private double direction;
 
@@ -55,6 +56,7 @@ public abstract class Boid implements Cloneable {
 		this.type = type;
 		this.color = color;
 		this.size = size;
+		dead = false;
 	}
 
 
@@ -73,7 +75,7 @@ public abstract class Boid implements Cloneable {
 
 		return b;
 	}
-
+	
 	public Type getType() {
 		return type;
 	}
@@ -89,7 +91,7 @@ public abstract class Boid implements Cloneable {
 	public PVector getAcceleration(){
 		return acceleration;
 	}
-	
+
 	public int GetMinDist() {
 		return Boid.MIN_DIST;
 	}
@@ -125,6 +127,15 @@ public abstract class Boid implements Cloneable {
 	public int getSize() {
 		return size;
 	}
+
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void die() {
+		dead = true;
+	}
+
 
 	public double[] turn(double x, double y) {
 		double[] pts = { x , y };
