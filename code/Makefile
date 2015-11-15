@@ -48,7 +48,7 @@ testPred:
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/test/TestPreyPredatorSimulator.java
 
 doc:
-	javadoc -encoding "UTF-8" -docencoding "UTF-8" -charset "UTF-8" -d ./doc -sourcepath ./src -subpackages element event group simulator test utility
+	javadoc -classpath bin/gui.jar -encoding "UTF-8" -docencoding "UTF-8" -charset "UTF-8" -d ./doc -sourcepath ./src -subpackages element event group simulator test utility
 
 # Execution:
 # on peut taper directement la ligne de commande :
