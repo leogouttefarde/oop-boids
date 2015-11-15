@@ -79,14 +79,13 @@ KACHER Ilyes}
 
 
 L’objectif de ce TP était d’implémenter en \texttt{Java} des simulations
-graphiques de quelques systèmes multiagents. Un des points les plus importants de ce TP était d'aborder les aspects fondamentaux de la programmation orientée objet. Nous avons implémenter trois simulateurs de systèmes de type automate cellulaire: le jeu de la vie de Conway, un jeu de l'immigration et le modèle de ségrégation de Schelling en plus d'un simulateur d’un système
-de mouvement d’essaims auto-organisés : le modèle de Boids.
+graphiques de quelques systèmes multiagents. Un des points les plus importants de ce TP était d'aborder les aspects fondamentaux de la programmation orientée objet. Nous avons implémenter trois simulateurs de systèmes de type automate cellulaire: le jeu de la vie de Conway, un jeu de l'immigration et le modèle de ségrégation de Schelling en plus d'un simulateur d’un système de mouvement d’essaims auto-organisés : le modèle de Boids.
 
 
 $\newline$
 \section {Choix conceptuels}
 \subsection{Automates cellulaires}
-Nous avons cherché à factoriser notre code tout en profitant des avantages de la programmation orientée objet en implémentant deux classes abstraites \texttt{Automaton} et \texttt{AutomatonSimulator}. Pour chaque système d'automate cellulaire simulé il ya une classe concrète qui hérite la classe \texttt{Automaton} et implémente les règles du système et une classe qui le simule en héritant \texttt{AutomatonSimulator}. Nous avons remarqué plusieurs similarités entre l'implémentation du jeux de l'immigration et du modèle du Schelling, donc, dans le but de plus factoriser notre code, nous avons définie une autre classe abstraite \texttt{ExtendedAutomaton} qui étend \texttt{Automaton} et qui est hérité par les implémentations de ces deux systèmes.
+Nous avons cherché à factoriser notre code tout en profitant des avantages de la programmation orientée objet en implémentant deux classes abstraites \texttt{Automaton} et \texttt{AutomatonSimulator}. Pour chaque système d'automate cellulaire simulé il y a une classe concrète qui hérite la classe \texttt{Automaton} et implémente les règles du système et une classe qui le simule en héritant \texttt{AutomatonSimulator}. Nous avons remarqué plusieurs similarités entre l'implémentation du jeux de l'immigration et du modèle du Schelling, donc, dans le but de plus factoriser notre code, nous avons définie une autre classe abstraite \texttt{ExtendedAutomaton} qui étend \texttt{Automaton} et qui est héritée par les implémentations de ces deux systèmes.
 
 \begin{tabular}{|l|c|c|c|}
   \hline
@@ -112,12 +111,23 @@ Pour visualiser l'exécution de ce simulateur, il faut exécuter la commande: \t
 \subsubsection {Modèle de Schelling}
 Pour visualiser l'exécution de ce simulateur, il faut exécuter la commande: \texttt{make exeSSim}
 \subsection{Mouvement d’essaims auto-organisés: les Boids}
+\subsubsection {Le système de boids}
+Nous avons utilisé presque la même architecture que pour le simulateur des balles. La classe \texttt{Boid} implémente les règles de l'agent d'un boid, la classe \texttt{Boids} implémente un environnement de plusieurs Boids tandis que le simulateur du système se trouve dans la classe \texttt{BoidsSimulator}.
+\subsubsection {Le système proies/prédateurs}
+
+Les classes \texttt{Predator} et \texttt{Prey} étendent la classe \texttt{Boid} et implémentent les règles nécessaires pour chaque population.
 
 \section {Tests}
 
 blabla tests
 
+\begin{center}
+\section* {Conclusion }
+\end{center}
 
+Ce projet nous a permis de nous confronter aux problématiques du modèle orienté objet et comment profiter de ces aspects fondamenteaux pour produire un code à la fois factorisé et réutilisable. Il nous a permis non seulement de mieux comprendre les notions du cours
+mais aussi de découvrir le monde des simulateurs multi-agents. Le
+projet était intéressant et il a permis d’avoir un rendu visuel, ce qui est fort agréable.
 \end{document}
 
 
