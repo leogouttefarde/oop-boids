@@ -16,7 +16,6 @@ public abstract class Boid implements Cloneable {
 
 	protected static final int MOVE_FACTOR = 100;
 	protected static final int MIN_DIST = 20;
-	protected static final int SPEED_FACTOR = 8;
 	protected static final double VISION = 2*Math.PI/3;
 
 	protected PVector position;
@@ -193,22 +192,17 @@ public abstract class Boid implements Cloneable {
 	public boolean isNeighbor(Boid b, Type type) {
 		return (b.type == type) && isNeighbor(b);
 	}
-	/*
-	public boolean isNear(Boid b, Group type) {
-		return (b.type == type) && isNear(b);
-	}*/
-	
 	public boolean isNear(Boid b) {
 		return this != b && position.distance(b.position) < NEIGHBORHOOD;
 	}
 
 	public boolean isNeighbor(Boid b) {
-		//final double neighborDir = b.getDirection();
 		
-		double tmp1 = b.position.x - position.x;
-		double tmp2 = b.position.y - position.y;
+		// calcul de l'orientation de b par rapport à this
+		double dirRelativX = b.position.x - position.x;
+		double dirRelativY = b.position.y - position.y;
 		
-		double neighborDir = aMod(Math.atan2(tmp2, tmp1));
+		double neighborDir = aMod(Math.atan2(dirRelativY, dirRelativX));
 
 		double minAngle = aMod(direction + VISION);
 		double maxAngle = aMod(direction - VISION);
@@ -218,7 +212,8 @@ public abstract class Boid implements Cloneable {
 			maxAngle = minAngle;
 			minAngle = tmp;
 		}
-			
+		
+		// vérification qu'il s'agit d'un voisin dans le champs de vision
 		if (this != b && position.distance(b.position) < NEIGHBORHOOD
 			 && !(minAngle <= neighborDir && neighborDir <= maxAngle))
 			return true;
@@ -285,7 +280,7 @@ public abstract class Boid implements Cloneable {
 			v.sub(speed);
 		}
 		
-		return v;//.div(SPEED_FACTOR);
+		return v;
 	}
 
 	public void update() {
