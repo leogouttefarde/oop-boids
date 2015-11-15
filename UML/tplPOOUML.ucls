@@ -49,7 +49,7 @@
   </class>  
   <class id="6" language="java" name="event.MessageEvent" project="TPL_POO" 
     file="/TPL_POO/code/src/event/MessageEvent.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1377" y="682"/>    
+    <position height="-1" width="-1" x="1464" y="796"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,7 +58,7 @@
   </class>  
   <class id="7" language="java" name="event.EventManager" project="TPL_POO" 
     file="/TPL_POO/code/src/event/EventManager.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1066" y="724"/>    
+    <position height="-1" width="-1" x="1120" y="825"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -67,7 +67,7 @@
   </class>  
   <class id="8" language="java" name="event.BoidsEvent" project="TPL_POO" file="/TPL_POO/code/src/event/BoidsEvent.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="925" y="264"/>    
+    <position height="-1" width="-1" x="876" y="295"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -76,7 +76,7 @@
   </class>  
   <class id="9" language="java" name="event.Event" project="TPL_POO" file="/TPL_POO/code/src/event/Event.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1360" y="451"/>    
+    <position height="-1" width="-1" x="1477" y="451"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -103,7 +103,7 @@
   </class>  
   <class id="12" language="java" name="group.Boids" project="TPL_POO" file="/TPL_POO/code/src/group/Boids.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="662" y="-75"/>    
+    <position height="-1" width="-1" x="865" y="-94"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -112,7 +112,7 @@
   </class>  
   <class id="13" language="java" name="group.Immigration" project="TPL_POO" 
     file="/TPL_POO/code/src/group/Immigration.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="842" y="-249"/>    
+    <position height="-1" width="-1" x="826" y="-414"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -184,7 +184,7 @@
   </class>  
   <class id="21" language="java" name="simulator.BoidsSimulator" project="TPL_POO" 
     file="/TPL_POO/code/src/simulator/BoidsSimulator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="704" y="212"/>    
+    <position height="-1" width="-1" x="622" y="255"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -220,7 +220,7 @@
   </class>  
   <class id="25" language="java" name="utility.Triangle" project="TPL_POO" 
     file="/TPL_POO/code/src/utility/Triangle.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="205" width="167" x="1634" y="602"/>    
+    <position height="-1" width="-1" x="1989" y="777"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -229,7 +229,7 @@
   </class>  
   <class id="26" language="java" name="utility.PVector" project="TPL_POO" file="/TPL_POO/code/src/utility/PVector.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="769" y="556"/>    
+    <position height="-1" width="-1" x="786" y="536"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -238,7 +238,7 @@
   </class>  
   <enumeration id="27" language="java" name="utility.Type" project="TPL_POO" file="/TPL_POO/code/src/utility/Type.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1017" y="448"/>    
+    <position height="-1" width="-1" x="592" y="-244"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -317,200 +317,213 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="36">    
+  <class id="36" language="java" name="event.LighterEvent" project="TPL_POO" 
+    file="/TPL_POO/code/src/event/LighterEvent.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1718" y="632"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="37">    
     <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="37" name="vacantHouses"/>      
-      <multiplicity id="38" minimum="0" maximum="2147483647"/>    
+      <attribute id="38" name="vacantHouses"/>      
+      <multiplicity id="39" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="39">    
+  <association id="40">    
     <bendpoint x="1262" y="61"/>    
     <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="40" name="beginning"/>      
-      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
+      <attribute id="41" name="beginning"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="42">    
+  <association id="43">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="43" name="speed"/>      
-      <multiplicity id="44" minimum="0" maximum="1"/>    
+      <attribute id="44" name="speed"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="45">    
+  <generalization id="46">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="11"/>  
   </generalization>  
-  <association id="46">    
+  <association id="47">    
     <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="47" name="automaton"/>      
-      <multiplicity id="48" minimum="0" maximum="1"/>    
+      <attribute id="48" name="automaton"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="49">    
+  <association id="50">    
     <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="50" name="boids"/>      
-      <multiplicity id="51" minimum="0" maximum="1"/>    
+      <attribute id="51" name="boids"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="52">    
+  <generalization id="53">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="54">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
-  <association id="53">    
+  <association id="55">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="54" name="automaton"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
+      <attribute id="56" name="automaton"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="56">    
+  <association id="58">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="57" name="balls"/>      
-      <multiplicity id="58" minimum="0" maximum="1"/>    
+      <attribute id="59" name="balls"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="59">    
+  <association id="61">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="60" name="boids"/>      
-      <multiplicity id="61" minimum="0" maximum="2147483647"/>    
+      <attribute id="62" name="boids"/>      
+      <multiplicity id="63" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="62">    
+  <generalization id="64">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
-  <association id="63">    
+  <association id="65">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="64" name="type"/>      
-      <multiplicity id="65" minimum="0" maximum="1"/>    
+      <attribute id="66" name="type"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="27" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="66">    
+  <nesting id="68">    
     <bendpoint x="1247" y="27"/>    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="15"/>  
   </nesting>  
-  <association id="67">    
+  <association id="69">    
     <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="68" name="balls"/>      
-      <multiplicity id="69" minimum="0" maximum="1"/>    
+      <attribute id="70" name="balls"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="70">    
+  <generalization id="72">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
-  <association id="71">    
+  <association id="73">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="72" name="boids"/>      
-      <multiplicity id="73" minimum="0" maximum="1"/>    
+      <attribute id="74" name="boids"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="74">    
+  <association id="76">    
     <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="75" name="boids"/>      
-      <multiplicity id="76" minimum="0" maximum="2147483647"/>    
+      <attribute id="77" name="boids"/>      
+      <multiplicity id="78" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="77">    
+  <generalization id="79">    
     <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="14"/>  
   </generalization>  
-  <generalization id="78">    
+  <generalization id="80">    
     <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="11"/>  
   </generalization>  
-  <generalization id="79">    
+  <generalization id="81">    
     <end type="SOURCE" refId="23"/>    
     <end type="TARGET" refId="19"/>  
   </generalization>  
-  <generalization id="80">    
+  <generalization id="82">    
     <end type="SOURCE" refId="20"/>    
     <end type="TARGET" refId="19"/>  
   </generalization>  
-  <association id="81">    
+  <association id="83">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="82" name="acceleration"/>      
-      <multiplicity id="83" minimum="0" maximum="1"/>    
+      <attribute id="84" name="acceleration"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="84">    
+  <generalization id="86">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
-  <generalization id="85">    
+  <generalization id="87">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
-  <generalization id="86">    
+  <generalization id="88">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
-  <generalization id="87">    
+  <generalization id="89">    
     <end type="SOURCE" refId="22"/>    
     <end type="TARGET" refId="19"/>  
   </generalization>  
-  <association id="88">    
+  <association id="90">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="89" name="position"/>      
-      <multiplicity id="90" minimum="0" maximum="1"/>    
+      <attribute id="91" name="position"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="91">    
+  <generalization id="93">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
-  <association id="92">    
+  <association id="94">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="93" name="instance"/>      
-      <multiplicity id="94" minimum="0" maximum="1"/>    
+      <attribute id="95" name="instance"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="95">    
+  <generalization id="97">    
     <end type="SOURCE" refId="18"/>    
     <end type="TARGET" refId="14"/>  
   </generalization>  
-  <association id="96">    
+  <association id="98">    
     <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="97" name="beginning"/>      
-      <multiplicity id="98" minimum="0" maximum="2147483647"/>    
+      <attribute id="99" name="beginning"/>      
+      <multiplicity id="100" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="99">    
+  <association id="101">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="100" name="events"/>      
-      <multiplicity id="101" minimum="0" maximum="2147483647"/>    
+      <attribute id="102" name="events"/>      
+      <multiplicity id="103" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
