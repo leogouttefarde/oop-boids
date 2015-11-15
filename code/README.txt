@@ -1,9 +1,16 @@
-Ensimag 2A POO - TP 2015/16
-============================
+/*
+ * Equipe 32 :
+ * DOUMA Nejmeddine - GOUTTEFARDE Léo - KACHER Ilyes
+ *
+ * TP POO - Simulation Orientée Objet de systèmes multiagents
+ * Ensimag 2A MMXV
+ */
+
 
 Les questions 1 à 12 ont été réalisées et testées, elles semblent fonctionnelles.
 
-- src: contient les classes du projet, ces classes sont repartit dans différents paquetages
+
+- src : contient les classes du projet, ces classes sont reparties en différents packages
 
 	-> element
 		Boid.java  Lighter.java  Predator.java  Prey.java
@@ -30,20 +37,20 @@ Les questions 1 à 12 ont été réalisées et testées, elles semblent fonction
 	-> utility
 		PVector.java  Triangle.java  Type.java
 
+- bin/gui.jar : archive Java contenant les classes de l'interface graphique.
 
-- bin/gui.jar: archive Java contenant les classes de l'interface graphique.
+- rapport.pdf : rapport du projet
 
-- rapport.pdf: rapport du projet
+- UML : contient le graphique UML du projet au format JPEG
 
-- UML: contient le graphique UML du projet au format jpeg
+- doc : contient la javadoc en html (à générer à l'aide du Makefile)
 
-- doc: contient la javadoc en html du projet (à générer à l'aide du Makefile)
-
-- Makefile: 
+- Makefile:  
 	-> générer la doc: make doc  
 
 	-> lancer la compilation d'un test: 
 		make testGUI : TestGUI.java
+		make testBalls : TestBalls.java
 		make testBSim : TestBallsSimulator.java
 		make testLifeSim : TestLifeSimulator.java
 		make testImmSim : TestImmigrationSimulator.java
@@ -57,6 +64,7 @@ Les questions 1 à 12 ont été réalisées et testées, elles semblent fonction
 	
 	-> lancer l'execution d'un test: 
 		make exeGUI : TestGUI.java
+		make exeBalls : TestBalls.java
 		make exeBSim : TestBallsSimulator.java
 		make exeLifeSim : TestLifeSimulator.java
 		make exeImmSim : TestImmigrationSimulator.java
