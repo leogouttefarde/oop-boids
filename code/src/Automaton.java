@@ -40,7 +40,7 @@ public abstract class Automaton {
 	protected abstract boolean isNeighborMatch(int cell, int neighbor);
 	protected abstract void endCellGen(int x, int y, int nbNeighbors);
 
-	protected void preGeneration() {}
+	protected void preGeneration() {} //Override seulement dans Schelling
 
 	protected boolean skipCellGen(int cell) {
 		return false;
