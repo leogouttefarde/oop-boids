@@ -4,10 +4,12 @@ public class Schelling extends ExtendedAutomaton {
 	
 	private int k;
 	private LinkedList<Cell> vacantHouses;
+	private boolean init;
 
 
 	public Schelling(int n, int m, int states, int k) {
 		this(n, m, states, k, 0);
+		init = true;
 	}
 
 	public Schelling(int n, int m, int states, int k, int defaultState) {
@@ -15,10 +17,10 @@ public class Schelling extends ExtendedAutomaton {
 		this.k = k;
 
 		vacantHouses = new LinkedList<Cell>();
-		initVacantHouses();
 	}
 
-	public void initVacantHouses() {
+
+	private void initVacantHouses() {
 		vacantHouses.clear();
 
 		for (int x = 0; x < n; x++) {
@@ -29,8 +31,13 @@ public class Schelling extends ExtendedAutomaton {
 		}
 	}
 
-
 	protected void preGeneration() {
+
+		if (init) {
+			initVacantHouses();
+			init = false;
+		}
+
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < m; y++) {
 				nextCells[x][y] = cells[x][y];
