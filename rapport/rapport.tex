@@ -14,6 +14,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{array}
+\usepackage{hyperref}
 \usepackage{makecell}
 \newcolumntype{x}[1]{>{\centering\arraybackslash}p{#1}}
 \usepackage{tikz}
@@ -99,20 +100,23 @@ Nous avons implémenté trois simulateurs d'automates cellulaires : le jeu de la
 
 $\newline$
 \section {Choix conceptuels}
-\subsection{Organisation en package}
+\subsection{Organisation en packages}
 Afin de faciliter la navigation au sein des différentes classes du projet, nous les avons réparties en différents packages :
 \begin{itemize}
 \item \texttt{element} : classes des différents agents (\texttt{Boid}, \texttt{Lighter}, \texttt{Predator} et \texttt{Prey})
 \item \texttt{event} : classes relatives aux événements
 \item \texttt{group} : classes qui gèrent les groupes d'agents
 \item \texttt{simulator} : classes simulator qui implémentent \texttt{Simulable}
-\item \texttt{test} : contient tous les tests
-\item \texttt{utility} : contient des classes diverses utilisés par les autres classes du projet
+\item \texttt{test} : classes des tests
+\item \texttt{utility} : classes annexes (\texttt{PVector}, \texttt{Triangle}, \texttt{Type})
 \end{itemize}
-\subsection{Un premier simulateur : Balls}
-Pour réaliser ce simulateur nous avons suivi le sujet qui a été assez guidé. Cette étape nous a permis de nous familiarisé avec la librairie \texttt{gui.jar} fournie et en particulier l'interface \texttt{Simulable}.
+
+\subsection{Premier simulateur : Balls}
+Pour réaliser ce simulateur nous avons suivi le sujet qui est assez guidé, et notamment géré les collisions. Cette étape a permis de nous familiariser avec la librairie \texttt{gui.jar} fournie et en particulier l'interface \texttt{Simulable}.
+
 \subsection{Automates cellulaires}
-Nous avons cherché à factoriser notre code tout en profitant des avantages de la programmation orientée objet en implémentant deux classes abstraites \texttt{Automaton} et \texttt{AutomatonSimulator}. Pour chaque système d'automate cellulaire simulé il y a une classe concrète qui hérite la classe \texttt{Automaton} et implémente les règles du système, et une classe qui le simule en héritant de \texttt{AutomatonSimulator}. Nous avons remarqué plusieurs similarités entre l'implémentation du jeux de l'immigration et du modèle du Schelling, donc, dans le but de plus factoriser notre code, nous avons définie une autre classe abstraite \texttt{ExtendedAutomaton} qui étend \texttt{Automaton} et qui est héritée par les implémentations de ces deux systèmes.
+Nous avons cherché à factoriser notre code tout en profitant des avantages de la programmation orientée objet en implémentant deux classes abstraites \texttt{Automaton} et \texttt{AutomatonSimulator}. Pour chaque système d'automate cellulaire simulé il y a une classe concrète qui hérite de la classe \texttt{Automaton} et implémente les règles du système, ainsi qu'une autre pour la simuler en héritant de \texttt{AutomatonSimulator}.
+Nous avons remarqué des similarités entre le jeu de l'immigration et le modèle du Schelling, ainsi, afin de factoriser davantage, nous avons défini une autre classe abstraite \texttt{ExtendedAutomaton} qui étend \texttt{Automaton} et est héritée par l'implémentation de ces deux systèmes.
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -129,30 +133,32 @@ Nous avons cherché à factoriser notre code tout en profitant des avantages de 
 \end{tabular}
 \end{center}
 
-Nous avons aussi généralisé l'utilisation de \texttt{EventManager} pour le calcul des générations suivantes pour tous les systèmes d'automate cellulaire simulés en définissant \texttt{AutomatonEvent} qui hérite la classe abstraite \texttt{Event}.
+Nous avons également généralisé l'utilisation de \texttt{EventManager} au calcul des générations suivantes pour tous les systèmes d'automate cellulaire simulés en définissant \texttt{AutomatonEvent} qui hérite de la classe abstraite \texttt{Event}.
 
 
-\subsection{Mouvement d’essaims auto-organisés : les Boids}
-\subsubsection {Le système de boids}
-Nous avons presque utilisé la même architecture que pour le simulateur des balles. La classe abstraite \texttt{Boid} implémente les règles communes d'un agent boid, la classe \texttt{Boids} implémente un environnement de plusieurs boids tandis que le simulateur du système se trouve dans la classe \texttt{BoidsSimulator}. 
+\subsection{Mouvements en essaims auto-organisés : les Boids}
+\subsubsection {Le système de {\em boids}}
+Nous avons presque utilisé la même architecture que pour le simulateur des balles. La classe abstraite \texttt{Boid} implémente les règles communes d'un agent boid, la classe \texttt{Boids} implémente un environnement de plusieurs {\em boids} tandis que le simulateur du système se trouve dans la classe \texttt{BoidsSimulator}. 
 
-\subsubsection {Les types de boids}
 
-Afin de compléter le comportement d'un boid nous avons ajouté les classes \texttt{Prey}, \texttt{Predator} et \texttt{Lighter}. Ces classes héritent de \texttt{Boid} et implèmentent les règles nécessaires afin d'obtenir un boid proie ou prédateur. Le boid \texttt{Lighter} est seulement un boid classic ayant une apparence différente, il s'agit d'un boid scintillant en forme de cercle.
+\subsubsection {Les types de {\em boids}}
 
-\subsubsection {Le système Proies/Prédateurs}
+Afin de compléter le comportement d'un boid nous avons ajouté les classes \texttt{Prey}, \texttt{Predator} et \texttt{Lighter}. Ces classes héritent de \texttt{Boid} et implémentent les règles nécessaires afin d'obtenir un boid proie ou prédateur. Le boid \texttt{Lighter} est un boid rond et brillant dont la couleur change à intervalles de temps aléatoires (événements différés aléatoires).
+
+
+\subsubsection {Le système de Proies / Prédateurs}
 
 Pour répondre à la simulation du système de proies et de prédateurs nous avons ajouté les règles suivantes :
 \begin{itemize}
-\item Un prédateur chasse la première proie dans son champ de vision au maximum de sa vitesse.
-\item Un prédateur mange une proie si elle se trouve à une petite distance du prédateur.
-\item Un proie s'enfuit au maximum de sa vitesse dès qu'un prédateur entre dans son champ de vision.
+\item Un prédateur chasse la première proie de son champ de vision à sa vitesse maximale
+\item Un prédateur dévore une proie suffisamment proche
+\item Une proie s'enfuit à sa vitesse maximale dès qu'un prédateur entre dans son champ de vision
 \end{itemize}
 
 \section {Tests}
 
 \subsection {Exécution}
-Tous les classes test sont dans le package \texttt{test} et sont repatis selont le tableau suivant:
+Toutes les classes de test sont dans le package \texttt{test}, elles sont réparties selont le tableau suivant :
 
 \begin{center}
 \begin{tabular}{|l|c|c|}
@@ -161,7 +167,7 @@ Tous les classes test sont dans le package \texttt{test} et sont repatis selont 
   \hline
   \texttt{TestGUI} & Test de l'interface graphique & \texttt{make exeGUI}\\
   \hline
-   \texttt{TestBalls} & Test demandé à la première question & \\
+   \texttt{TestBalls} & Test demandé à la première question & \texttt{make exeBalls}\\
   \hline
   \texttt{TestBallsSimulator} & Balls & \texttt{make exeBSim}\\
   \hline
@@ -177,26 +183,24 @@ Tous les classes test sont dans le package \texttt{test} et sont repatis selont 
   \hline
   \texttt{TestPreyPredatorSimulator} & Boids proies/prédateurs  & \texttt{make exePred}\\
   \hline
-  
- 
+
 \end{tabular}
 \end{center}
 
 \subsection {Résultats}
-\subsubsection {Jeux de la vie de Conway}
-Pour tester ce système, nous avons implémenter certains \textit{pattern} calssiques comme \textit{toad}, \textit{pulsar} ou \textit{blinker} que nous avons récupéré sur cette adresse: 
+\subsubsection {Jeu de la vie de Conway}
+Pour tester ce système, nous avons implémenté certains \textit{pattern} classiques comme \textit{toad}, \textit{pulsar} ou \textit{blinker} obtenus à l'adresse suivante : \url{https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns}.
 \newline
-\url{https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns}
-\newline
-Nous avons réussi à obtenir les résultats attendus avec le bon nombre d'itérations.
+Nous avons bien obtenu les résultats attendus avec le bon nombre d'itérations.
+
 \subsubsection {Jeux de l'immigration}
-Nous avons pu constater l'effet des règles du jeux sur les cellules, en particulier, comment un état se propage sur la grille.
+Nous avons pu constater l'effet des règles du jeux sur les cellules, en particulier la manière dont un état se propage sur la grille.
 
 \subsubsection {Modèle de Schelling}
-Le tableau suivant contient le nombre des itérations nécessaires avant d'obtenir une ségrégation en fonction du seuil \textit{K} et du nombre des couleurs:
+Le tableau suivant contient le nombre d'itérations nécessaires avant d'obtenir une ségrégation en fonction du seuil \textit{K} et du nombre de couleurs:
 \begin{center}
 \begin{tabular}{|x{5cm}|x{2cm}|x{2cm}|x{2cm}|x{2cm}|x{2cm}|}\hline
-\diag{.1em}{5cm}{\texttt{numberOfColor}}{\textit{K}} & 2 & 4 & 5 & 7 & 8\\ \hline
+\diag{.1em}{5cm}{\texttt{NbColors}}{\textit{K}} & 2 & 4 & 5 & 7 & 8\\ \hline
 2 & 55 & 16 & 8 & 0 & 0\\ \hline
 7 & +10000 $\infty$ & 409 & 50 & 11 & 0\\ \hline
 14 & +10000 $\infty$ & 2363 & 237 & 17 & 0\\ \hline
@@ -204,26 +208,29 @@ Le tableau suivant contient le nombre des itérations nécessaires avant d'obten
 
 \end{tabular}
 \end{center}
-+10000 $\sim$ : Nous avons dépassé 10000 itération en ayant qu'une ségrégation partielle.
++10000 $\sim$ : Nous avons dépassé 10000 itérations en n'ayant qu'une ségrégation partielle.
 \newline
-+10000 $\infty$ : Nous avons dépassé 10000 itération sans aucune ségrégation en cours de formation.
++10000 $\infty$ : Nous avons dépassé 10000 itérations sans aucune ségrégation en cours de formation.
 \newline
 \newline
-Nous constatons que le nombre des itérations nécessaires avant d'obtenir une ségrégation est inversement proportionnel à \textit{K} et proportionnel à \texttt{numberOfColor}.
+Nous constatons que le nombre d'itérations nécessaires avant d'obtenir une ségrégation est inversement proportionnel à \textit{K} et proportionnel à \texttt{NbColors}.
 
 \subsubsection {Boids}
-Sur une même grille, nous avons lancer deux groupe de boids différents: des boids triangulaires (les \texttt{Pray}) et des boids qui sont circulaires (les \texttt{Lighter}). Nous avons réussi à visualiser la cohabitation entre ces deux groupes différents sur une même grille.
+Sur une même grille, nous avons lancé deux groupes de {\em boids} différents: des {\em boids} triangulaires (les \texttt{Prey}) et des {\em boids} circulaires (les \texttt{Lighter}). Nous avons réussi à visualiser la cohabitation entre ces deux groupes différents au sein d'une même simulation.
 
-\subsubsection {Système Proie/Prédateur}
-Les \texttt{Predator} cherchent à attrapper les \texttt{Pray} sans se laisser géner par les \texttt{Lighter} qui partagent la même grille avec eux. On constate bien le rôle joué par l'event manager qui est de gérer le calcule des états suivants des agents à des fréquences différentes.
+\subsubsection {Système Proie / Prédateur}
+Les \texttt{Predator} cherchent à attraper les \texttt{Prey} sans se laisser gêner par les \texttt{Lighter} qui partagent la même grille. On voit bien le rôle joué par l'event manager consistant à gérer la mise à jour des agents selon différentes fréquences.
+\\
 
 \begin{center}
-\section* {Conclusion }
+\section* {Conclusion}
 \end{center}
 
-Ce projet nous a permis de nous confronter aux problématiques du modèle orienté objet et comment profiter de ces aspects fondamenteaux pour produire un code à la fois factorisé et réutilisable. Il nous a permis non seulement de mieux comprendre les notions du cours
-mais aussi de découvrir le monde des simulateurs multi-agents. Le
-projet était intéressant et il a permis d’avoir un rendu visuel, ce qui est fort agréable.
+Ce projet nous a introduit aux problématiques de la programmation orientée objet ainsi qu'à la manière d'en tirer profit pour produire un code à la fois factorisé et réutilisable.
+Il nous a aidé non seulement à mieux comprendre les notions de cours mais aussi à découvrir le monde des simulateurs multi-agents.
+
+C'est un projet intéressant qui nous a permis de profiter d'une interface visuelle et de créer des agents amusants comme le \texttt{Lighter}.
+
 \end{document}
 
 
