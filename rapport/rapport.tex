@@ -94,10 +94,10 @@ Afin de faciliter la navigation à travers les différentes classes du projet, n
 \item \texttt{test} : contient tous les test
 \item \texttt{utility} : contient des classes divers utilisés par les autres classes du projet
 \end{itemize}
-\subsection{Un premier simulateur: Balls}
+\subsection{Un premier simulateur : Balls}
 Pour réaliser ce simulateur nous avons suivi le sujet qui a été assez guidé. Cette étape nous a permis de nous familiarisé avec la librairie \texttt{gui.jar} fournie et en particulier l'interface \texttt{Simulable}.
 \subsection{Automates cellulaires}
-Nous avons cherché à factoriser notre code tout en profitant des avantages de la programmation orientée objet en implémentant deux classes abstraites \texttt{Automaton} et \texttt{AutomatonSimulator}. Pour chaque système d'automate cellulaire simulé il y a une classe concrète qui hérite la classe \texttt{Automaton} et implémente les règles du système et une classe qui le simule en héritant \texttt{AutomatonSimulator}. Nous avons remarqué plusieurs similarités entre l'implémentation du jeux de l'immigration et du modèle du Schelling, donc, dans le but de plus factoriser notre code, nous avons définie une autre classe abstraite \texttt{ExtendedAutomaton} qui étend \texttt{Automaton} et qui est héritée par les implémentations de ces deux systèmes.
+Nous avons cherché à factoriser notre code tout en profitant des avantages de la programmation orientée objet en implémentant deux classes abstraites \texttt{Automaton} et \texttt{AutomatonSimulator}. Pour chaque système d'automate cellulaire simulé il y a une classe concrète qui hérite la classe \texttt{Automaton} et implémente les règles du système, et une classe qui le simule en héritant de \texttt{AutomatonSimulator}. Nous avons remarqué plusieurs similarités entre l'implémentation du jeux de l'immigration et du modèle du Schelling, donc, dans le but de plus factoriser notre code, nous avons définie une autre classe abstraite \texttt{ExtendedAutomaton} qui étend \texttt{Automaton} et qui est héritée par les implémentations de ces deux systèmes.
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -117,12 +117,22 @@ Nous avons cherché à factoriser notre code tout en profitant des avantages de 
 Nous avons aussi généralisé l'utilisation de \texttt{EventManager} pour le calcul des générations suivantes pour tous les systèmes d'automate cellulaire simulés en définissant \texttt{AutomatonEvent} qui hérite la classe abstraite \texttt{Event}.
 
 
-\subsection{Mouvement d’essaims auto-organisés: les Boids}
+\subsection{Mouvement d’essaims auto-organisés : les Boids}
 \subsubsection {Le système de boids}
-Nous avons utilisé presque la même architecture que pour le simulateur des balles. La classe \texttt{Boid} implémente les règles de l'agent d'un boid, la classe \texttt{Boids} implémente un environnement de plusieurs boids tandis que le simulateur du système se trouve dans la classe \texttt{BoidsSimulator}.
+Nous avons presque utilisé la même architecture que pour le simulateur des balles. La classe abstraite \texttt{Boid} implémente les règles communes d'un agent boid, la classe \texttt{Boids} implémente un environnement de plusieurs boids tandis que le simulateur du système se trouve dans la classe \texttt{BoidsSimulator}. 
+
+\subsubsection {Les types de boids}
+
+Afin de compléter le comportement d'un boid nous avons ajouté les classes \texttt{Prey}, \texttt{Predator} et \texttt{Lighter}. Ces classes héritent de \texttt{Boid} et implèmentent les règles nécessaires afin d'obtenir un boid proie ou prédateur. Le boid \texttt{Lighter} est seulement un boid classic ayant une apparence différente, il s'agit d'un boid scintillant en forme de cercle.
+
 \subsubsection {Le système Proies/Prédateurs}
 
-Les classes \texttt{Predator} et \texttt{Prey} étendent la classe \texttt{Boid} et implémentent les règles nécessaires pour chaque population.
+Pour répondre à la simulation du système de proies et de prédateurs nous avons ajouté les règles suivantes :
+\begin{itemize}
+\item Un prédateur chasse la première proie dans son champ de vision au maximum de sa vitesse.
+\item Un prédateur mange une proie si elle se trouve à une petite distance du prédateur.
+\item Un proie s'enfuit au maximum de sa vitesse dès qu'un prédateur entre dans son champ de vision.
+\end{itemize}
 
 \section {Tests}
 
