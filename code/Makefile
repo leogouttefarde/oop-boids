@@ -24,28 +24,28 @@
 all: testBoids
 
 testGUI:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestGUI.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestGUI.java
 
 testBSim:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestBallsSimulator.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestBallsSimulator.java
 
 testLifeSim:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestLifeSimulator.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestLifeSimulator.java
 
 testImmSim:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestImmigrationSimulator.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestImmigrationSimulator.java
 
 testSSim:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSchellingSimulator.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestSchellingSimulator.java
 
 testBoids:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestBoidsSimulator.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestBoidsSimulator.java
 
 testEvents:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestEventManager.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestEventManager.java
 
 testPred:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestPreyPredatorSimulator.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestPreyPredatorSimulator.java
 
 
 # Execution:
@@ -54,28 +54,28 @@ testPred:
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeIHM
 exeGUI: testGUI
-	java -classpath bin:bin/gui.jar TestGUI
+	java -classpath bin:bin/gui.jar tests/TestGUI
 
 exeBSim: testBSim
-	java -classpath bin:bin/gui.jar TestBallsSimulator
+	java -classpath bin:bin/gui.jar tests/TestBallsSimulator
 
 exeLifeSim: testLifeSim
-	java -classpath bin:bin/gui.jar TestLifeSimulator
+	java -classpath bin:bin/gui.jar tests/TestLifeSimulator
 
 exeImmSim: testImmSim
-	java -classpath bin:bin/gui.jar TestImmigrationSimulator
+	java -classpath bin:bin/gui.jar tests/TestImmigrationSimulator
 
 exeSSim: testSSim
-	java -classpath bin:bin/gui.jar TestSchellingSimulator
+	java -classpath bin:bin/gui.jar tests/TestSchellingSimulator
 
 exeBoids: testBoids
-	java -classpath bin:bin/gui.jar TestBoidsSimulator
+	java -classpath bin:bin/gui.jar tests/TestBoidsSimulator
 
 exeEvents: testEvents
-	java -classpath bin:bin/gui.jar TestEventManager
+	java -classpath bin:bin/gui.jar tests/TestEventManager
 
 exePred: testPred
-	java -classpath bin:bin/gui.jar TestPreyPredatorSimulator
+	java -classpath bin:bin/gui.jar tests/TestPreyPredatorSimulator
 
 clean:
 	rm -rf bin/*.class
