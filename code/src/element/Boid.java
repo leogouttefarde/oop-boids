@@ -7,6 +7,11 @@ import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
 
+/**
+ * Classe abstraite qui regroupe les parties commune entre les différents type de Boid (Prey, Predator, Lighter)
+ * @author ilyes
+ *
+ */
 public abstract class Boid implements Cloneable {
 
 	protected static final int NEIGHBORHOOD = 55;
@@ -37,11 +42,27 @@ public abstract class Boid implements Cloneable {
 	protected int triXPts[];
 	protected int triYPts[];
 
-
-	public Boid(double x, double y, double vx, double vy, double ax, double ay,
+	/**
+	 * Crée un boid avec des valeurs prédéfinis
+	 * @param x la coordonnée x de position
+	 * @param y la coordonnée y de position
+	 * @param sx la coordonnée x de speed
+	 * @param sy la coordonnée y de speed
+	 * @param ax la coordonnée x de acceleration
+	 * @param ay la coordonnée y de acceleration
+	 * @param type le type de boid 
+	 * @see Type
+	 * @see Predator
+	 * @see Prey
+	 * @see Lighter
+	 * @param color la couleur du boid
+	 * @param size le paramètre de taille pour calculer les points du Triangle
+	 * @see Boid#computeTriangle()
+	 */
+	public Boid(double x, double y, double sx, double sy, double ax, double ay,
 				Type type, Color color, int size) {
 		position = new PVector(x, y);
-		speed = new PVector(vx, vy);
+		speed = new PVector(sx, sy);
 		acceleration = new PVector(ax, ay);
 
 		computeDirection();
@@ -58,7 +79,9 @@ public abstract class Boid implements Cloneable {
 		dead = false;
 	}
 
-
+	/**
+	 * Retourne une copie du boid
+	 */
 	public Boid clone() {
 		Boid b = null;
 
@@ -75,34 +98,65 @@ public abstract class Boid implements Cloneable {
 		return b;
 	}
 	
+	/**
+	 * 
+	 * @return Retourne le type du boid
+	 */
 	public Type getType() {
 		return type;
 	}
 	
+	/**
+	 * @return Retourne la position du boid
+	 * @see PVector
+	 */
 	public PVector getPosition(){
 		return position;
 	}
 	
+	/**
+	 * @return Retourne la vitesse du boid
+	 * @see PVector
+	 */
 	public PVector getSpeed(){
 		return speed;
 	}
 	
+	/**
+	 * @return Retourne l'accélération du boid
+	 * @see PVector
+	 */
 	public PVector getAcceleration(){
 		return acceleration;
 	}
 
+	/**
+	 * @return Retourne la distance minimale entre deux boids voisin
+	 * @see Boid#ruleKeepDistance()
+	 */
 	public int GetMinDist() {
 		return Boid.MIN_DIST;
 	}
 
+	
 	public void setGroup(LinkedList<Boid> group) {
 		this.boids = group;
 	}
-
+	
+	/**
+	 * Calcul la direction du boid
+	 */
 	private void computeDirection() {
 		direction = aMod(Math.atan2(speed.getY(), speed.getX()));
 	}
 
+	/**
+	 * Initialise la position, la vitesse, l'accélération et la direction du boid
+	 * @param position la nouvelle position
+	 * @param speed la nouvelle vitesse
+	 * @param acceleration la nouvelle accélération
+	 * @see Boid#computeDirection()
+	 */
 	public void reset(PVector position, PVector speed, PVector acceleration) {
 		this.position.setLocation(position);
 		this.speed.setLocation(speed);
@@ -111,31 +165,64 @@ public abstract class Boid implements Cloneable {
 		computeDirection();
 	}
 
+	/**
+	 * 
+	 * @return Retourne la masse d'un boid
+	 */
 	public int getMass() {
 		return 1;
 	}
 
+	/**
+	 * 
+	 * @return Retourne la direction du boid
+	 */
 	public double getDirection() {
 		return direction;
 	}
 	
+	/**
+	 * 
+	 * @return Retourne la couleur du boid
+	 */
 	public Color getColor() {
 		return color;
 	}
 	
+	/**
+	 * 
+	 * @return Retourne la taille du boid
+	 * @see Boid#computeTriangle()
+	 */
 	public int getSize() {
 		return size;
 	}
 
+	/**
+	 * 
+	 * @return Retourne vrai si le boid est mort, faux sinon
+	 * @see Boid#dead
+	 */
 	public boolean isDead() {
 		return dead;
 	}
 
+	/**
+	 * Met à vrai l'attribut dead du boid
+	 * @see Boid#dead
+	 */
 	public void die() {
 		dead = true;
 	}
 
-
+	/**
+	 * Applique une rotation de centre position et d'angle direction pour le point (x, y).
+	 * Cette méthode est utilisé pour orienter le Triangle dans la bonne direction.
+	 * @param x la coordonnée x 
+	 * @param y la coordonnée y
+	 * @return Retourne un tableau à 2 éléments qui contient le resultat de la rotation
+	 * @see Boid#computeTriangle()
+	 */
 	public double[] turn(double x, double y) {
 		double[] pts = { x , y };
 
@@ -145,6 +232,12 @@ public abstract class Boid implements Cloneable {
 		return pts;
 	}
 
+	/**
+	 * Calcul les trois points du Triangle correspondant au boid
+	 * @see Boid#turn(double, double)
+	 * @see Boid#triXPts
+	 * @see Boid#triYPts
+	 */
 	public void computeTriangle() {
 		final double cx = position.getX();
 		final double cy = position.getY();
@@ -164,38 +257,74 @@ public abstract class Boid implements Cloneable {
 		triYPts[2] = (int)pts[1];
 	}
 
+	/**
+	 * @return Retourne les coordonnées x des trois points du Triangle
+	 * @see Boid#triXPts
+	 */
 	public int[] getTriangleX() {
 		return triXPts;
 	}
 
+	/**
+	 * @return Retourne les coordonnées y des trois points du Triangle
+	 * @see Boid#triYPts
+	 */
 	public int[] getTriangleY() {
 		return triYPts;
 	}
 
+	/**
+	 * @return Retourne a % b
+	 */
 	public static double mod(double a, double b) {
 		double r = a % b;
 
 		return (r < 0) ? (r + b) : r;
 	}
 
+	/**
+	 * @return a % 2 * Math.PI
+	 */
 	public static double aMod(double a) {
 		return mod(a, 2 * Math.PI);
 	}
 
+	/**
+	 * Met à jour la position du boid de manière ignorer les bords de la fenêtre graphique.
+	 * @param pos la position du boid
+	 */
 	public void setPos(PVector pos) {
 		pos.x = mod(pos.x, Boids.getWidth());
 		pos.y = mod(pos.y, Boids.getHeight());
 
 		this.position.setLocation(pos);
 	}
-
+	
+	/**
+	 * 
+	 * @param b un boid
+	 * @param type un type de boid
+	 * @return Retourne vrai si b est un voisin visible de même type que le boid
+	 * @see Boid#isNeighbor(Boid)
+	 */
 	public boolean isNeighbor(Boid b, Type type) {
 		return (b.type == type) && isNeighbor(b);
 	}
+	
+	/**
+	 * 
+	 * @param b un boid
+	 * @return Retourne vrai si b est dans le voisinage du boid
+	 */
 	public boolean isNear(Boid b) {
 		return this != b && position.distance(b.position) < NEIGHBORHOOD;
 	}
 
+	/**
+	 * 
+	 * @param b un boid
+	 * @return Retourne vrai si b est un voisin visible du boid
+	 */
 	public boolean isNeighbor(Boid b) {
 		
 		// calcul de l'orientation de b par rapport à this
@@ -221,8 +350,14 @@ public abstract class Boid implements Cloneable {
 		
 		return false;
 	}
-
-	// First rule : Boids try to fly towards the center of mass of neighboring boids
+	
+	/**
+	 * Première règle de déplacement en essaim. 
+	 * Le boid se déplace vers le centre de masse de ces voisins.
+	 * @return Retourne le vecteur de déplacement vers le centre de masse
+	 * @see Boid#isNeighbor(Boid, Type)
+	 * @see PVector
+	 */
 	protected PVector ruleFlyToCenter() {
 		PVector force = new PVector();
 		int count = 0;
@@ -242,8 +377,14 @@ public abstract class Boid implements Cloneable {
 
 		return force;
 	}
-
-	// Second rule : Boids try to keep a small distance away from other objects (including other Boids)
+	
+	/**
+	 * Deuxième règle de déplacement en essaim. 
+	 * Le boid se replace pour être à une distance minimale de tous les boids de sont voisinage
+	 * @return Retourne le vecteur de déplacement pour s'éloigner des bois trop proche
+	 * @see Boid#isNear(Boid)
+	 * @see PVector
+	 */
 	protected PVector ruleKeepDistance() {
 		PVector forces = new PVector();
 
@@ -262,8 +403,14 @@ public abstract class Boid implements Cloneable {
 
 		return forces;
 	}
-
-	// Third rule : Boids try to match speed with near boids
+	
+	/**
+	 * Troisième règle de déplacement en essaim. 
+	 * Le boid adapte sa vitesse pour rejoindre un essaim qui est dans son voisinage visible.
+	 * @return Retourne le vecteur de déplacement pour adapter sa vitesse
+	 * @see Boid#isNeighbor(Boid, Type)
+	 * @see PVector
+	 */
 	protected PVector ruleMatchSpeed() {
 		PVector v = new PVector();
 		int count = 0;
@@ -282,7 +429,10 @@ public abstract class Boid implements Cloneable {
 		
 		return v;
 	}
-
+	
+	/**
+	 * Met à jour l'état du boid.
+	 */
 	public void update() {
 		speed.add(acceleration);
 		speed.limit(maxspeed);
@@ -292,11 +442,24 @@ public abstract class Boid implements Cloneable {
 		acceleration.reset();
 	}
 
+	/**
+	 * Applique une force sur l'accélération du boid
+	 * @param force la force à appliquer
+	 * @see PVector
+	 */
 	public void applyForce(PVector force) {
 		force.limit(maxforce);
 		acceleration.add(force.div(getMass()));
 	}
 
+	/**
+	 * Applique les trois règle de déplacement de l'essaim et met à jour l'état du boid.
+	 * @see Boid#ruleFlyToCenter()
+	 * @see Boid#ruleKeepDistance()
+	 * @see Boid#ruleMatchSpeed()
+	 * @see Boid#applyForce(PVector)
+	 * @see Boid#update()
+	 */
 	public void move() {
 		PVector force;
 
@@ -307,7 +470,10 @@ public abstract class Boid implements Cloneable {
 		applyForce(force);
 		update();
 	}
-
+	
+	/**
+	 * @return Retourne une String qui contient l'état du boid à afficher
+	 */
 	public String toString() {
 		return "Boid(x : " + position.x + ", y :" + position.y + ", vx : " + speed.x + ", vy : " 
 				+ speed.y + ", ax : " + acceleration.x + ", ay : " + acceleration.y + ")";
