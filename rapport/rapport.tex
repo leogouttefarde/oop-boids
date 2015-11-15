@@ -91,19 +91,21 @@ KACHER Ilyes}
 \end{center}
 
 
-L’objectif de ce TP était d’implémenter en \texttt{Java} des simulations
-graphiques de quelques systèmes multiagents. Un des points les plus importants de ce TP était d'aborder les aspects fondamentaux de la programmation orientée objet. Nous avons implémenter trois simulateurs de systèmes de type automate cellulaire: le jeu de la vie de Conway, un jeu de l'immigration et le modèle de ségrégation de Schelling en plus d'un simulateur d’un système de mouvement d’essaims auto-organisés : le modèle de Boids.
+L'objectif de ce TP était d'implémenter en \texttt{Java} les simulations
+graphiques de quelques systèmes multiagents, l'un des points les plus importants étant d'aborder les aspects fondamentaux de la programmation orientée objet.
+
+Nous avons implémenté trois simulateurs d'automates cellulaires : le jeu de la vie de Conway, le jeu de l'immigration, le modèle de ségrégation de Schelling, ainsi qu'un simulateur de Boids (système d'essaims auto-organisés).
 
 
 $\newline$
 \section {Choix conceptuels}
 \subsection{Organisation en package}
-Afin de faciliter la navigation à travers les différentes classes du projet, nous les avons classé dans des différents package:
+Afin de faciliter la navigation au sein des différentes classes du projet, nous les avons réparties en différents packages :
 \begin{itemize}
-\item \texttt{element} : contient les classes qui implémentent les différents agents (\texttt{Boid}, \texttt{Lighter}, \texttt{Predator} et \texttt{Prey})
-\item \texttt{event} : contient l'\texttt{EventManager} et les différentes classes pour gérer les différents types d'\texttt{event}
-\item \texttt{group} : contient les différentes classes qui implémentent les groupes des agents
-\item \texttt{simulator} : contient toutes les classes simulator qui réalisent \texttt{Simulable}
+\item \texttt{element} : classes des différents agents (\texttt{Boid}, \texttt{Lighter}, \texttt{Predator} et \texttt{Prey})
+\item \texttt{event} : classes relatives aux événements
+\item \texttt{group} : classes qui gèrent les groupes d'agents
+\item \texttt{simulator} : classes simulator qui implémentent \texttt{Simulable}
 \item \texttt{test} : contient tous les tests
 \item \texttt{utility} : contient des classes divers utilisés par les autres classes du projet
 \end{itemize}
