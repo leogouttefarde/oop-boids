@@ -10,8 +10,8 @@ public class BallsSimulator implements Simulable {
 
 	private Balls balls;
 	private GUISimulator gui;
-	static final int BALLSIZE = 7; // Ball radius
-	private static final int GUI_BORDERS = 3; // GUI panel borders
+	static final int BALLSIZE = 7; // Rayon des ball
+	private static final int GUI_BORDERS = 3; // bordure du panel GUI
 
 	public BallsSimulator(GUISimulator gui, Balls balls) {
 		this.gui = gui;
