@@ -22,6 +22,8 @@ public class Lighter extends Boid {
 	protected static final int MIN_LIGHT = 0;
 	protected static final int MAX_LIGHT = 170;
 
+	private static int shining;
+
 	
 	/**
 	 * Crée un boid de type Lighter
@@ -39,6 +41,7 @@ public class Lighter extends Boid {
 		super(x, y, sx, sy, ax, ay, Type.Lighter, Color.WHITE, SIZE);
 		maxspeed = MAX_SPEED;
 		randLight();
+		shining = 0;
 	}
 
 	@Override
@@ -54,21 +57,36 @@ public class Lighter extends Boid {
 	 */
 	protected void randLight() {
 		Random rand = new Random();
-		setLight(rand.nextInt(MAX_LIGHT - MIN_LIGHT) + MIN_LIGHT);
+		setBrightness(rand.nextInt(MAX_LIGHT - MIN_LIGHT) + MIN_LIGHT);
 	}
 
 	/**
 	 * Calcule la couleur d'affichage
 	 * 
-	 * @param light Taux de brillance
+	 * @param brightness Taux de brillance
 	 */
-	protected void setLight(int light) {
-		color = new Color(light, 255, 255, 255);
+	protected void setBrightness(int brightness) {
+		int[] cols = new int[3];
+
+		for (int i = 0; i < cols.length; i++) {
+			cols[i] = 255;
+		}
+
+		cols[shining] = brightness;
+		color = new Color(cols[0], cols[1], cols[2], 255);
 	}
 
 	@Override
 	public int GetMinDist() {
 		return Lighter.MIN_DIST;
+	}
+
+	/**
+	 * Evénement de changement de teinte
+	 */
+	public static void Event() {
+		Random rand = new Random();
+		shining = rand.nextInt(3);
 	}
 
 	@Override
