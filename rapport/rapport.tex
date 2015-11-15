@@ -193,15 +193,21 @@ Nous avons pu constater l'effet des règles du jeux sur les cellules, en particu
 \subsubsection {Modèle de Schelling}
 Le tableau suivant contient le nombre des itérations nécessaires avant d'obtenir une ségrégation en fonction du seuil \textit{K} et du nombre des couleurs:
 \begin{center}
-\begin{tabular}{|x{5cm}|x{.5cm}|x{.5cm}|x{.5cm}|x{.5cm}|}\hline
-\diag{.1em}{5cm}{\texttt{numberOfColor}}{\textit{K}}&5&10&50&100\\ \hline
-2&?&?&?&?\\ \hline
-7&?&?&?&?\\ \hline
-14&?&?&?&?\\ \hline
-49&?&?&?&?\\ \hline
+\begin{tabular}{|x{5cm}|x{2cm}|x{2cm}|x{2cm}|x{2cm}|x{2cm}|}\hline
+\diag{.1em}{5cm}{\texttt{numberOfColor}}{\textit{K}} & 2 & 4 & 5 & 7 & 8\\ \hline
+2 & 55 & 16 & 8 & 0 & 0\\ \hline
+7 & +10000 $\infty$ & 409 & 50 & 11 & 0\\ \hline
+14 & +10000 $\infty$ & 2363 & 237 & 17 & 0\\ \hline
+49 & +10000 $\infty$ & +10000 $\sim$ & 2270 & 40 & 0\\ \hline
 
 \end{tabular}
 \end{center}
++10000 $\sim$ : Nous avons dépassé 10000 itération en ayant qu'une ségrégation partielle.
+\newline
++10000 $\infty$ : Nous avons dépassé 10000 itération sans aucune ségrégation en cours de formation.
+\newline
+\newline
+Nous constatons que le nombre des itérations nécessaires avant d'obtenir une ségrégation est inversement proportionnel à \textit{K} et proportionnel à \texttt{numberOfColor}.
 
 \subsubsection {Boids}
 Sur une même grille, nous avons lancer deux groupe de boids différents: des boids triangulaires (les \texttt{Pray}) et des boids qui sont circulaires (les \texttt{Lighter}). Nous avons réussi à visualiser la cohabitation entre ces deux groupes différents sur une même grille.
