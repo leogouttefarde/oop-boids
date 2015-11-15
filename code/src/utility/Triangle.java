@@ -36,6 +36,7 @@ public class Triangle implements GraphicalElement {
 		this.yPoints = yPoints;
 	}
 
+
 	/**
 	 * Dessine le triangle dans le Graphics2D g2d
 	 * {@inheritDoc}
@@ -45,16 +46,18 @@ public class Triangle implements GraphicalElement {
 		Stroke currentStroke = g2d.getStroke();
 		g2d.setStroke(new BasicStroke(2.0F));
 		Color current = g2d.getColor();
+
 		if (this.fillColor != null) {
 			g2d.setColor(this.fillColor);
 			g2d.fillPolygon(xPoints, yPoints, nPoints);
 		}
+
 		g2d.setColor(this.drawColor);
 		g2d.drawPolygon(xPoints, yPoints, nPoints);
 		g2d.setColor(current);
 		g2d.setStroke(currentStroke);
 	}
-	
+
 	/**
 	 * Affiche le triangle.
 	 * 
@@ -62,6 +65,6 @@ public class Triangle implements GraphicalElement {
 	 */
 	public String toString()
 	{
-		return this.drawColor.toString() + " triangle";
+		return drawColor + " triangle";
 	}
 }

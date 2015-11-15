@@ -56,6 +56,8 @@ public class BoidsSimulator implements Simulable {
 			b.computeTriangle();
 
 			switch (b.getType()) {
+
+				// Affiche le triangle
 				case Prey:
 				case Predator:
 				default:
@@ -63,6 +65,7 @@ public class BoidsSimulator implements Simulable {
 										b.getColor(), b.getColor());
 					break;
 
+				// Affiche un cercle plein pour Lighter
 				case Lighter:
 					elem = new Oval((int)b.getPosition().getX(),
 									(int)b.getPosition().getY(),

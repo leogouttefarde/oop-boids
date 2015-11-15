@@ -89,6 +89,7 @@ public abstract class Boid implements Cloneable {
 	public Boid clone() {
 		Boid b = null;
 
+		// On clone chaque objet important de la classe
 		try {
 			b = (Boid)super.clone();
 			b.position = position.clone();
