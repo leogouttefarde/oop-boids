@@ -49,9 +49,9 @@ Les questions 1 à 12 ont été réalisées et testées, elles semblent fonction
 
 - Makefile :
 
-    -> générer la doc : make doc  
+    -> Générer la doc : make doc  
 
-    -> lancer la compilation d'un test :
+    -> Lancer la compilation d'un test :
         make testGUI        : TestGUI.java
         make testBalls      : TestBalls.java
         make testBSim       : TestBallsSimulator.java
@@ -62,10 +62,10 @@ Les questions 1 à 12 ont été réalisées et testées, elles semblent fonction
         make testEvents     : TestEventManager.java
         make testPred       : TestPreyPredatorSimulator.java
 
-    -> lancer la compilation de tous les tests :
+    -> Lancer la compilation de tous les tests :
         make all
 
-    -> lancer l'execution d'un test : 
+    -> Lancer l'execution d'un test : 
         make exeGUI         : TestGUI.java
         make exeBalls       : TestBalls.java
         make exeBSim        : TestBallsSimulator.java
@@ -76,6 +76,6 @@ Les questions 1 à 12 ont été réalisées et testées, elles semblent fonction
         make exeEvents      : TestEventManager.java
         make exePred        : TestPreyPredatorSimulator.java
 
-    -> nettoyer le répertoire bin : 
+    -> Nettoyer le répertoire bin : 
         make clean
 
