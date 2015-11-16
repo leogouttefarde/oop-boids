@@ -59,7 +59,7 @@ public abstract class AutomatonSimulator implements Simulable {
 	protected abstract Color getCellColor(int x, int y);
 
 	/**
-	 * Met à jour l'affichage
+	 * Méthode générique de mise à jour de l'affichage
 	 */
 	protected void updateFrame() {
 		cells = automaton.getCells();
