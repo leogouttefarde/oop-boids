@@ -42,7 +42,7 @@ Les questions 1 à 12 ont été réalisées et testées, elles semblent fonction
 
 - rapport.pdf : rapport du projet
 
-- UML : contient le graphique UML du projet au format JPEG
+- UML.png : contient le graphique UML du projet au format PNG
 
 - doc : contient la javadoc en html (à générer à l'aide du Makefile)
 

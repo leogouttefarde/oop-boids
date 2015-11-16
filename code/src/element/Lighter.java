@@ -41,13 +41,6 @@ public class Lighter extends Boid {
 		super(x, y, sx, sy, ax, ay, Type.Lighter, Color.WHITE, SIZE);
 		maxspeed = MAX_SPEED;
 		randLight();
-		shining = 0;
-	}
-
-	@Override
-	public void reset(PVector position, PVector speed, PVector acceleration) {
-		super.reset(position, speed, acceleration);
-		randLight();
 	}
 
 	/**

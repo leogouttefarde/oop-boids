@@ -86,7 +86,6 @@ public class Predator extends Boid {
 			if(isNeighbor(b, Type.Prey) && position.distance(b.position) <= DEATH_RADIUS) {
 				b.die();
 				killed = true;
-				System.out.println("Prey eaten");
 			}
 		}
 

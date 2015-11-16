@@ -98,13 +98,10 @@ public class Boids {
 	 * Reinitialise le groupe
 	 */
 	public void reset() {
-		Boid curBoid;
-		Iterator<Boid> it= beginning.iterator();
-		
-		for(Boid b : boids) {
-			curBoid = it.next();
-			b.reset(curBoid.getPosition(), curBoid.getSpeed(),
-					curBoid.getAcceleration());
+		boids.clear();
+
+		for(Boid b : beginning) {
+			boids.add(b.clone());
 		}
 	}
 

@@ -38,8 +38,8 @@ public class TestSchellingSimulator {
 		}
 
 		int k = 5;
-		int n = 50;
-		int m = 50;
+		int n = 70;
+		int m = 40;
 
 		int rndMin = 1;
 		int rndMax = numberOfColor + 1;

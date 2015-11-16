@@ -170,22 +170,6 @@ public abstract class Boid implements Cloneable {
 	}
 
 	/**
-	 * Initialise la position, la vitesse, l'accélération et la direction du Boid
-	 * 
-	 * @param position 		Nouvelle position
-	 * @param speed 		Nouvelle vitesse
-	 * @param acceleration 	Nouvelle accélération
-	 * @see Boid#computeDirection()
-	 */
-	public void reset(PVector position, PVector speed, PVector acceleration) {
-		this.position.setLocation(position);
-		this.speed.setLocation(speed);
-		this.acceleration.setLocation(acceleration);
-
-		computeDirection();
-	}
-
-	/**
 	 * Retourne la masse du Boid
 	 * 
 	 * @return Masse
