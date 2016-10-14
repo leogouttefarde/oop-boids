@@ -1,10 +1,5 @@
-/*
- * TP POO - Simulation Orientée Objet de systèmes multiagents
- * Ensimag 2A MMXV
- */
-
-
-Les questions 1 à 12 ont été réalisées et testées, elles semblent fonctionnelles.
+## OOP Project : Multi agents OOP simulation
+#### Ensimag 2A 2015
 
 
 - src : contient les classes du projet, ces classes sont reparties en différents packages
