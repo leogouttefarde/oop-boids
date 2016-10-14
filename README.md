@@ -1,5 +1,4 @@
 ## OOP Project : Multi agents OOP simulation
-#### Ensimag 2A 2015
 
 
 - src : contient les classes du projet, ces classes sont reparties en différents packages
